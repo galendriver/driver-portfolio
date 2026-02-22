@@ -1,0 +1,33 @@
+account,owner,ticker,description,shares,yf_symbol,cg_id,manual_value,sector,asset_class,notes
+galen_brokerage,galen,NVDA,NVIDIA,944,NVDA,,,tech,us_equity,
+galen_brokerage,galen,GOOGL,Alphabet Class A,16,GOOGL,,,tech,us_equity,
+galen_brokerage,galen,GOOG,Alphabet Class C,43,GOOG,,,tech,us_equity,
+galen_brokerage,galen,AAPL,Apple,51,AAPL,,,tech,us_equity,
+galen_brokerage,galen,AMD,AMD,95,AMD,,,tech,us_equity,
+galen_brokerage,galen,MSFT,Microsoft,16,MSFT,,,tech,us_equity,
+galen_brokerage,galen,PLTR,Palantir,129,PLTR,,,tech,us_equity,
+galen_brokerage,galen,OKLO,Oklo,328,OKLO,,,tech,us_equity,
+galen_brokerage,galen,COIN,Coinbase,6,COIN,,,tech,us_equity,
+galen_brokerage,galen,KSCP,Knightscope,6,KSCP,,,tech,us_equity,HARVEST LOSS -95%
+galen_brokerage,galen,WMT,Walmart,99,WMT,,,consumer,us_equity,
+galen_brokerage,galen,TSLA,Tesla,4,TSLA,,,consumer,us_equity,
+galen_brokerage,galen,RGTI,Rigetti Computing,2,RGTI,,,tech,us_equity,
+galen_brokerage,galen,APLD,Applied Digital,1,APLD,,,tech,us_equity,
+galen_brokerage,galen,NNDM,Nano Dimension,200,NNDM,,,tech,us_equity,
+galen_401k,galen,GALEN_401K,Amazon 401k Fidelity (TDF + index mix),,,,135000,diversified,retirement,Manual: update quarterly from Fidelity
+galen_rsu,galen,AMZN_RSU,Amazon RSUs (vested — Fidelity),1347,AMZN,,,tech,us_equity,1347 shares @ $230.82 as of 2/19/26; sell 75% each vest
+galen_crypto,galen,BTC,Bitcoin,0.665421,BTC-USD,bitcoin,,crypto,crypto,
+galen_crypto,galen,stETH,Lido Staked ETH,7.76244,,staked-ether,,crypto,crypto,
+galen_crypto,galen,RNDR,Render Token,7140.92,,render-token,,crypto,crypto,
+galen_crypto,galen,ETH,Ethereum,2.43054,ETH-USD,ethereum,,crypto,crypto,
+galen_crypto,galen,WLD,Worldcoin,92,WLD-USD,worldcoin-org,,crypto,crypto,UPDATE: confirm WLD balance
+galen_crypto,galen,NEAR,NEAR Protocol,,,near,,crypto,crypto,HARVEST LOSS — sell immediately; UPDATE: add share count
+galen_crypto,galen,AIOZ,AIOZ Network,,,aioz-network,,crypto,crypto,HARVEST LOSS — sell immediately; UPDATE: add share count
+galen_crypto,galen,ALGO,Algorand,,,algorand,,crypto,crypto,HARVEST LOSS — sell immediately; UPDATE: add share count
+galen_crypto,galen,COMP,Compound,,,compound-governance-token,,crypto,crypto,HARVEST LOSS — sell immediately; UPDATE: add share count
+galen_crypto,galen,KISHU,Kishu Inu,,,kishu-inu,,crypto,crypto,HARVEST LOSS — sell immediately; UPDATE: add share count
+galen_cash,galen,CASH,High-yield savings,,,,70000,cash,cash,Manual: update monthly
+jaclyn_databricks_equity,jaclyn,DBRX_VESTED,Databricks vested equity (pre-IPO),,,,593000,tech,private_equity,Manual: 3119 units @ ~$190; update if tender price changes
+jaclyn_databricks_equity,jaclyn,DBRX_UNVESTED,Databricks unvested equity (pre-IPO),,,,410000,tech,private_equity,Manual: 2156 units; illiquid; update quarterly
+jaclyn_401k_fidelity,jaclyn,JACLYN_401K_FID,Jaclyn 401k Fidelity (TRP 2055),,,,85732,diversified,retirement,Manual: update quarterly from Fidelity
+jaclyn_401k_databricks,jaclyn,JACLYN_401K_DBRX,Jaclyn 401k Databricks (tactical),,,,84048,diversified,retirement,Manual: update quarterly from NetBenefits

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Driver Portfolio</title>
+
+  <!-- PWA / iOS home screen -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Portfolio" />
+  <link rel="manifest" href="/static/manifest.json" />
+  <meta name="theme-color" content="#0d1117" />
+
+  <style>
+    /* ── Reset & base ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0d1117;
+      --bg-card:     #161b22;
+      --bg-tab:      #1c2128;
+      --border:      #30363d;
+      --text:        #e6edf3;
+      --text-sub:    #8b949e;
+      --text-muted:  #6e7681;
+      --green:       #3fb950;
+      --blue:        #58a6ff;
+      --red:         #f85149;
+      --yellow:      #d29922;
+      --radius:      12px;
+      --header-h:    56px;
+      --safe-top:    env(safe-area-inset-top, 0px);
+      --safe-bot:    env(safe-area-inset-bottom, 0px);
+      --safe-left:   env(safe-area-inset-left, 0px);
+      --safe-right:  env(safe-area-inset-right, 0px);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── Header ───────────────────────────────────────────── */
+    #header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: calc(var(--safe-top) + 12px) calc(var(--safe-right) + 16px) 12px calc(var(--safe-left) + 16px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    #header h1 {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      white-space: nowrap;
+    }
+
+    #updated-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      flex: 1;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #refresh-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-sub);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 16px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: color 0.15s, border-color 0.15s;
+      line-height: 1;
+    }
+    #refresh-btn:active { color: var(--blue); border-color: var(--blue); }
+    #refresh-btn.spinning { animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Main content ─────────────────────────────────────── */
+    #main {
+      padding: 16px calc(var(--safe-right) + 16px) calc(var(--safe-bot) + 24px) calc(var(--safe-left) + 16px);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ── Summary cards ────────────────────────────────────── */
+    #summary {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .card-total {
+      grid-column: 1 / -1;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+    }
+
+    .card-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .card-value {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      line-height: 1.1;
+    }
+
+    .card-total .card-value {
+      font-size: 34px;
+    }
+
+    .card-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ── Filter tabs ──────────────────────────────────────── */
+    #tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .tab {
+      flex: 1;
+      background: var(--bg-tab);
+      border: 1px solid var(--border);
+      color: var(--text-sub);
+      border-radius: 8px;
+      padding: 8px 0;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .tab.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+
+    /* ── Positions list ───────────────────────────────────── */
+    #sort-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 8px;
+    }
+
+    #sort-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+    }
+    #sort-label:active { color: var(--blue); }
+
+    #positions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .position-row {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pos-left {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .pos-ticker {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+    }
+
+    .pos-desc {
+      font-size: 12px;
+      color: var(--text-sub);
+      margin-top: 1px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .pos-detail {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .pos-right {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .pos-value {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .pos-source {
+      font-size: 11px;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    .source-live    { color: var(--green); }
+    .source-manual  { color: var(--text-muted); }
+    .source-missing { color: var(--red); }
+
+    /* owner badge */
+    .pos-owner {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      background: var(--bg-tab);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 5px;
+      display: inline-block;
+      margin-top: 3px;
+    }
+
+    /* ── Loading / error states ───────────────────────────── */
+    #status-msg {
+      text-align: center;
+      padding: 48px 16px;
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--border);
+      border-top-color: var(--blue);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin-bottom: 12px;
+    }
+
+    #error-msg {
+      background: rgba(248, 81, 73, 0.1);
+      border: 1px solid rgba(248, 81, 73, 0.4);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      color: var(--red);
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: none;
+    }
+
+    /* ── Utilities ────────────────────────────────────────── */
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header id="header">
+    <h1>Driver Portfolio</h1>
+    <span id="updated-label">Loading…</span>
+    <button id="refresh-btn" title="Refresh prices">↻</button>
+  </header>
+
+  <!-- Main content -->
+  <main id="main">
+
+    <!-- Error banner -->
+    <div id="error-msg"></div>
+
+    <!-- Summary cards -->
+    <section id="summary">
+      <div class="card card-total">
+        <div class="card-label">Total Portfolio</div>
+        <div class="card-value" id="val-total">—</div>
+        <div class="card-sub" id="val-liquid">Liquid: —</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Galen</div>
+        <div class="card-value" id="val-galen">—</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Jaclyn</div>
+        <div class="card-value" id="val-jaclyn">—</div>
+      </div>
+    </section>
+
+    <!-- Filter tabs -->
+    <div id="tabs">
+      <button class="tab active" data-filter="all">All</button>
+      <button class="tab" data-filter="galen">Galen</button>
+      <button class="tab" data-filter="jaclyn">Jaclyn</button>
+    </div>
+
+    <!-- Sort bar -->
+    <div id="sort-bar">
+      <span id="sort-label">Sort: Value ▾</span>
+    </div>
+
+    <!-- Loading state -->
+    <div id="status-msg">
+      <div class="spinner"></div><br>Fetching live prices…
+    </div>
+
+    <!-- Positions -->
+    <div id="positions-list"></div>
+
+  </main>
+
+  <script>
+    // ── State ────────────────────────────────────────────────
+    let allPositions = [];
+    let currentFilter = 'all';
+    let sortAsc = false;   // default: value descending
+    let refreshTimer = null;
+
+    // ── Helpers ──────────────────────────────────────────────
+    function fmt(n) {
+      if (n === null || n === undefined) return '—';
+      if (n >= 1_000_000) return '$' + (n / 1_000_000).toFixed(2) + 'M';
+      if (n >= 1_000)     return '$' + Math.round(n).toLocaleString('en-US');
+      return '$' + n.toFixed(2);
+    }
+
+    function fmtShort(n) {
+      // For summary cards — always show full number
+      if (n === null || n === undefined) return '—';
+      return '$' + Math.round(n).toLocaleString('en-US');
+    }
+
+    function fmtShares(s) {
+      if (s === null || s === undefined) return null;
+      // Crypto can have many decimals; stocks are whole numbers
+      return s >= 10 ? s.toLocaleString('en-US', { maximumFractionDigits: 2 })
+                     : s.toLocaleString('en-US', { maximumFractionDigits: 6 });
+    }
+
+    function fmtPrice(p) {
+      if (p === null || p === undefined) return null;
+      if (p >= 1000) return '$' + p.toLocaleString('en-US', { maximumFractionDigits: 2 });
+      if (p >= 1)    return '$' + p.toFixed(2);
+      return '$' + p.toFixed(4);
+    }
+
+    function sourceClass(src) {
+      if (!src || src === 'missing') return 'source-missing';
+      if (src.startsWith('manual'))  return 'source-manual';
+      return 'source-live';
+    }
+
+    function sourceLabel(src) {
+      if (!src || src === 'missing') return 'no price';
+      if (src === 'manual-fallback') return 'est.';
+      if (src === 'manual')          return 'manual';
+      if (src === 'zero')            return '—';
+      return 'live';
+    }
+
+    // ── Fetch data ───────────────────────────────────────────
+    async function fetchPortfolio() {
+      const btn = document.getElementById('refresh-btn');
+      btn.classList.add('spinning');
+      document.getElementById('error-msg').style.display = 'none';
+
+      try {
+        const res = await fetch('/api/portfolio');
+        const data = await res.json();
+
+        if (!res.ok || data.error) {
+          throw new Error(data.error || `HTTP ${res.status}`);
+        }
+
+        allPositions = data.positions;
+
+        // Update summary cards
+        const s = data.summary;
+        document.getElementById('val-total').textContent  = fmtShort(s.total_portfolio);
+        document.getElementById('val-galen').textContent  = fmtShort(s.galen_total);
+        document.getElementById('val-jaclyn').textContent = fmtShort(s.jaclyn_total);
+        document.getElementById('val-liquid').textContent = 'Liquid: ' + fmtShort(s.liquid_total);
+
+        // Format timestamp to just time if today
+        const ts = data.last_updated;
+        const timePart = ts.split(' ')[1] || ts;
+        document.getElementById('updated-label').textContent = 'Updated ' + timePart;
+
+        document.getElementById('status-msg').classList.add('hidden');
+        renderPositions();
+
+      } catch (err) {
+        const errDiv = document.getElementById('error-msg');
+        errDiv.textContent = 'Failed to load: ' + err.message;
+        errDiv.style.display = 'block';
+        document.getElementById('status-msg').classList.add('hidden');
+        if (allPositions.length > 0) renderPositions(); // show stale data
+      } finally {
+        btn.classList.remove('spinning');
+        scheduleRefresh();
+      }
+    }
+
+    // ── Render positions ─────────────────────────────────────
+    function renderPositions() {
+      let rows = allPositions.filter(p => {
+        if (currentFilter === 'all') return true;
+        return p.owner === currentFilter;
+      });
+
+      // Sort
+      rows = [...rows].sort((a, b) => {
+        const diff = a.value - b.value;
+        return sortAsc ? diff : -diff;
+      });
+
+      const list = document.getElementById('positions-list');
+      list.innerHTML = '';
+
+      if (rows.length === 0) {
+        list.innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-muted)">No positions found</div>';
+        return;
+      }
+
+      rows.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'position-row';
+
+        // Detail line: "944 sh @ $189.82" or just blank for manual
+        let detailHtml = '';
+        if (p.shares !== null && p.price !== null) {
+          detailHtml = `${fmtShares(p.shares)} sh @ ${fmtPrice(p.price)}`;
+        } else if (p.shares !== null) {
+          detailHtml = `${fmtShares(p.shares)} sh`;
+        }
+
+        const ownerBadge = currentFilter === 'all'
+          ? `<span class="pos-owner">${p.owner}</span>`
+          : '';
+
+        div.innerHTML = `
+          <div class="pos-left">
+            <div class="pos-ticker">${p.ticker}</div>
+            <div class="pos-desc">${p.description}</div>
+            ${detailHtml ? `<div class="pos-detail">${detailHtml}</div>` : ''}
+            ${ownerBadge}
+          </div>
+          <div class="pos-right">
+            <div class="pos-value">${fmt(p.value)}</div>
+            <div class="pos-source ${sourceClass(p.price_source)}">${sourceLabel(p.price_source)}</div>
+          </div>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    // ── Auto-refresh ─────────────────────────────────────────
+    function scheduleRefresh() {
+      clearTimeout(refreshTimer);
+      refreshTimer = setTimeout(fetchPortfolio, 5 * 60 * 1000); // 5 min
+    }
+
+    // ── Event listeners ──────────────────────────────────────
+    document.getElementById('refresh-btn').addEventListener('click', () => {
+      clearTimeout(refreshTimer);
+      fetchPortfolio();
+    });
+
+    document.getElementById('tabs').addEventListener('click', e => {
+      const btn = e.target.closest('.tab');
+      if (!btn) return;
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      renderPositions();
+    });
+
+    document.getElementById('sort-label').addEventListener('click', () => {
+      sortAsc = !sortAsc;
+      document.getElementById('sort-label').textContent = sortAsc
+        ? 'Sort: Value ▴'
+        : 'Sort: Value ▾';
+      renderPositions();
+    });
+
+    // ── Boot ─────────────────────────────────────────────────
+    fetchPortfolio();
+  </script>
+
+</body>
+</html>

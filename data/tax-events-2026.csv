@@ -1,0 +1,14 @@
+event_name,owner,event_type,proceeds,cost_basis,holding,settled,notes
+Databricks tender offer,jaclyn,ltcg,200000,67000,long,false,33.7% of vested; ~3119 units; basis estimated
+Recreational property sale,household,ltcg,150000,100000,long,false,Gross ~$150k; gain ~$50k; escrow Feb-Mar 2026
+NEAR Protocol harvest,galen,loss,161,809,long,false,80.12% loss; sell before tender settles
+AIOZ Network harvest,galen,loss,61,756,long,false,91.93% loss; sell before tender settles
+Algorand harvest,galen,loss,5,15,long,false,66.35% loss; sell before tender settles
+Compound harvest,galen,loss,0.35,9,long,false,96.05% loss; sell before tender settles
+Kishu Inu harvest,galen,loss,4,200,long,false,~98% loss; estimated basis
+KSCP harvest,galen,loss,6,511,long,false,95.39% loss; Knightscope
+Galen Amazon RSU vest Q1,galen,ordinary,12500,0,n/a,false,Estimated quarterly; taxed at vest as W-2 income
+Galen Amazon RSU vest Q2,galen,ordinary,12500,0,n/a,false,Estimated quarterly; taxed at vest as W-2 income
+Galen Amazon RSU vest Q3,galen,ordinary,12500,0,n/a,false,Estimated quarterly; taxed at vest as W-2 income
+Galen Amazon RSU vest Q4,galen,ordinary,12500,0,n/a,false,Estimated quarterly; taxed at vest as W-2 income
+Jaclyn Databricks RSU vest,jaclyn,ordinary,90000,0,n/a,false,Pre-IPO vesting; ~$80-100k/yr estimated midpoint
