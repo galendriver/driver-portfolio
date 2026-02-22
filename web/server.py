@@ -195,6 +195,7 @@ def portfolio():
             "price":           round(price, 4) if price is not None else None,
             "value":           round(row["_value"], 2),
             "price_source":    row["_price_source"],
+            "symbol":          price_key or None,
             "ytd_start_value": ytd_start_value,
             "ytd_gain":        ytd_gain,
             "ytd_pct":         ytd_pct,

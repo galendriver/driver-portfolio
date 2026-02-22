@@ -57,7 +57,7 @@
     #refresh-btn {
       background: none; border: 1px solid var(--border); color: var(--text-sub);
       border-radius: 8px; padding: 6px 10px; font-size: 16px; cursor: pointer; line-height: 1;
-      flex-shrink: 0; transition: color .15s, border-color .15s;
+      flex-shrink: 0;
     }
     #refresh-btn:active { color: var(--blue); border-color: var(--blue); }
     #refresh-btn.spinning { animation: spin .8s linear infinite; }
@@ -80,51 +80,57 @@
       font-size: 11px; font-weight: 600; text-transform: uppercase;
       letter-spacing: .8px; color: var(--text-muted); margin-bottom: 4px;
     }
-    .card-value {
-      font-size: 28px; font-weight: 700; letter-spacing: -.5px; line-height: 1.1;
-    }
+    .card-value { font-size: 28px; font-weight: 700; letter-spacing: -.5px; line-height: 1.1; }
     .card-total .card-value { font-size: 34px; }
     .card-gains { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; }
     .card-gain-line { font-size: 13px; font-weight: 500; }
     .card-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
 
-    /* ── Tabs ── */
-    #tabs { display: flex; gap: 6px; margin-bottom: 14px; }
+    /* ── Owner tabs ── */
+    #tabs { display: flex; gap: 6px; margin-bottom: 12px; }
     .tab {
       flex: 1; background: var(--bg-tab); border: 1px solid var(--border);
       color: var(--text-sub); border-radius: 8px; padding: 8px 0;
-      font-size: 14px; font-weight: 500; cursor: pointer; text-align: center; transition: all .15s;
+      font-size: 14px; font-weight: 500; cursor: pointer; text-align: center;
     }
     .tab.active { background: var(--blue); border-color: var(--blue); color: #fff; }
 
+    /* ── Controls bar (sort + view) ── */
+    #controls {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 12px; flex-wrap: wrap;
+    }
+    .ctrl-group { display: flex; gap: 4px; }
+    .ctrl-label { font-size: 12px; color: var(--text-muted); align-self: center; margin-right: 2px; }
+    .ctrl-btn {
+      background: var(--bg-tab); border: 1px solid var(--border);
+      color: var(--text-sub); border-radius: 7px; padding: 5px 10px;
+      font-size: 12px; font-weight: 500; cursor: pointer; white-space: nowrap;
+    }
+    .ctrl-btn.active { background: var(--bg-card); border-color: var(--text-sub); color: var(--text); }
+    .ctrl-spacer { flex: 1; }
+    .ctrl-toggle {
+      background: var(--bg-tab); border: 1px solid var(--border);
+      color: var(--text-sub); border-radius: 7px; padding: 5px 12px;
+      font-size: 12px; font-weight: 500; cursor: pointer;
+    }
+    .ctrl-toggle.active { border-color: var(--blue); color: var(--blue); }
+
     /* ── Group sections ── */
     .group { margin-bottom: 10px; }
-
     .group-header {
       display: flex; align-items: center; gap: 8px;
       padding: 10px 14px; cursor: pointer; user-select: none;
       background: var(--bg-tab); border: 1px solid var(--border);
-      border-radius: var(--radius); transition: border-color .15s;
+      border-radius: var(--radius);
     }
-    .group-header:active { border-color: var(--blue); }
-
-    .group-chevron {
-      font-size: 11px; color: var(--text-muted); flex-shrink: 0;
-      transition: transform .2s; display: inline-block;
-    }
+    .group-chevron { font-size: 11px; color: var(--text-muted); flex-shrink: 0; transition: transform .2s; }
     .group.collapsed .group-chevron { transform: rotate(-90deg); }
-
     .group-name { font-size: 14px; font-weight: 700; flex: 1; }
-
     .group-meta { text-align: right; }
     .group-total { font-size: 14px; font-weight: 700; }
-    .group-ytd   { font-size: 12px; font-weight: 500; margin-top: 1px; }
-
-    .group-rows {
-      display: flex; flex-direction: column; gap: 5px;
-      margin-top: 5px;
-      overflow: hidden;
-    }
+    .group-ytd { font-size: 12px; font-weight: 500; margin-top: 1px; }
+    .group-rows { display: flex; flex-direction: column; gap: 5px; margin-top: 5px; }
     .group.collapsed .group-rows { display: none; }
 
     /* ── Position rows ── */
@@ -135,12 +141,10 @@
     }
     .pos-left { flex: 1; min-width: 0; }
     .pos-ticker { font-size: 15px; font-weight: 700; }
-    .pos-desc {
-      font-size: 12px; color: var(--text-sub); margin-top: 1px;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
+    .pos-desc { font-size: 12px; color: var(--text-sub); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .pos-detail { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-    .pos-gains { display: flex; gap: 10px; margin-top: 5px; flex-wrap: wrap; }
+    .pos-accounts { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .pos-gains { display: flex; gap: 8px; margin-top: 5px; flex-wrap: wrap; }
     .pos-gain-chip {
       font-size: 11px; font-weight: 600; padding: 2px 7px;
       border-radius: 20px; background: var(--bg-tab); border: 1px solid var(--border);
@@ -164,15 +168,11 @@
     .source-manual { color: var(--text-muted); }
 
     /* ── Loading / error ── */
-    #status-msg {
-      text-align: center; padding: 48px 16px;
-      color: var(--text-muted);
-    }
+    #status-msg { text-align: center; padding: 48px 16px; color: var(--text-muted); }
     .spinner {
       display: inline-block; width: 24px; height: 24px;
       border: 2px solid var(--border); border-top-color: var(--blue);
-      border-radius: 50%; animation: spin .7s linear infinite;
-      margin-bottom: 12px;
+      border-radius: 50%; animation: spin .7s linear infinite; margin-bottom: 12px;
     }
     #error-msg {
       background: rgba(248,81,73,.1); border: 1px solid rgba(248,81,73,.4);
@@ -212,39 +212,45 @@
     </div>
   </section>
 
-  <!-- Filter tabs -->
+  <!-- Owner filter tabs -->
   <div id="tabs">
     <button class="tab active" data-filter="all">All</button>
     <button class="tab" data-filter="galen">Galen</button>
     <button class="tab" data-filter="jaclyn">Jaclyn</button>
   </div>
 
-  <!-- Loading state -->
-  <div id="status-msg">
-    <div class="spinner"></div><br>Fetching live prices…
+  <!-- Sort + view controls -->
+  <div id="controls">
+    <span class="ctrl-label">Sort:</span>
+    <div class="ctrl-group">
+      <button class="ctrl-btn active" data-sort="value-desc">Value ▼</button>
+      <button class="ctrl-btn" data-sort="value-asc">Value ▲</button>
+      <button class="ctrl-btn" data-sort="alpha">A→Z</button>
+      <button class="ctrl-btn" data-sort="ytd">YTD%</button>
+    </div>
+    <div class="ctrl-spacer"></div>
+    <button class="ctrl-toggle" id="combine-btn">Combine</button>
   </div>
 
-  <!-- Groups -->
+  <div id="status-msg"><div class="spinner"></div><br>Fetching live prices…</div>
   <div id="groups-container"></div>
 </main>
 
 <script>
   // ── Config ───────────────────────────────────────────────
-  const GROUP_ORDER = ['us_equity', 'crypto', 'retirement', 'private_equity', 'cash'];
+  const GROUP_ORDER  = ['us_equity','crypto','retirement','private_equity','cash'];
   const GROUP_LABELS = {
-    us_equity:      'Stocks',
-    crypto:         'Crypto',
-    retirement:     'Retirement',
-    private_equity: 'Private Equity',
-    cash:           'Cash',
+    us_equity: 'Stocks', crypto: 'Crypto', retirement: 'Retirement',
+    private_equity: 'Private Equity', cash: 'Cash',
   };
 
   // ── State ────────────────────────────────────────────────
-  let allPositions  = [];
-  let currentFilter = 'all';
-  let sortAsc       = false;
+  let allPositions    = [];
+  let currentFilter   = 'all';
+  let currentSort     = 'value-desc';
+  let combinedView    = false;
   let collapsedGroups = new Set();
-  let refreshTimer  = null;
+  let refreshTimer    = null;
 
   // ── Formatters ───────────────────────────────────────────
   function fmt(n) {
@@ -254,57 +260,104 @@
     if (abs >= 1_000)     return '$' + Math.round(n).toLocaleString('en-US');
     return '$' + n.toFixed(2);
   }
-
   function fmtFull(n) {
-    if (n == null) return '—';
-    return '$' + Math.round(n).toLocaleString('en-US');
+    return n == null ? '—' : '$' + Math.round(n).toLocaleString('en-US');
   }
-
   function fmtShares(s) {
     if (s == null) return null;
     return s >= 10
       ? s.toLocaleString('en-US', { maximumFractionDigits: 2 })
       : s.toLocaleString('en-US', { maximumFractionDigits: 6 });
   }
-
   function fmtPrice(p) {
     if (p == null) return null;
     if (p >= 1000) return '$' + p.toLocaleString('en-US', { maximumFractionDigits: 2 });
     if (p >= 1)    return '$' + p.toFixed(2);
     return '$' + p.toFixed(4);
   }
-
   function fmtGainChip(gain, pct, label) {
     if (gain == null) return null;
     const sign = gain >= 0 ? '+' : '';
     const cls  = gain >= 0 ? 'pos' : 'neg';
-    const pctStr = pct != null ? ` (${sign}${pct.toFixed(1)}%)` : '';
-    return `<span class="pos-gain-chip ${cls}">${label}: ${sign}${fmt(gain)}${pctStr}</span>`;
+    const ps   = pct != null ? ` (${sign}${pct.toFixed(1)}%)` : '';
+    return `<span class="pos-gain-chip ${cls}">${label}: ${sign}${fmt(gain)}${ps}</span>`;
   }
-
   function fmtGainLine(gain, pct, label) {
     if (gain == null) return '';
     const sign = gain >= 0 ? '+' : '';
     const cls  = gain >= 0 ? 'pos' : 'neg';
-    const pctStr = pct != null ? ` (${sign}${pct.toFixed(1)}%)` : '';
-    return `<div class="card-gain-line ${cls}">${label}: ${sign}${fmt(gain)}${pctStr}</div>`;
+    const ps   = pct != null ? ` (${sign}${pct.toFixed(1)}%)` : '';
+    return `<div class="card-gain-line ${cls}">${label}: ${sign}${fmt(gain)}${ps}</div>`;
   }
-
-  function sourceLabel(src) {
-    if (!src || src === 'missing') return 'no price';
-    if (src === 'manual-fallback') return 'est.';
-    if (src === 'manual')          return 'manual';
-    if (src === 'zero')            return '—';
+  function srcLabel(s) {
+    if (!s || s === 'missing') return 'no price';
+    if (s === 'manual-fallback') return 'est.';
+    if (s === 'manual') return 'manual';
+    if (s === 'zero')   return '—';
     return 'live';
   }
-
-  function sourceClass(src) {
-    if (!src || src === 'missing') return 'muted';
-    if (src.startsWith('manual'))  return 'source-manual';
+  function srcClass(s) {
+    if (!s || s === 'missing') return 'muted';
+    if (s.startsWith('manual')) return 'source-manual';
     return 'source-live';
   }
 
-  // ── Fetch ────────────────────────────────────────────────
+  // ── Sort helper ──────────────────────────────────────────
+  function sortRows(rows) {
+    return [...rows].sort((a, b) => {
+      if (currentSort === 'value-desc') return b.value - a.value;
+      if (currentSort === 'value-asc')  return a.value - b.value;
+      if (currentSort === 'alpha')      return a.ticker.localeCompare(b.ticker);
+      if (currentSort === 'ytd') {
+        const ap = a.ytd_pct ?? -Infinity;
+        const bp = b.ytd_pct ?? -Infinity;
+        return bp - ap;
+      }
+      return 0;
+    });
+  }
+
+  // ── Combine positions by underlying symbol ────────────────
+  function combinePositions(rows) {
+    const map = new Map();
+    rows.forEach(p => {
+      const key = p.symbol || p.ticker;
+      if (!map.has(key)) {
+        map.set(key, { ...p, _accounts: [p.account], _count: 1 });
+      } else {
+        const m = map.get(key);
+        m.value += p.value;
+        if (p.shares != null) m.shares = (m.shares || 0) + p.shares;
+        if (p.ytd_gain != null && m.ytd_gain != null) {
+          m.ytd_gain += p.ytd_gain;
+          if (p.ytd_start_value != null && m.ytd_start_value != null) {
+            m.ytd_start_value += p.ytd_start_value;
+            m.ytd_pct = m.ytd_start_value
+              ? m.ytd_gain / m.ytd_start_value * 100 : null;
+          }
+        } else if (p.ytd_gain != null) {
+          m.ytd_gain = p.ytd_gain;
+          m.ytd_pct  = p.ytd_pct;
+        }
+        if (p.alltime_gain != null && m.alltime_gain != null) {
+          m.alltime_gain += p.alltime_gain;
+          if (p.cost_basis != null && m.cost_basis != null) {
+            m.cost_basis += p.cost_basis;
+            m.alltime_pct = m.cost_basis
+              ? m.alltime_gain / m.cost_basis * 100 : null;
+          }
+        } else if (p.alltime_gain != null) {
+          m.alltime_gain = p.alltime_gain;
+          m.alltime_pct  = p.alltime_pct;
+        }
+        m._accounts.push(p.account);
+        m._count++;
+      }
+    });
+    return Array.from(map.values());
+  }
+
+  // ── Fetch data ───────────────────────────────────────────
   async function fetchPortfolio() {
     const btn = document.getElementById('refresh-btn');
     btn.classList.add('spinning');
@@ -318,7 +371,6 @@
       allPositions = data.positions;
       const s = data.summary;
 
-      // Summary cards
       document.getElementById('val-total').textContent  = fmtFull(s.total_portfolio);
       document.getElementById('val-galen').textContent  = fmtFull(s.galen_total);
       document.getElementById('val-jaclyn').textContent = fmtFull(s.jaclyn_total);
@@ -327,16 +379,13 @@
       document.getElementById('gains-total').innerHTML =
         fmtGainLine(s.portfolio_ytd_gain, s.portfolio_ytd_pct, 'YTD') +
         fmtGainLine(s.portfolio_alltime_gain, s.portfolio_alltime_pct, 'All-time');
-
       document.getElementById('gains-galen').innerHTML =
         fmtGainLine(s.galen_ytd_gain, s.galen_ytd_pct, 'YTD') +
         fmtGainLine(s.galen_alltime_gain, s.galen_alltime_pct, 'All-time');
-
       document.getElementById('gains-jaclyn').innerHTML =
         fmtGainLine(s.jaclyn_ytd_gain, s.jaclyn_ytd_pct, 'YTD') +
         fmtGainLine(s.jaclyn_alltime_gain, s.jaclyn_alltime_pct, 'All-time');
 
-      // Timestamp
       const timePart = (data.last_updated || '').split(' ')[1] || data.last_updated;
       document.getElementById('updated-label').textContent = 'Updated ' + timePart;
 
@@ -355,20 +404,19 @@
     }
   }
 
-  // ── Render ───────────────────────────────────────────────
+  // ── Render groups ────────────────────────────────────────
   function renderGroups() {
-    const filtered = allPositions.filter(p =>
+    // Filter by owner
+    let filtered = allPositions.filter(p =>
       currentFilter === 'all' || p.owner === currentFilter
     );
 
-    // Sort within groups
-    const sorted = [...filtered].sort((a, b) =>
-      sortAsc ? a.value - b.value : b.value - a.value
-    );
+    // Optionally combine by underlying symbol
+    if (combinedView) filtered = combinePositions(filtered);
 
-    // Group
+    // Group by asset class
     const groups = {};
-    sorted.forEach(p => {
+    filtered.forEach(p => {
       const key = p.asset_class || 'other';
       if (!groups[key]) groups[key] = [];
       groups[key].push(p);
@@ -383,18 +431,15 @@
       const rows = groups[key];
       if (!rows || rows.length === 0) return;
 
-      const label     = GROUP_LABELS[key] || key;
+      const sorted     = sortRows(rows);
+      const label      = GROUP_LABELS[key] || key;
       const groupTotal = rows.reduce((s, p) => s + p.value, 0);
       const isCollapsed = collapsedGroups.has(key);
 
-      // Group-level YTD
+      // Group YTD
       let ytdStart = 0, ytdCur = 0, hasYtd = false;
       rows.forEach(p => {
-        if (p.ytd_start_value != null) {
-          ytdStart += p.ytd_start_value;
-          ytdCur   += p.value;
-          hasYtd    = true;
-        }
+        if (p.ytd_start_value != null) { ytdStart += p.ytd_start_value; ytdCur += p.value; hasYtd = true; }
       });
       let ytdHtml = '';
       if (hasYtd && ytdStart) {
@@ -406,7 +451,7 @@
       }
 
       // Position rows HTML
-      const rowsHtml = rows.map(p => {
+      const rowsHtml = sorted.map(p => {
         let detail = '';
         if (p.shares != null && p.price != null) {
           detail = `${fmtShares(p.shares)} sh @ ${fmtPrice(p.price)}`;
@@ -414,12 +459,19 @@
           detail = `${fmtShares(p.shares)} sh`;
         }
 
+        // In combined mode, show which accounts are included
+        let accountsHtml = '';
+        if (combinedView && p._count > 1) {
+          const accts = p._accounts.map(a => a.replace(/_/g, ' ')).join(' · ');
+          accountsHtml = `<div class="pos-accounts">${accts}</div>`;
+        }
+
         const chips = [
           fmtGainChip(p.ytd_gain, p.ytd_pct, 'YTD'),
           fmtGainChip(p.alltime_gain, p.alltime_pct, 'All-time'),
         ].filter(Boolean).join('');
 
-        const ownerBadge = currentFilter === 'all'
+        const ownerBadge = (currentFilter === 'all' && !combinedView)
           ? `<span class="pos-owner">${p.owner}</span>` : '';
 
         return `
@@ -427,13 +479,14 @@
             <div class="pos-left">
               <div class="pos-ticker">${p.ticker}</div>
               <div class="pos-desc">${p.description}</div>
-              ${detail ? `<div class="pos-detail">${detail}</div>` : ''}
-              ${chips  ? `<div class="pos-gains">${chips}</div>` : ''}
+              ${detail       ? `<div class="pos-detail">${detail}</div>` : ''}
+              ${accountsHtml}
+              ${chips        ? `<div class="pos-gains">${chips}</div>` : ''}
               ${ownerBadge}
             </div>
             <div class="pos-right">
               <div class="pos-value">${fmt(p.value)}</div>
-              <div class="pos-source ${sourceClass(p.price_source)}">${sourceLabel(p.price_source)}</div>
+              <div class="pos-source ${srcClass(p.price_source)}">${srcLabel(p.price_source)}</div>
             </div>
           </div>`;
       }).join('');
@@ -455,8 +508,7 @@
 
       groupEl.querySelector('.group-header').addEventListener('click', () => {
         const k = groupEl.dataset.key;
-        if (collapsedGroups.has(k)) collapsedGroups.delete(k);
-        else collapsedGroups.add(k);
+        collapsedGroups.has(k) ? collapsedGroups.delete(k) : collapsedGroups.add(k);
         groupEl.classList.toggle('collapsed');
       });
 
@@ -482,6 +534,22 @@
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
     currentFilter = btn.dataset.filter;
+    renderGroups();
+  });
+
+  document.getElementById('controls').addEventListener('click', e => {
+    const btn = e.target.closest('.ctrl-btn');
+    if (btn) {
+      document.querySelectorAll('.ctrl-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentSort = btn.dataset.sort;
+      renderGroups();
+    }
+  });
+
+  document.getElementById('combine-btn').addEventListener('click', () => {
+    combinedView = !combinedView;
+    document.getElementById('combine-btn').classList.toggle('active', combinedView);
     renderGroups();
   });
 
