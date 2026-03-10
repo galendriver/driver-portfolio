@@ -24,8 +24,10 @@ except ImportError:
     print("Missing dependency: pip3 install requests")
     sys.exit(1)
 
-CACHE_FILE = Path(__file__).parent.parent / "data" / "prices-cache.json"
-CACHE_TTL_SECONDS = 300  # 5 minutes — refresh if older than this
+CACHE_FILE      = Path(__file__).parent.parent / "data" / "prices-cache.json"
+WEEK_CACHE_FILE = Path(__file__).parent.parent / "data" / "week-prices-cache.json"
+CACHE_TTL_SECONDS      = 300       # 5 minutes
+WEEK_CACHE_TTL_SECONDS = 6 * 3600  # 6 hours
 
 # Google Sheet (set to "Anyone with link can view")
 GSHEET_ID = "1CmjrabBz4eDvy5sSvX-2pi9NRcZFwzU74oe6w-88G-k"
@@ -54,6 +56,10 @@ def load_rows(use_sheet: bool = True) -> list[dict]:
     return rows
 
 
+# ---------------------------------------------------------------------------
+# Cache helpers
+# ---------------------------------------------------------------------------
+
 def load_cache() -> dict:
     if CACHE_FILE.exists():
         try:
@@ -72,8 +78,29 @@ def save_cache(prices: dict):
     CACHE_FILE.write_text(json.dumps(prices, indent=2))
 
 
+def load_week_cache() -> dict:
+    if WEEK_CACHE_FILE.exists():
+        try:
+            data = json.loads(WEEK_CACHE_FILE.read_text())
+            age = time.time() - data.get("fetched_at", 0)
+            if age < WEEK_CACHE_TTL_SECONDS:
+                return data
+        except Exception:
+            pass
+    return {}
+
+
+def save_week_cache(prices: dict):
+    prices["fetched_at"] = time.time()
+    WEEK_CACHE_FILE.write_text(json.dumps(prices, indent=2))
+
+
+# ---------------------------------------------------------------------------
+# Yahoo Finance
+# ---------------------------------------------------------------------------
+
 def fetch_yfinance(symbols: list[str]) -> dict[str, float]:
-    """Fetch prices for a list of Yahoo Finance symbols."""
+    """Fetch current prices + prev_close for a list of Yahoo Finance symbols."""
     if not symbols:
         return {}
     prices = {}
@@ -83,8 +110,11 @@ def fetch_yfinance(symbols: list[str]) -> dict[str, float]:
             try:
                 info = tickers.tickers[sym].fast_info
                 price = info.last_price
+                prev  = getattr(info, "previous_close", None)
                 if price and price > 0:
                     prices[sym] = round(price, 6)
+                if prev and prev > 0:
+                    prices[f"prev:{sym}"] = round(prev, 6)
             except Exception:
                 pass
     except Exception as e:
@@ -92,46 +122,113 @@ def fetch_yfinance(symbols: list[str]) -> dict[str, float]:
     return prices
 
 
+def fetch_yfinance_week_ago(symbols: list[str]) -> dict[str, float]:
+    """Fetch price from ~7 calendar days ago (≈5 trading days) via daily history."""
+    if not symbols:
+        return {}
+    prices = {}
+    for sym in symbols:
+        try:
+            hist = yf.Ticker(sym).history(period="12d", interval="1d")
+            if hist.empty:
+                continue
+            closes = hist["Close"].dropna()
+            if len(closes) >= 6:
+                prices[f"week:{sym}"] = round(float(closes.iloc[-6]), 6)
+            elif len(closes) >= 1:
+                prices[f"week:{sym}"] = round(float(closes.iloc[0]), 6)
+        except Exception as e:
+            print(f"  [week yf] {sym}: {e}")
+    return prices
+
+
+# ---------------------------------------------------------------------------
+# CoinGecko
+# ---------------------------------------------------------------------------
+
 def fetch_coingecko(cg_ids: list[str]) -> dict[str, float]:
-    """Fetch prices from CoinGecko free API (no key required)."""
+    """Fetch current prices + approx prev_close (24h ago) from CoinGecko."""
     if not cg_ids:
         return {}
     ids_param = ",".join(cg_ids)
-    url = f"https://api.coingecko.com/api/v3/simple/price?ids={ids_param}&vs_currencies=usd"
+    url = (
+        f"https://api.coingecko.com/api/v3/simple/price"
+        f"?ids={ids_param}&vs_currencies=usd&include_24hr_change=true"
+    )
     try:
         resp = requests.get(url, timeout=10, headers={"User-Agent": "financial-planner/1.0"})
         resp.raise_for_status()
         data = resp.json()
-        return {cg_id: data[cg_id]["usd"] for cg_id in cg_ids if cg_id in data}
+        prices = {}
+        for cg_id in cg_ids:
+            if cg_id not in data:
+                continue
+            current   = data[cg_id]["usd"]
+            change_24 = data[cg_id].get("usd_24h_change")
+            prices[cg_id] = current
+            if change_24 is not None:
+                # back-calculate price 24h ago
+                denom = 1 + change_24 / 100
+                if denom != 0:
+                    prices[f"prev:{cg_id}"] = round(current / denom, 6)
+        return prices
     except Exception as e:
         print(f"  [CoinGecko error] {e}")
         return {}
 
 
+def fetch_coingecko_week_ago(cg_ids: list[str]) -> dict[str, float]:
+    """Fetch price from ~7 days ago via CoinGecko market_chart endpoint."""
+    if not cg_ids:
+        return {}
+    prices = {}
+    for cg_id in cg_ids:
+        try:
+            url  = (
+                f"https://api.coingecko.com/api/v3/coins/{cg_id}"
+                f"/market_chart?vs_currency=usd&days=7&interval=daily"
+            )
+            resp = requests.get(url, timeout=15, headers={"User-Agent": "financial-planner/1.0"})
+            data = resp.json()
+            price_data = data.get("prices", [])
+            if price_data:
+                prices[f"week:{cg_id}"] = round(float(price_data[0][1]), 6)
+        except Exception as e:
+            print(f"  [week cg] {cg_id}: {e}")
+        time.sleep(1.2)  # CoinGecko free-tier rate limit
+    return prices
+
+
+# ---------------------------------------------------------------------------
+# Main fetch
+# ---------------------------------------------------------------------------
+
 def fetch_all_prices(rows: list[dict], force_refresh: bool = False) -> dict:
     """
     Given the balances CSV rows, fetch all needed prices.
-    Returns dict keyed by row identifier: {yf_symbol or cg_id: price_usd}
+    Returns flat dict keyed by symbol:
+      {sym: current_price, "prev:{sym}": prev_close, "week:{sym}": week_ago_price, ...}
     Uses cache unless force_refresh=True or cache is stale.
     """
     if not force_refresh:
         cache = load_cache()
         if cache:
+            # Merge in week cache if available
+            week_cache = load_week_cache()
+            if week_cache:
+                cache.update({k: v for k, v in week_cache.items() if k != "fetched_at"})
             return cache
 
     yf_symbols = []
-    cg_ids = []
+    cg_ids     = []
 
     for row in rows:
-        yf = row.get("yf_symbol", "").strip()
-        cg = row.get("cg_id", "").strip()
+        yf  = row.get("yf_symbol", "").strip()
+        cg  = row.get("cg_id", "").strip()
         shares_str = row.get("shares", "").strip()
-        manual = row.get("manual_value", "").strip()
 
-        # Only fetch price if we have shares (otherwise uses manual_value)
-        if not shares_str or not float(shares_str) if shares_str else True:
-            if not shares_str:
-                continue
+        if not shares_str:
+            continue
 
         if yf:
             yf_symbols.append(yf)
@@ -139,10 +236,11 @@ def fetch_all_prices(rows: list[dict], force_refresh: bool = False) -> dict:
             cg_ids.append(cg)
 
     yf_symbols = list(set(yf_symbols))
-    cg_ids = list(set(cg_ids))
+    cg_ids     = list(set(cg_ids))
 
     prices = {}
 
+    # Current + prev_close prices
     if yf_symbols:
         print(f"  Fetching {len(yf_symbols)} stock prices from Yahoo Finance...")
         yf_prices = fetch_yfinance(yf_symbols)
@@ -160,6 +258,23 @@ def fetch_all_prices(rows: list[dict], force_refresh: bool = False) -> dict:
                 print(f"  [warn] No price returned for {cg_id}")
 
     save_cache(prices)
+
+    # Week-ago prices (separate longer-lived cache)
+    week_cache = load_week_cache()
+    if not week_cache:
+        week_prices = {}
+        if yf_symbols:
+            print(f"  Fetching week-ago stock prices from Yahoo Finance...")
+            week_prices.update(fetch_yfinance_week_ago(yf_symbols))
+        if cg_ids:
+            print(f"  Fetching week-ago crypto prices from CoinGecko...")
+            week_prices.update(fetch_coingecko_week_ago(cg_ids))
+        if week_prices:
+            save_week_cache(week_prices)
+        week_cache = week_prices
+
+    prices.update({k: v for k, v in week_cache.items() if k != "fetched_at"})
+
     return prices
 
 
@@ -220,12 +335,12 @@ if __name__ == "__main__":
 
     prices = fetch_all_prices(rows, force_refresh=args.refresh)
 
-    print(f"\n  {'Symbol':<25} {'Price (USD)':>15}")
-    print(f"  {'─'*25} {'─'*15}")
+    print(f"\n  {'Symbol':<30} {'Price (USD)':>15}")
+    print(f"  {'─'*30} {'─'*15}")
     for sym, price in sorted(prices.items()):
         if sym in ("fetched_at", "fetched_at_human"):
             continue
-        print(f"  {sym:<25} ${price:>14,.4f}")
+        print(f"  {sym:<30} ${price:>14,.4f}")
 
     cached_at = prices.get("fetched_at_human", "unknown")
     print(f"\n  Prices as of: {cached_at}")

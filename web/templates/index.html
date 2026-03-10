@@ -69,33 +69,34 @@
       max-width: 600px; margin: 0 auto;
     }
 
-    /* ── Summary cards ── */
-    #summary { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-    .card-total { grid-column: 1 / -1; }
+    /* ── Summary card ── */
+    #summary { margin-bottom: 16px; }
     .card {
       background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 14px 16px;
+      border-radius: var(--radius); padding: 16px 18px;
     }
     .card-label {
       font-size: 11px; font-weight: 600; text-transform: uppercase;
       letter-spacing: .8px; color: var(--text-muted); margin-bottom: 4px;
     }
-    .card-value { font-size: 28px; font-weight: 700; letter-spacing: -.5px; line-height: 1.1; }
-    .card-total .card-value { font-size: 34px; }
-    .card-gains { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; }
-    .card-gain-line { font-size: 13px; font-weight: 500; }
+    .card-value { font-size: 36px; font-weight: 700; letter-spacing: -.5px; line-height: 1.1; }
     .card-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
 
-    /* ── Owner tabs ── */
-    #tabs { display: flex; gap: 6px; margin-bottom: 12px; }
-    .tab {
-      flex: 1; background: var(--bg-tab); border: 1px solid var(--border);
-      color: var(--text-sub); border-radius: 8px; padding: 8px 0;
-      font-size: 14px; font-weight: 500; cursor: pointer; text-align: center;
+    /* Performance row: 1d · 1w · YTD */
+    .perf-row {
+      display: flex; gap: 0; margin-top: 14px;
+      border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
     }
-    .tab.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .perf-cell {
+      flex: 1; padding: 10px 12px; text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .perf-cell:last-child { border-right: none; }
+    .perf-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .6px; color: var(--text-muted); margin-bottom: 3px; }
+    .perf-val   { font-size: 15px; font-weight: 700; }
+    .perf-pct   { font-size: 12px; font-weight: 500; margin-top: 1px; }
 
-    /* ── Controls bar (sort + view) ── */
+    /* ── Controls bar ── */
     #controls {
       display: flex; align-items: center; gap: 8px;
       margin-bottom: 12px; flex-wrap: wrap;
@@ -129,7 +130,7 @@
     .group-name { font-size: 14px; font-weight: 700; flex: 1; }
     .group-meta { text-align: right; }
     .group-total { font-size: 14px; font-weight: 700; }
-    .group-ytd { font-size: 12px; font-weight: 500; margin-top: 1px; }
+    .group-perf { font-size: 12px; font-weight: 500; margin-top: 1px; }
     .group-rows { display: flex; flex-direction: column; gap: 5px; margin-top: 5px; }
     .group.collapsed .group-rows { display: none; }
 
@@ -144,7 +145,7 @@
     .pos-desc { font-size: 12px; color: var(--text-sub); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .pos-detail { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
     .pos-accounts { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
-    .pos-gains { display: flex; gap: 8px; margin-top: 5px; flex-wrap: wrap; }
+    .pos-gains { display: flex; gap: 6px; margin-top: 5px; flex-wrap: wrap; }
     .pos-gain-chip {
       font-size: 11px; font-weight: 600; padding: 2px 7px;
       border-radius: 20px; background: var(--bg-tab); border: 1px solid var(--border);
@@ -153,12 +154,6 @@
     .pos-right { text-align: right; flex-shrink: 0; }
     .pos-value { font-size: 16px; font-weight: 700; }
     .pos-source { font-size: 11px; font-weight: 500; margin-top: 2px; }
-    .pos-owner {
-      font-size: 10px; font-weight: 600; text-transform: uppercase;
-      color: var(--text-muted); background: var(--bg-tab);
-      border: 1px solid var(--border); border-radius: 4px;
-      padding: 1px 5px; display: inline-block; margin-top: 4px;
-    }
 
     /* ── Color helpers ── */
     .pos { color: var(--green); }
@@ -192,32 +187,31 @@
 <main id="main">
   <div id="error-msg"></div>
 
-  <!-- Summary cards -->
+  <!-- Summary card -->
   <section id="summary">
-    <div class="card card-total">
+    <div class="card">
       <div class="card-label">Total Portfolio</div>
       <div class="card-value" id="val-total">—</div>
-      <div class="card-gains" id="gains-total"></div>
       <div class="card-sub" id="val-liquid"></div>
-    </div>
-    <div class="card">
-      <div class="card-label">Galen</div>
-      <div class="card-value" id="val-galen">—</div>
-      <div class="card-gains" id="gains-galen"></div>
-    </div>
-    <div class="card">
-      <div class="card-label">Jaclyn</div>
-      <div class="card-value" id="val-jaclyn">—</div>
-      <div class="card-gains" id="gains-jaclyn"></div>
+      <div class="perf-row">
+        <div class="perf-cell">
+          <div class="perf-label">1D</div>
+          <div class="perf-val" id="perf-day-val">—</div>
+          <div class="perf-pct" id="perf-day-pct"></div>
+        </div>
+        <div class="perf-cell">
+          <div class="perf-label">1W</div>
+          <div class="perf-val" id="perf-week-val">—</div>
+          <div class="perf-pct" id="perf-week-pct"></div>
+        </div>
+        <div class="perf-cell">
+          <div class="perf-label">YTD</div>
+          <div class="perf-val" id="perf-ytd-val">—</div>
+          <div class="perf-pct" id="perf-ytd-pct"></div>
+        </div>
+      </div>
     </div>
   </section>
-
-  <!-- Owner filter tabs -->
-  <div id="tabs">
-    <button class="tab active" data-filter="all">All</button>
-    <button class="tab" data-filter="galen">Galen</button>
-    <button class="tab" data-filter="jaclyn">Jaclyn</button>
-  </div>
 
   <!-- Sort + view controls -->
   <div id="controls">
@@ -226,6 +220,8 @@
       <button class="ctrl-btn active" data-sort="value-desc">Value ▼</button>
       <button class="ctrl-btn" data-sort="value-asc">Value ▲</button>
       <button class="ctrl-btn" data-sort="alpha">A→Z</button>
+      <button class="ctrl-btn" data-sort="day">1D%</button>
+      <button class="ctrl-btn" data-sort="week">1W%</button>
       <button class="ctrl-btn" data-sort="ytd">YTD%</button>
     </div>
     <div class="ctrl-spacer"></div>
@@ -246,7 +242,6 @@
 
   // ── State ────────────────────────────────────────────────
   let allPositions    = [];
-  let currentFilter   = 'all';
   let currentSort     = 'value-desc';
   let combinedView    = false;
   let collapsedGroups = new Set();
@@ -282,13 +277,20 @@
     const ps   = pct != null ? ` (${sign}${pct.toFixed(1)}%)` : '';
     return `<span class="pos-gain-chip ${cls}">${label}: ${sign}${fmt(gain)}${ps}</span>`;
   }
-  function fmtGainLine(gain, pct, label) {
-    if (gain == null) return '';
+
+  // Fills a perf-cell trio: val element, pct element
+  function fillPerfCell(valEl, pctEl, gain, pct) {
+    if (gain == null) { valEl.textContent = '—'; pctEl.textContent = ''; return; }
     const sign = gain >= 0 ? '+' : '';
     const cls  = gain >= 0 ? 'pos' : 'neg';
-    const ps   = pct != null ? ` (${sign}${pct.toFixed(1)}%)` : '';
-    return `<div class="card-gain-line ${cls}">${label}: ${sign}${fmt(gain)}${ps}</div>`;
+    valEl.textContent = sign + fmt(gain);
+    valEl.className   = 'perf-val ' + cls;
+    if (pct != null) {
+      pctEl.textContent = sign + pct.toFixed(2) + '%';
+      pctEl.className   = 'perf-pct ' + cls;
+    }
   }
+
   function srcLabel(s) {
     if (!s || s === 'missing') return 'no price';
     if (s === 'manual-fallback') return 'est.';
@@ -308,11 +310,9 @@
       if (currentSort === 'value-desc') return b.value - a.value;
       if (currentSort === 'value-asc')  return a.value - b.value;
       if (currentSort === 'alpha')      return a.ticker.localeCompare(b.ticker);
-      if (currentSort === 'ytd') {
-        const ap = a.ytd_pct ?? -Infinity;
-        const bp = b.ytd_pct ?? -Infinity;
-        return bp - ap;
-      }
+      if (currentSort === 'day')  { const ap = a.day_pct  ?? -Infinity; const bp = b.day_pct  ?? -Infinity; return bp - ap; }
+      if (currentSort === 'week') { const ap = a.week_pct ?? -Infinity; const bp = b.week_pct ?? -Infinity; return bp - ap; }
+      if (currentSort === 'ytd')  { const ap = a.ytd_pct  ?? -Infinity; const bp = b.ytd_pct  ?? -Infinity; return bp - ap; }
       return 0;
     });
   }
@@ -328,28 +328,36 @@
         const m = map.get(key);
         m.value += p.value;
         if (p.shares != null) m.shares = (m.shares || 0) + p.shares;
-        if (p.ytd_gain != null && m.ytd_gain != null) {
-          m.ytd_gain += p.ytd_gain;
-          if (p.ytd_start_value != null && m.ytd_start_value != null) {
-            m.ytd_start_value += p.ytd_start_value;
-            m.ytd_pct = m.ytd_start_value
-              ? m.ytd_gain / m.ytd_start_value * 100 : null;
+
+        // Merge day/week/ytd
+        for (const [gainKey, startKey, pctKey] of [
+          ['day_gain',  null,             'day_pct'],
+          ['week_gain', null,             'week_pct'],
+          ['ytd_gain',  'ytd_start_value','ytd_pct'],
+        ]) {
+          if (p[gainKey] != null && m[gainKey] != null) {
+            m[gainKey] += p[gainKey];
+            if (startKey && p[startKey] != null && m[startKey] != null) {
+              m[startKey] += p[startKey];
+              m[pctKey] = m[startKey] ? m[gainKey] / m[startKey] * 100 : null;
+            }
+          } else if (p[gainKey] != null) {
+            m[gainKey] = p[gainKey];
+            m[pctKey]  = p[pctKey];
           }
-        } else if (p.ytd_gain != null) {
-          m.ytd_gain = p.ytd_gain;
-          m.ytd_pct  = p.ytd_pct;
         }
+
         if (p.alltime_gain != null && m.alltime_gain != null) {
           m.alltime_gain += p.alltime_gain;
           if (p.cost_basis != null && m.cost_basis != null) {
             m.cost_basis += p.cost_basis;
-            m.alltime_pct = m.cost_basis
-              ? m.alltime_gain / m.cost_basis * 100 : null;
+            m.alltime_pct = m.cost_basis ? m.alltime_gain / m.cost_basis * 100 : null;
           }
         } else if (p.alltime_gain != null) {
           m.alltime_gain = p.alltime_gain;
           m.alltime_pct  = p.alltime_pct;
         }
+
         m._accounts.push(p.account);
         m._count++;
       }
@@ -372,19 +380,23 @@
       const s = data.summary;
 
       document.getElementById('val-total').textContent  = fmtFull(s.total_portfolio);
-      document.getElementById('val-galen').textContent  = fmtFull(s.galen_total);
-      document.getElementById('val-jaclyn').textContent = fmtFull(s.jaclyn_total);
       document.getElementById('val-liquid').textContent = 'Liquid: ' + fmtFull(s.liquid_total);
 
-      document.getElementById('gains-total').innerHTML =
-        fmtGainLine(s.portfolio_ytd_gain, s.portfolio_ytd_pct, 'YTD') +
-        fmtGainLine(s.portfolio_alltime_gain, s.portfolio_alltime_pct, 'All-time');
-      document.getElementById('gains-galen').innerHTML =
-        fmtGainLine(s.galen_ytd_gain, s.galen_ytd_pct, 'YTD') +
-        fmtGainLine(s.galen_alltime_gain, s.galen_alltime_pct, 'All-time');
-      document.getElementById('gains-jaclyn').innerHTML =
-        fmtGainLine(s.jaclyn_ytd_gain, s.jaclyn_ytd_pct, 'YTD') +
-        fmtGainLine(s.jaclyn_alltime_gain, s.jaclyn_alltime_pct, 'All-time');
+      fillPerfCell(
+        document.getElementById('perf-day-val'),
+        document.getElementById('perf-day-pct'),
+        s.day_gain, s.day_pct
+      );
+      fillPerfCell(
+        document.getElementById('perf-week-val'),
+        document.getElementById('perf-week-pct'),
+        s.week_gain, s.week_pct
+      );
+      fillPerfCell(
+        document.getElementById('perf-ytd-val'),
+        document.getElementById('perf-ytd-pct'),
+        s.ytd_gain, s.ytd_pct
+      );
 
       const timePart = (data.last_updated || '').split(' ')[1] || data.last_updated;
       document.getElementById('updated-label').textContent = 'Updated ' + timePart;
@@ -406,17 +418,11 @@
 
   // ── Render groups ────────────────────────────────────────
   function renderGroups() {
-    // Filter by owner
-    let filtered = allPositions.filter(p =>
-      currentFilter === 'all' || p.owner === currentFilter
-    );
-
-    // Optionally combine by underlying symbol
-    if (combinedView) filtered = combinePositions(filtered);
+    let positions = combinedView ? combinePositions(allPositions) : allPositions;
 
     // Group by asset class
     const groups = {};
-    filtered.forEach(p => {
+    positions.forEach(p => {
       const key = p.asset_class || 'other';
       if (!groups[key]) groups[key] = [];
       groups[key].push(p);
@@ -436,18 +442,23 @@
       const groupTotal = rows.reduce((s, p) => s + p.value, 0);
       const isCollapsed = collapsedGroups.has(key);
 
-      // Group YTD
-      let ytdStart = 0, ytdCur = 0, hasYtd = false;
+      // Group perf — show whichever of day/week/ytd matches current sort, else day
+      const perfKey = currentSort === 'week' ? 'week' : currentSort === 'ytd' ? 'ytd' : 'day';
+      let gStart = 0, gCur = 0, hasPerf = false;
       rows.forEach(p => {
-        if (p.ytd_start_value != null) { ytdStart += p.ytd_start_value; ytdCur += p.value; hasYtd = true; }
+        const startVal = perfKey === 'ytd'  ? p.ytd_start_value
+                       : perfKey === 'week' ? (p.week_gain != null ? p.value - p.week_gain : null)
+                       : (p.day_gain != null ? p.value - p.day_gain : null);
+        if (startVal != null) { gStart += startVal; gCur += p.value; hasPerf = true; }
       });
-      let ytdHtml = '';
-      if (hasYtd && ytdStart) {
-        const gain = ytdCur - ytdStart;
-        const pct  = gain / ytdStart * 100;
+      let perfHtml = '';
+      if (hasPerf && gStart) {
+        const gain = gCur - gStart;
+        const pct  = gain / gStart * 100;
         const sign = gain >= 0 ? '+' : '';
         const cls  = gain >= 0 ? 'pos' : 'neg';
-        ytdHtml = `<div class="group-ytd ${cls}">YTD ${sign}${pct.toFixed(1)}%</div>`;
+        const lbl  = perfKey === 'ytd' ? 'YTD' : perfKey === 'week' ? '1W' : '1D';
+        perfHtml = `<div class="group-perf ${cls}">${lbl} ${sign}${pct.toFixed(1)}%</div>`;
       }
 
       // Position rows HTML
@@ -459,7 +470,6 @@
           detail = `${fmtShares(p.shares)} sh`;
         }
 
-        // In combined mode, show which accounts are included
         let accountsHtml = '';
         if (combinedView && p._count > 1) {
           const accts = p._accounts.map(a => a.replace(/_/g, ' ')).join(' · ');
@@ -467,12 +477,11 @@
         }
 
         const chips = [
-          fmtGainChip(p.ytd_gain, p.ytd_pct, 'YTD'),
+          fmtGainChip(p.day_gain,     p.day_pct,     '1D'),
+          fmtGainChip(p.week_gain,    p.week_pct,    '1W'),
+          fmtGainChip(p.ytd_gain,     p.ytd_pct,     'YTD'),
           fmtGainChip(p.alltime_gain, p.alltime_pct, 'All-time'),
         ].filter(Boolean).join('');
-
-        const ownerBadge = (currentFilter === 'all' && !combinedView)
-          ? `<span class="pos-owner">${p.owner}</span>` : '';
 
         return `
           <div class="position-row">
@@ -482,7 +491,6 @@
               ${detail       ? `<div class="pos-detail">${detail}</div>` : ''}
               ${accountsHtml}
               ${chips        ? `<div class="pos-gains">${chips}</div>` : ''}
-              ${ownerBadge}
             </div>
             <div class="pos-right">
               <div class="pos-value">${fmt(p.value)}</div>
@@ -500,7 +508,7 @@
           <span class="group-name">${label}</span>
           <div class="group-meta">
             <div class="group-total">${fmtFull(groupTotal)}</div>
-            ${ytdHtml}
+            ${perfHtml}
           </div>
         </div>
         <div class="group-rows">${rowsHtml}</div>
@@ -526,15 +534,6 @@
   document.getElementById('refresh-btn').addEventListener('click', () => {
     clearTimeout(refreshTimer);
     fetchPortfolio();
-  });
-
-  document.getElementById('tabs').addEventListener('click', e => {
-    const btn = e.target.closest('.tab');
-    if (!btn) return;
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
-    renderGroups();
   });
 
   document.getElementById('controls').addEventListener('click', e => {

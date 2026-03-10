@@ -135,15 +135,13 @@ def portfolio():
         row["_value"]        = val
         row["_price_source"] = source
 
-    # Build positions + accumulate summary gain buckets
     positions = []
 
-    def _gains_bucket():
-        return {"ytd_start": 0.0, "ytd_cur": 0.0, "at_cost": 0.0, "at_cur": 0.0}
-
-    g_total  = _gains_bucket()
-    g_galen  = _gains_bucket()
-    g_jaclyn = _gains_bucket()
+    # Accumulators for portfolio-level gain summaries
+    day_start_total = day_cur_total = 0.0
+    week_start_total = week_cur_total = 0.0
+    ytd_start_total = ytd_cur_total = 0.0
+    at_cost_total = at_cur_total = 0.0
 
     for row in rows:
         shares_str = (row.get("shares") or "").strip()
@@ -151,25 +149,42 @@ def portfolio():
         yf_sym     = (row.get("yf_symbol") or "").strip()
         cg_id      = (row.get("cg_id") or "").strip()
         price_key  = yf_sym or cg_id
-        owner      = row.get("owner", "")
 
         price = None
         if price_key and row["_price_source"] == "live":
             price = prices.get(price_key)
 
-        # YTD
+        # ── Day (prev close) ────────────────────────────────────
+        day_gain = day_pct = None
+        prev_price = prices.get(f"prev:{price_key}") if price_key else None
+        if prev_price and shares and price is not None:
+            day_start = round(shares * prev_price, 2)
+            day_gain  = round(row["_value"] - day_start, 2)
+            day_pct   = round(day_gain / day_start * 100, 2) if day_start else None
+            day_start_total += day_start
+            day_cur_total   += row["_value"]
+
+        # ── Week (7 calendar days ago) ──────────────────────────
+        week_gain = week_pct = None
+        week_price = prices.get(f"week:{price_key}") if price_key else None
+        if week_price and shares and price is not None:
+            week_start = round(shares * week_price, 2)
+            week_gain  = round(row["_value"] - week_start, 2)
+            week_pct   = round(week_gain / week_start * 100, 2) if week_start else None
+            week_start_total += week_start
+            week_cur_total   += row["_value"]
+
+        # ── YTD ────────────────────────────────────────────────
         ytd_gain = ytd_pct = ytd_start_value = None
         ytd_price = ytd_prices.get(price_key) if price_key else None
         if ytd_price and shares and price is not None:
             ytd_start_value = round(shares * ytd_price, 2)
             ytd_gain        = round(row["_value"] - ytd_start_value, 2)
             ytd_pct         = round(ytd_gain / ytd_start_value * 100, 2) if ytd_start_value else None
-            for bucket in [g_total, (g_galen if owner == "galen" else g_jaclyn if owner == "jaclyn" else None)]:
-                if bucket:
-                    bucket["ytd_start"] += ytd_start_value
-                    bucket["ytd_cur"]   += row["_value"]
+            ytd_start_total += ytd_start_value
+            ytd_cur_total   += row["_value"]
 
-        # All-time
+        # ── All-time ────────────────────────────────────────────
         alltime_gain = alltime_pct = cost_basis = None
         cb_str = (row.get("cost_basis") or "").strip()
         if cb_str:
@@ -177,17 +192,15 @@ def portfolio():
                 cost_basis   = float(cb_str)
                 alltime_gain = round(row["_value"] - cost_basis, 2)
                 alltime_pct  = round(alltime_gain / cost_basis * 100, 2) if cost_basis else None
-                for bucket in [g_total, (g_galen if owner == "galen" else g_jaclyn if owner == "jaclyn" else None)]:
-                    if bucket:
-                        bucket["at_cost"] += cost_basis
-                        bucket["at_cur"]  += row["_value"]
+                at_cost_total += cost_basis
+                at_cur_total  += row["_value"]
             except ValueError:
                 pass
 
         positions.append({
             "ticker":          row.get("ticker", ""),
             "description":     row.get("description", ""),
-            "owner":           owner,
+            "owner":           row.get("owner", ""),
             "account":         row.get("account", ""),
             "asset_class":     row.get("asset_class", ""),
             "sector":          row.get("sector", ""),
@@ -196,6 +209,10 @@ def portfolio():
             "value":           round(row["_value"], 2),
             "price_source":    row["_price_source"],
             "symbol":          price_key or None,
+            "day_gain":        day_gain,
+            "day_pct":         day_pct,
+            "week_gain":       week_gain,
+            "week_pct":        week_pct,
             "ytd_start_value": ytd_start_value,
             "ytd_gain":        ytd_gain,
             "ytd_pct":         ytd_pct,
@@ -206,15 +223,9 @@ def portfolio():
 
     positions.sort(key=lambda x: x["value"], reverse=True)
 
-    def _gain_summary(bucket):
-        ytd_gain = at_gain = ytd_pct = at_pct = None
-        if bucket["ytd_start"]:
-            ytd_gain = round(bucket["ytd_cur"] - bucket["ytd_start"], 2)
-            ytd_pct  = round(ytd_gain / bucket["ytd_start"] * 100, 2)
-        if bucket["at_cost"]:
-            at_gain = round(bucket["at_cur"] - bucket["at_cost"], 2)
-            at_pct  = round(at_gain / bucket["at_cost"] * 100, 2)
-        return {"ytd_gain": ytd_gain, "ytd_pct": ytd_pct, "alltime_gain": at_gain, "alltime_pct": at_pct}
+    # Portfolio-level gain summaries
+    def _pct(cur, start):
+        return round((cur - start) / start * 100, 2) if start else None
 
     liquid_total = sum(
         r["_value"] for r in rows
@@ -228,12 +239,15 @@ def portfolio():
         "last_updated": last_updated,
         "summary": {
             "total_portfolio": round(sum(r["_value"] for r in rows)),
-            "galen_total":     round(sum(r["_value"] for r in rows if r.get("owner") == "galen")),
-            "jaclyn_total":    round(sum(r["_value"] for r in rows if r.get("owner") == "jaclyn")),
             "liquid_total":    round(liquid_total),
-            **{f"portfolio_{k}": v for k, v in _gain_summary(g_total).items()},
-            **{f"galen_{k}": v for k, v in _gain_summary(g_galen).items()},
-            **{f"jaclyn_{k}": v for k, v in _gain_summary(g_jaclyn).items()},
+            "day_gain":        round(day_cur_total - day_start_total, 2) if day_start_total else None,
+            "day_pct":         _pct(day_cur_total, day_start_total),
+            "week_gain":       round(week_cur_total - week_start_total, 2) if week_start_total else None,
+            "week_pct":        _pct(week_cur_total, week_start_total),
+            "ytd_gain":        round(ytd_cur_total - ytd_start_total, 2) if ytd_start_total else None,
+            "ytd_pct":         _pct(ytd_cur_total, ytd_start_total),
+            "alltime_gain":    round(at_cur_total - at_cost_total, 2) if at_cost_total else None,
+            "alltime_pct":     _pct(at_cur_total, at_cost_total),
         },
         "positions": positions,
     })
