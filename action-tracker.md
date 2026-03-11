@@ -1,7 +1,7 @@
 # Financial Planning Action Tracker
 **Household:** Galen & Jaclyn
-**Last Updated:** 2026-02-19
-**Next Review:** March 2026 (post-property sale & tender settlement)
+**Last Updated:** 2026-03-10
+**Next Review:** April 2026 (post-tender settlement, check refi rates)
 
 ---
 
@@ -10,19 +10,28 @@
 - `🔴 URGENT` — Time-sensitive, do immediately
 - `🟡 PENDING` — Awaiting trigger event
 - `🔁 ONGOING` — Recurring action
+- `⏸ WATCH` — Monitor, act on trigger
 
 ---
 
-## WEEK 1 — Feb 17–23, 2026
+## COMPLETED ✅
+
+| Status | Action | Details |
+|--------|--------|---------|
+| ✅ DONE | Databricks 401(k) reallocated | Tactical allocation in place (2/19/26) |
+| ✅ DONE | Future contributions updated | Databricks 401(k) contribution allocation updated |
+| ✅ DONE | $30k HELOC payment | Balance reduced to $150,000 |
+| ✅ DONE | Recreational property sold | $146,000 applied to HELOC → balance now ~$4,000 |
+
+---
+
+## URGENT — Do Before Tender Settles
 
 | Status | Action | Details | Deadline |
 |--------|--------|---------|----------|
-| ✅ DONE | Databricks 401(k) reallocated | New tactical allocation in place (2/19/26) | — |
-| ✅ DONE | Future contributions updated | Databricks 401(k) contribution allocation updated | — |
-| ✅ DONE | $30k HELOC payment | Balance now $150,000 | — |
-| 🔴 URGENT | **Accept Databricks tender offer** | Sell $200k (33.7% of vested @ ~$190/unit). Net proceeds ~$180,335 after ~$19,665 tax. | **Before deadline closes** |
-| 🔴 URGENT | **Crypto tax-loss harvesting** | Sell NEAR ($161), AIOZ ($61), Algorand ($5), Compound ($0.35), Kishu Inu ($4) — total ~$1,900 losses. Do BEFORE tender settles to offset gains. | **Before tender settles** |
-| 🔴 URGENT | **Harvest KSCP loss** | Sell Knightscope: ~$6 current, $505 loss (-95.39%) | **Before tender settles** |
+| 🔴 URGENT | **Zero out HELOC** | Pay remaining ~$4,000 from cash. Opens full $250k credit line. | Immediately |
+| 🔴 URGENT | **Crypto tax-loss harvesting** | Sell NEAR ($161), AIOZ ($61), Algorand ($5), Compound ($0.35), Kishu Inu ($4) — ~$1,900 losses. Must do BEFORE tender settles. | Before Mar 15 |
+| 🔴 URGENT | **Harvest KSCP loss** | Sell Knightscope: ~$6 current, $505 loss (-95.39%) | Before Mar 15 |
 
 ### Crypto Loss Harvesting Detail
 | Token | Current Value | Est. Loss | Action |
@@ -37,47 +46,71 @@
 
 ---
 
-## WEEKS 2–3 — Feb 24 – Mar 9, 2026
+## WEEK OF MARCH 15–20 — Tender Settles, Deploy Capital
 
-| Status | Action | Details | Trigger |
-|--------|--------|---------|---------|
-| 🟡 PENDING | Recreational property closes escrow | Sale price ~$150k gross, ~$142.5k net after $7.5k tax | Escrow closes |
-| 🟡 PENDING | Pay off HELOC in full | Use property net proceeds + $7,500 from cash reserves. Balance: $150k → $0. Opens $250k credit line. | Day of proceeds receipt |
-| 🟡 PENDING | Receive tender proceeds | $200k gross → ~$180,335 net (after ~$19,665 federal LTCG tax) | ~2–3 weeks after acceptance |
+### Capital Available
+| Source | Amount |
+|--------|--------|
+| Databricks tender (gross) | $200,000 |
+| Less: 2026 tax reserve (move to separate HYSA, do not invest) | -$20,000 |
+| **Investable from tender** | **$180,000** |
+| Existing cash (keep untouched as emergency fund) | $40,000 |
+
+### Step 1 — Tax Reserve
+| Status | Action | Details |
+|--------|--------|---------|
+| 🟡 PENDING | Move $20,000 to HYSA labeled "2026 taxes" | Do not invest. Hold until April 2027 tax filing. |
+
+### Step 2 — Deploy $180,000
+
+| Status | Priority | Buy | Ticker | Amount | Thesis |
+|--------|----------|-----|--------|--------|--------|
+| 🟡 PENDING | 1 | Healthcare ETF | VHT | $40,000 | 0% → target 3–5%. Defensive, low correlation. |
+| 🟡 PENDING | 2 | Financials ETF | VFH | $30,000 | 0% → target 3–5%. AI financing + rate environment. |
+| 🟡 PENDING | 3 | Google | GOOGL | $22,000 | Highest conviction. 3-lab AI exposure, Gemini 18% share, YouTube, Search moat. |
+| 🟡 PENDING | 4 | RTX Corporation | RTX | $14,000 | 7-year Pentagon missile contracts. Tomahawk/PAC-3/SM-6 quadrupling. |
+| 🟡 PENDING | 5 | Constellation Energy | CEG | $12,000 | Nuclear repriced as energy security. Calpine deal ($60GW). Meta 20-yr contract. |
+| 🟡 PENDING | 6 | Tesla | TSLA | $12,000 | $X consolidation thesis. SpaceX IPO June 2026 catalyst. Tranche 1 of $20k total. |
+| 🟡 PENDING | 7 | Japan ETF | EWJ | $10,000 | Geographic diversification. Fiscal reform thesis. |
+| 🟡 PENDING | 8 | AeroVironment | AVAV | $8,000 | Drone warfare. 93% firm orders, $3.5B contract awards, $330 analyst target. |
+| 🟡 PENDING | 9 | Emerging Markets ETF | VWO | $8,000 | Geographic diversification. |
+| 🟡 PENDING | 10 | Rocket Lab | RKLB | $5,000 | Space ecosystem. SpaceX IPO halo. Picks-and-shovels. Tranche 1 of $8k total. |
+| 🟡 PENDING | 11 | Hold in HYSA (Tranche 2) | — | $19,000 | Dry powder for pullback opportunity. |
+| | | | **TOTAL** | **$180,000** | |
 
 ---
 
-## WEEKS 3–4 — Mar 10–23, 2026 (Deploy $332,735)
+## TRANCHE 2 — Deploy Q2 2026 (~$19k dry powder)
 
-### Sources
-| Source | Gross | Net |
-|--------|-------|-----|
-| Databricks tender | $200,000 | ~$180,335 |
-| Property sale | ~$150,000 | ~$142,500 |
-| Cash from reserves | $9,900 | $9,900 |
-| **Total** | | **~$332,735** |
-
-### Deployment Plan
-| Status | Priority | Action | Amount | Target |
-|--------|----------|--------|--------|--------|
-| 🟡 PENDING | 1 | ~~Pay off HELOC~~ *(handled in Wks 2–3)* | $150,000 | Saves $10,500/yr |
-| 🟡 PENDING | 2a | Buy Healthcare ETF/stocks | $50,000 | XLV or VHT (0% → target 3–5%) |
-| 🟡 PENDING | 2b | Buy Financials ETF/stocks | $40,000 | XLF or VFH (0% → target 3–5%) |
-| 🟡 PENDING | 2c | Buy Industrials ETF/stocks | $25,000 | XLI or select (GE, RTX, CAT) |
-| 🟡 PENDING | 2d | Buy Japan ETF | $10,000 | EWJ or DXJ |
-| 🟡 PENDING | 2e | Buy EM ETF | $10,000 | VWO or IEMG |
-| 🟡 PENDING | 3 | Primary mortgage paydown | $30,000 | Balance: $1.33M → $1.30M |
-| 🟡 PENDING | 4 | Rebuild cash reserve | $17,735 | HYSA → total cash ~$57,735 |
+| Status | Action | Amount | Trigger |
+|--------|--------|--------|---------|
+| ⏸ WATCH | Complete TSLA position | $8,000 | 4–6 weeks pre-SpaceX IPO announcement |
+| ⏸ WATCH | Complete RKLB position | $3,000 | Post SpaceX IPO announcement clarity |
+| ⏸ WATCH | **Arista Networks (ANET)** | $10,000 | **Only on ~10% market correction (~$120-125 entry).** 29% upside, 0 sell ratings, AI Ethernet moat. |
+| ⏸ WATCH | Additional GOOGL | From remainder | If market pulls back 10%+, add more GOOGL first |
 
 ---
 
-## ONGOING — March 2026+
+## MORTGAGE — No Action Required
+
+| Item | Detail |
+|------|--------|
+| Rate | 5.85% ARM |
+| ARM type | 7-year fixed → locked until **October 2032** |
+| After-tax effective rate | **3.80%** (5.85% × 65% — mortgage interest deductible at 35% bracket) |
+| Refi target | 4.0–4.5% 30-year fixed |
+| Current 30-yr fixed market rate | ~6.0–6.3% — refinancing now would INCREASE your rate |
+| Decision | **Do not pay down. Do not refi yet.** Revisit when 30-yr fixed hits ~5.0%. |
+| Rate alert to set | Get notified when 30-yr fixed reaches 5.0% → call mortgage broker |
+
+---
+
+## ONGOING — Monthly / Quarterly / Annual
 
 ### Monthly
 | Status | Action | Details |
 |--------|--------|---------|
-| 🔁 ONGOING | Monitor RSU vesting (Galen) | Amazon RSUs, ~$40–50k/yr vesting |
-| 🔁 ONGOING | Sell 75% of each Amazon RSU vest | Immediately upon vesting; deploy to underweight sectors |
+| 🔁 ONGOING | Sell 75% of each Amazon RSU vest | Immediately upon vesting. Deploy to underweight sectors. Do NOT sell existing AMZN position. |
 | 🔁 ONGOING | Monitor RSU vesting (Jaclyn) | Post-IPO: sell 50–75% upon lockup expiration |
 | 🔁 ONGOING | Update account balances | Log to `data/balances-YYYY-MM.csv` |
 
@@ -93,11 +126,24 @@
 | Status | Action | Details |
 |--------|--------|---------|
 | 🔁 ONGOING | Comprehensive portfolio review | Update retirement projections |
-| 🔁 ONGOING | Assess mortgage refi opportunity | Target: 4.0–4.5% fixed (from 5.85% ARM) |
+| 🔁 ONGOING | Assess mortgage refi opportunity | Target: 4.0–4.5% fixed (from 5.85% ARM). Don't refi above 5.0%. |
 | 🔁 ONGOING | Tax-loss harvesting sweep | Check all positions for unrealized losses |
 | 🔁 ONGOING | Max 401(k) contributions | $23k each = $46k/yr household |
 | 🔁 ONGOING | Evaluate backdoor Roth / mega backdoor Roth | $7k/person Roth + up to $50k+ mega backdoor |
-| 🔁 ONGOING | Plan capital gains strategy for year | Coordinate RSU sales, tender, loss offsets |
+
+---
+
+## DO NOT DO — Standing Decisions
+
+| Decision | Rationale |
+|----------|-----------|
+| ❌ Do NOT sell NVDA | 40% analyst upside. Tax friction too high (372% gain). AI capex intact. |
+| ❌ Do NOT sell existing AMZN position | 36% consensus upside, 0 sell ratings from 63 analysts. AWS growing 30%+. |
+| ❌ Do NOT buy XLE or broad energy ETFs | RSI 75.98 (all-time high). War premium temporary. Structural oil oversupply. |
+| ❌ Do NOT buy VRT (Vertiv) now | Only 8% analyst upside. BlackRock trimmed 11.2% in Q4. Watch for pullback. |
+| ❌ Do NOT buy BMNR (BitMine) | Wrong risk profile. Already have BTC/ETH. BlackRock move was passive rebalancing. |
+| ❌ Do NOT pay down mortgage | 3.80% effective after-tax rate. ARM locked to Oct 2032. Invest the capital instead. |
+| ❌ Do NOT refinance yet | Current 30-yr fixed (6.0–6.3%) is HIGHER than ARM (5.85%). Wait for rates to drop. |
 
 ---
 
@@ -107,13 +153,14 @@
 |--------|---------|----------------|----------|
 | Databricks % of household | 46% | Keep <40% post-tender | >45% |
 | Databricks % of Jaclyn's NW | 86% | Keep <60% post-tender | >70% |
-| Any single liquid position | NVDA ~24% | Keep <25% | >25% |
+| Any single liquid position | NVDA | Keep <25% | >25% |
 | Amazon % of household | ~13% | Keep <20% | >20% |
 | Healthcare allocation | 0% | Target 3–5% | <2% after deployment |
 | Financials allocation | 0% | Target 3–5% | <2% after deployment |
 | International (total) | ~5% | Target 8–10% | <5% |
-| HELOC balance | $150,000 | $0 post-sale | >$0 after property close |
-| Cash + HELOC liquidity | ~$307k post-plan | Keep >$200k | <$150k |
+| HELOC balance | ~$4,000 | $0 immediately | >$0 |
+| Cash + HYSA liquidity | ~$40k | Keep >$40k | <$30k |
+| 30-yr fixed mortgage rate | 6.0–6.3% | Alert at 5.0% to call broker | <5.0% |
 
 ---
 
@@ -125,6 +172,7 @@
 | Property sale | ~$50,000 | 15% federal LTCG | ~$7,500 |
 | Crypto loss offset | ~($1,900) | — | ~($285) |
 | **Net 2026 capital gains tax** | | | **~$27,165** |
+| **Set aside from tender proceeds** | | | **$20,000 in separate HYSA** |
 
 *Washington state: 7% capital gains applies above $250k threshold — not triggered by these transactions.*
 
@@ -135,7 +183,9 @@
 | Date | Milestone | Target Net Worth |
 |------|-----------|-----------------|
 | Feb 2026 | Baseline | $1,780,780 |
-| Mar 2026 | Post-sale + HELOC eliminated | ~$1,930,780 |
-| Aug 2026 | 6-month check | ~$2,050,000 |
+| Mar 2026 | Post-tender + HELOC eliminated | ~$1,930,780 |
+| Jun 2026 | SpaceX IPO — reassess TSLA/RKLB | — |
+| Aug 2026 | 6-month portfolio check | ~$2,050,000 |
 | Feb 2027 | 1-year target | ~$2,100,000–$2,300,000 |
+| Oct 2032 | ARM adjustment date — must refi before this | — |
 | 2035–2036 | Retirement (age 47–48) | $6,000,000–$7,000,000 |

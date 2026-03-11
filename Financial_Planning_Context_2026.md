@@ -1,6 +1,6 @@
 # Financial Planning Context - Galen & Jaclyn
-**Last Updated:** February 19, 2026  
-**Next Review:** March 2026 (post-property sale & tender settlement)
+**Last Updated:** March 10, 2026
+**Next Review:** April 2026 (post-tender settlement, Tranche 2 deployment, refi rate monitoring)
 
 ---
 
@@ -20,11 +20,19 @@
 - Wife's 86% net worth concentration in employer stock (Databricks)
 - Zero defensive sector exposure (healthcare, financials, international in taxable)
 
-**Strategic Response:**
-- Databricks tender offer: Sell $200k (33.7% of vested) to reduce concentration
-- Property sale proceeds: $150k → eliminate HELOC
-- Deploy combined $332k to build diversification + eliminate expensive debt
-- Rebalance 401(k) allocations for tactical positioning
+**Strategic Response (Updated March 10, 2026):**
+- Databricks tender offer: Sell $200k (33.7% of vested) — settling March 15–20
+- Property sold: $146k applied to HELOC → ~$4k remaining (zero out immediately)
+- Deploy $180k net tender proceeds into diversified positions (see deployment plan below)
+- 401(k) reallocations: Completed 2/19/26
+- Mortgage: 7-year ARM locked at 5.85% until Oct 2032. Do not pay down (3.80% after-tax effective rate). Do not refi until 30-yr fixed hits ~4.5%.
+
+**Key macro context added March 2026:**
+- US-Israel war on Iran began Feb 28, 2026. Oil hit $120/bbl, settled ~$100. 20% of global oil supply disrupted.
+- JPMorgan warns 10% S&P 500 correction if conflict persists. Yardeni 35% meltdown odds.
+- Iran war reinforces nuclear energy security thesis (bullish CEG), validates TSLA energy pivot, creates drone warfare demand (bullish AVAV, RTX).
+- Trump directed defense contractors to quadruple missile production (PAC-3, THAAD, Tomahawk, AMRAAM). RTX locked in 7-year Pentagon contracts.
+- SpaceX IPO expected June 2026 at $1.5T valuation. xAI already acquired by SpaceX. Tesla-SpaceX merger odds: 15%. SpaceX-xAI combo: 48%.
 
 ---
 
@@ -173,10 +181,12 @@
 
 **Primary Mortgage:**
 - Balance: $1,330,000
-- Rate: 5.85% ARM
+- Rate: 5.85% ARM (7-year fixed period — locked until **October 2032**)
 - Annual interest: $77,805
-- **Plan: Refinance to 4.5% fixed when rates drop**
-- **Plan: Small $30k paydown from tender proceeds**
+- After-tax effective rate: **3.80%** (mortgage interest deductible at 35% bracket)
+- Current 30-yr fixed market rate: ~6.0–6.3% — refinancing now would INCREASE the rate
+- **Plan: Do NOT pay down. Do NOT refi yet. Set rate alert at 5.0% to call mortgage broker.**
+- **Refi target: 4.0–4.5% 30-yr fixed — likely 2027–2028**
 
 **Rental Mortgage:**
 - Balance: $300,000
@@ -187,11 +197,10 @@
 - **Strategy: Keep this mortgage forever**
 
 **HELOC:**
-- Balance: $150,000 (after $30k payment on 2/19/26)
+- Balance: ~$4,000 (after $30k payment 2/19 + $146k property proceeds applied 3/26)
 - Rate: 7%
-- Annual interest: $10,500
 - Total credit line: $250,000
-- **Strategy: Eliminate completely with property sale proceeds**
+- **Strategy: Zero out immediately (~$4k from cash). Then $250k credit line fully available.**
 
 ---
 
@@ -307,62 +316,49 @@
 
 ---
 
-### **3. Deployment Strategy: $332,735 Total**
+### **3. Deployment Strategy: $180,000 (Updated March 10, 2026)**
 
-**Sources:**
-- Databricks tender net: $180,335
-- Property sale net: $142,500
-- Additional cash: $9,900 (from existing reserves)
-- **Total available: $332,735**
+**Actual sources (revised from original plan):**
+- Databricks tender gross: $200,000
+- Less: 2026 tax reserve (separate HYSA, do not invest): -$20,000
+- **Investable from tender: $180,000**
+- Property sale: $146,000 → applied to HELOC (not investable)
+- Existing cash: $40,000 → kept as emergency fund (do not touch)
 
-**Allocation Priority:**
+**Why lower than original $332k plan:** Property proceeds went to HELOC paydown as planned. Cash stays as emergency reserve. Only the tender net is investable capital.
 
-**Priority 1: Eliminate HELOC ($150,000)**
-- Saves: $10,500/year guaranteed
-- Opens: $250k credit line for emergencies
-- No-brainer decision
+**Tranche 1 — Deploy Week of March 15–20 ($161,000):**
 
-**Priority 2: Build Defensive Sector Positions ($135,000)**
+| Position | Ticker | Amount | Rationale |
+|----------|--------|--------|-----------|
+| Healthcare ETF | VHT | $40,000 | 0% → 2-3% allocation. Defensive, low correlation to tech, AI drug discovery catalyst. |
+| Financials ETF | VFH | $30,000 | 0% → 1.5-2% allocation. AI financing demand, rate environment. |
+| Google | GOOGL | $22,000 | Highest conviction. 3-lab AI exposure (xAI via SpaceX + Anthropic + Gemini). 90% search share, YouTube, Chrome. Gemini 18.2% AI market share. $400 analyst target. |
+| RTX Corporation | RTX | $14,000 | 7-year Pentagon contracts to quadruple Tomahawk/PAC-3/SM-6 production. Iran war creates structural replenishment demand. |
+| Constellation Energy | CEG | $12,000 | Nuclear repriced as energy security asset. Calpine deal ($60GW capacity). Meta 20-yr contract. Iran war reinforces thesis. $404 median analyst target. |
+| Tesla | TSLA | $12,000 | Tranche 1 of $20k. $X consolidation thesis. SpaceX-xAI merged. June 2026 IPO catalyst. Energy storage business real and scaling. |
+| Japan ETF | EWJ | $10,000 | Geographic diversification. Fiscal reform thesis. Low tech correlation. |
+| AeroVironment | AVAV | $8,000 | Drone warfare thesis. 93% firm orders. $3.5B record contracts. Iran war = live-fire validation. $330 median analyst target. |
+| Emerging Markets ETF | VWO | $8,000 | Geographic diversification. EM growth thesis. |
+| Rocket Lab | RKLB | $5,000 | Tranche 1 of $8k. Space ecosystem picks-and-shovels. SpaceX IPO halo play. |
+| **Tranche 1 Total** | | **$161,000** | |
 
-*Healthcare - $50,000:*
-- Rationale: 0% exposure, 12% of S&P 500, rated "outperform" for 2026
-- Catalysts: AI drug discovery, GLP-1 drugs (Eli Lilly/Novo Nordisk), attractive valuations
-- Implementation: Sector ETF (XLV, VHT) or select stocks
-- Expected return: 12-15% in 2026
-- Correlation to tech: Low
+**Tranche 2 — Hold as Dry Powder ($19,000 + HYSA until Q2 2026):**
 
-*Financials - $40,000:*
-- Rationale: 0% exposure, 13% of S&P 500, strong 2026 setup
-- Catalysts: AI infrastructure financing, steeper yield curve, M&A activity
-- Implementation: Sector ETF (XLF, VFH) or select banks/processors (JPM, V, GS)
-- Expected return: 10-12% in 2026
-- Correlation to tech: Moderate
+| Position | Amount | Trigger |
+|----------|--------|---------|
+| Complete TSLA ($8k remaining) | $8,000 | 4–6 weeks, pre-SpaceX IPO |
+| Complete RKLB ($3k remaining) | $3,000 | Post SpaceX IPO announcement |
+| Arista Networks (ANET) | $10,000 | ONLY on ~10% market pullback (~$120-125 entry). 29% upside, 0 sell ratings, AI Ethernet moat. |
+| Additional GOOGL | From remainder | First priority if 10%+ correction materializes |
 
-*Industrials - $25,000:*
-- Rationale: Minimal exposure, benefits from AI infrastructure buildout
-- Catalysts: Data center construction, defense spending increase, rated "outperform"
-- Implementation: Sector ETF (XLI) or select stocks (GE, RTX, CAT)
-- Expected return: 10-12% in 2026
-- Correlation to tech: Moderate-high (AI related but different risk profile)
-
-*International - $20,000:*
-- Rationale: Near-zero taxable exposure (only in 401k)
-- Catalysts: Japan fiscal reforms, EM growth, dollar weakness expected
-- Implementation: Japan ETF (EWJ, DXJ) + EM ETF (VWO, IEMG)
-- Expected return: 7-10% in 2026
-- Correlation to tech: Low
-
-**Priority 3: Strategic Debt Reduction ($30,000)**
-- Primary mortgage: Pay down $30,000
-- Reduces balance: $1,330,000 → $1,300,000
-- Saves: $1,755/year now, $1,350/year after refi to 4.5%
-- Rationale: Lowers refi principal, psychological benefit, doesn't sacrifice diversification
-
-**Priority 4: Rebuild Cash Reserve ($17,735)**
-- Emergency fund + opportunity capital
-- Combined with existing $40k = $57,735 total cash
-- Plus $250k HELOC availability = $307,735 total liquidity
-- Provides security and flexibility
+**Standing decisions — do NOT do these:**
+- ❌ Do not sell NVDA (40% analyst upside, tax friction prohibitive, AI capex intact)
+- ❌ Do not sell existing AMZN position (36% consensus upside, 0 sell ratings, AWS growing 30%+)
+- ❌ Do not buy XLE or broad energy ETFs (RSI 75.98 all-time high, war premium temporary)
+- ❌ Do not buy VRT/Vertiv (only 8% upside, BlackRock trimmed 11.2% in Q4)
+- ❌ Do not buy BMNR/BitMine (wrong risk profile, BlackRock move was passive rebalancing)
+- ❌ Do not pay down mortgage (3.80% effective after-tax rate, ARM locked to Oct 2032)
 
 ---
 
@@ -557,81 +553,71 @@ Sell these positions to realize losses:
 
 ---
 
-## Implementation Timeline
+## Implementation Timeline (Updated March 10, 2026)
 
-### **Week 1 (February 17-23, 2026)**
-
-**Completed:**
+### **Completed**
 - ✅ Databricks 401(k) reallocated (2/19/26)
 - ✅ Future contributions updated in Databricks 401(k)
-- ✅ $30,000 paid toward HELOC (balance now $150k)
-
-**Still to complete:**
-- [ ] Accept Databricks tender offer for $200,000
-- [ ] Execute crypto tax loss harvesting (~$1,900 losses)
-  - Sell: NEAR, AIOZ, Algorand, Compound, Kishu Inu, KSCP
-  - Time-sensitive: Do before tender settles
+- ✅ $30,000 paid toward HELOC (2/19/26)
+- ✅ Recreational property sold — $146,000 applied to HELOC (HELOC now ~$4k)
 
 ---
 
-### **Week 2-3 (February 24 - March 9, 2026)**
-
-**Property sale:**
-- [ ] Recreational property closes escrow/title
-- [ ] Receive proceeds: ~$150,000 gross, ~$142,500 net after tax
-- [ ] Immediately pay off HELOC: $150,000 (use $7,500 from other cash to cover full balance)
-- Result: HELOC = $0, $250,000 credit line available
-
-**Databricks tender:**
-- [ ] Tender offer settles (typically 2-3 weeks after acceptance)
-- [ ] Receive proceeds: $200,000 gross, ~$180,335 net after tax
-- Result: Databricks position = $803k ($393k vested + $410k unvested)
+### **This Week — Before Tender Settles (by March 15)**
+- [ ] Zero out HELOC (~$4,000 from cash)
+- [ ] Execute crypto tax-loss harvesting: Sell NEAR, AIOZ, Algorand, Compound, Kishu Inu, KSCP (~$1,900 losses)
 
 ---
 
-### **Week 3-4 (March 10-23, 2026)**
-
-**Deploy combined proceeds ($332,735):**
-
-**Day 1-2: Sector Diversification ($135,000)**
-- [ ] Healthcare: $50,000
-  - Option A: Sector ETF (XLV or VHT)
-  - Option B: 3-4 select stocks (ELI Lilly, UnitedHealth, Intuitive Surgical, Dexcom)
-- [ ] Financials: $40,000
-  - Option A: Sector ETF (XLF or VFH)
-  - Option B: 3-4 select stocks (JPMorgan, Visa, Goldman Sachs, Bank of America)
-- [ ] Industrials: $25,000
-  - Option A: Sector ETF (XLI)
-  - Option B: 2-3 select stocks (GE Aerospace, RTX, Caterpillar)
-- [ ] International: $20,000
-  - Japan: $10,000 (EWJ or DXJ)
-  - Emerging Markets: $10,000 (VWO or IEMG)
-
-**Day 3: Debt & Cash Management ($47,735)**
-- [ ] Primary mortgage: Pay $30,000 principal (reduces to $1,300,000)
-- [ ] High-yield savings: Deposit $17,735 emergency fund
+### **Week of March 15–20 — Tender Settles**
+- [ ] Receive $200,000 from Databricks tender
+- [ ] Move $20,000 to HYSA labeled "2026 taxes" (do not invest)
+- [ ] Deploy $161,000 (Tranche 1):
+  - [ ] VHT — $40,000
+  - [ ] VFH — $30,000
+  - [ ] GOOGL — $22,000
+  - [ ] RTX — $14,000
+  - [ ] CEG — $12,000
+  - [ ] TSLA — $12,000
+  - [ ] EWJ — $10,000
+  - [ ] AVAV — $8,000
+  - [ ] VWO — $8,000
+  - [ ] RKLB — $5,000
+- [ ] Park $19,000 in HYSA as Tranche 2 dry powder
 
 ---
 
-### **Ongoing (March 2026 onwards)**
+### **April–June 2026 — Tranche 2**
+- [ ] Complete TSLA position ($8,000) — 4–6 weeks pre-SpaceX IPO
+- [ ] Complete RKLB position ($3,000) — post IPO announcement
+- [ ] ANET ($10,000) — ONLY if ~10% market correction occurs
+- [ ] Watch for SpaceX IPO announcement (expected June 2026)
+- [ ] Reassess TSLA/RKLB/RKLB position sizing post-IPO news
+
+---
+
+### **Ongoing**
 
 **Monthly:**
-- [ ] Monitor RSU vesting schedules (both spouses)
-- [ ] Sell 75% of Galen's Amazon RSUs upon each vest
-- [ ] Deploy RSU sale proceeds to underweight sectors
+- [ ] Sell 75% of Galen's Amazon RSUs upon each vest (do NOT sell existing AMZN position)
+- [ ] Monitor Jaclyn's Databricks RSU vesting — post-IPO sell 50–75% upon lockup expiration
+- [ ] Update account balances in `data/balances-YYYY-MM.csv`
 
-**Quarterly (March, June, Sept, Dec):**
-- [ ] Review 401(k) allocations for drift
-- [ ] Manually rebalance if any position >10% off target
-- [ ] Review taxable portfolio sector weights
-- [ ] Check if any single position >25% of portfolio → trim to 20%
+**Quarterly (Mar / Jun / Sep / Dec):**
+- [ ] Review 401(k) allocations for drift (rebalance if >10% off target)
+- [ ] Run `check_allocations.py` — check sector weights
+- [ ] Trim if any single liquid position >25% → target 20%
+- [ ] Databricks concentration check (flag if >45% household or >70% Jaclyn's NW)
 
-**Annual (January each year):**
-- [ ] Comprehensive portfolio review
-- [ ] Update retirement projections
-- [ ] Assess mortgage refinance opportunities
-- [ ] Plan tax strategy for upcoming year
-- [ ] Review and update asset allocation targets
+**Annual (January):**
+- [ ] Comprehensive portfolio review + retirement projection update
+- [ ] Assess mortgage refi — target 4.0–4.5% fixed. Set rate alert at 5.0%.
+- [ ] Tax-loss harvesting sweep
+- [ ] Max 401(k) contributions ($23k each = $46k household)
+- [ ] Evaluate backdoor Roth / mega backdoor Roth
+
+**Hard date to calendar:**
+- 🗓 **October 2032** — ARM adjustment date. Must be refinanced before this.
 
 ---
 
