@@ -461,7 +461,6 @@
         </div>`;
     }).join('');
 
-    const totalGross = unvested.reduce((s, p) => s + p.value, 0);
     const totalNet   = totalGross * 0.7;
     const totalRow   = document.createElement('div');
     totalRow.className = 'unvested-total-row';
