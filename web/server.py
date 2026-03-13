@@ -7,6 +7,7 @@ Run locally:  python3 -m flask --app web/server run
 Production:   gunicorn web.server:app --bind 0.0.0.0:$PORT
 """
 
+import csv
 import sys
 import os
 import json
@@ -112,6 +113,65 @@ def get_ytd_prices(rows: list) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# Baseline (frozen pre-March-2026 snapshot)
+# ---------------------------------------------------------------------------
+
+_BASELINE_CSV = Path(__file__).parent.parent / "data" / "balances-baseline.csv"
+
+
+def load_baseline_rows():
+    with open(_BASELINE_CSV, newline="") as f:
+        return list(csv.DictReader(f))
+
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+def _merge_vested_positions(positions):
+    """Server-side merge of vested positions sharing the same yf_symbol."""
+    by_symbol = {}
+    no_symbol = []
+
+    for p in positions:
+        sym = p.get("symbol")
+        if not sym:
+            no_symbol.append(p)
+            continue
+        if sym not in by_symbol:
+            by_symbol[sym] = dict(p)
+        else:
+            m = by_symbol[sym]
+            m["value"] = round(m["value"] + p["value"], 2)
+            if p["shares"] is not None:
+                m["shares"] = round((m["shares"] or 0) + p["shares"], 6)
+
+            # Merge absolute gains; recompute pct from summed value
+            for gain_k, pct_k in [("day_gain", "day_pct"), ("week_gain", "week_pct")]:
+                if p[gain_k] is not None:
+                    if m[gain_k] is not None:
+                        m[gain_k] = round(m[gain_k] + p[gain_k], 2)
+                        start = m["value"] - m[gain_k]
+                        m[pct_k] = round(m[gain_k] / start * 100, 2) if start else None
+                    else:
+                        m[gain_k] = p[gain_k]
+                        m[pct_k] = p[pct_k]
+
+            if p["ytd_gain"] is not None:
+                if m["ytd_gain"] is not None:
+                    m["ytd_gain"] = round(m["ytd_gain"] + p["ytd_gain"], 2)
+                    if p["ytd_start_value"] is not None and m["ytd_start_value"] is not None:
+                        m["ytd_start_value"] = round(m["ytd_start_value"] + p["ytd_start_value"], 2)
+                        m["ytd_pct"] = round(m["ytd_gain"] / m["ytd_start_value"] * 100, 2) if m["ytd_start_value"] else None
+                else:
+                    m["ytd_gain"] = p["ytd_gain"]
+                    m["ytd_pct"] = p["ytd_pct"]
+                    m["ytd_start_value"] = p["ytd_start_value"]
+
+    return list(by_symbol.values()) + no_symbol
+
+
+# ---------------------------------------------------------------------------
 # Routes
 # ---------------------------------------------------------------------------
 
@@ -135,15 +195,18 @@ def portfolio():
         row["_value"]        = val
         row["_price_source"] = source
 
-    positions = []
+    positions          = []
+    unvested_positions = []
 
-    # Accumulators for portfolio-level gain summaries
+    # Accumulators for portfolio-level gain summaries (vested only)
     day_start_total = day_cur_total = 0.0
     week_start_total = week_cur_total = 0.0
     ytd_start_total = ytd_cur_total = 0.0
     at_cost_total = at_cur_total = 0.0
 
     for row in rows:
+        is_unvested = row.get("asset_class") == "unvested_rsu"
+
         shares_str = (row.get("shares") or "").strip()
         shares     = float(shares_str) if shares_str else None
         yf_sym     = (row.get("yf_symbol") or "").strip()
@@ -161,8 +224,9 @@ def portfolio():
             day_start = round(shares * prev_price, 2)
             day_gain  = round(row["_value"] - day_start, 2)
             day_pct   = round(day_gain / day_start * 100, 2) if day_start else None
-            day_start_total += day_start
-            day_cur_total   += row["_value"]
+            if not is_unvested:
+                day_start_total += day_start
+                day_cur_total   += row["_value"]
 
         # ── Week (7 calendar days ago) ──────────────────────────
         week_gain = week_pct = None
@@ -171,8 +235,9 @@ def portfolio():
             week_start = round(shares * week_price, 2)
             week_gain  = round(row["_value"] - week_start, 2)
             week_pct   = round(week_gain / week_start * 100, 2) if week_start else None
-            week_start_total += week_start
-            week_cur_total   += row["_value"]
+            if not is_unvested:
+                week_start_total += week_start
+                week_cur_total   += row["_value"]
 
         # ── YTD ────────────────────────────────────────────────
         ytd_gain = ytd_pct = ytd_start_value = None
@@ -181,8 +246,9 @@ def portfolio():
             ytd_start_value = round(shares * ytd_price, 2)
             ytd_gain        = round(row["_value"] - ytd_start_value, 2)
             ytd_pct         = round(ytd_gain / ytd_start_value * 100, 2) if ytd_start_value else None
-            ytd_start_total += ytd_start_value
-            ytd_cur_total   += row["_value"]
+            if not is_unvested:
+                ytd_start_total += ytd_start_value
+                ytd_cur_total   += row["_value"]
 
         # ── All-time ────────────────────────────────────────────
         alltime_gain = alltime_pct = cost_basis = None
@@ -192,12 +258,13 @@ def portfolio():
                 cost_basis   = float(cb_str)
                 alltime_gain = round(row["_value"] - cost_basis, 2)
                 alltime_pct  = round(alltime_gain / cost_basis * 100, 2) if cost_basis else None
-                at_cost_total += cost_basis
-                at_cur_total  += row["_value"]
+                if not is_unvested:
+                    at_cost_total += cost_basis
+                    at_cur_total  += row["_value"]
             except ValueError:
                 pass
 
-        positions.append({
+        pos = {
             "ticker":          row.get("ticker", ""),
             "description":     row.get("description", ""),
             "owner":           row.get("owner", ""),
@@ -219,8 +286,15 @@ def portfolio():
             "cost_basis":      cost_basis,
             "alltime_gain":    alltime_gain,
             "alltime_pct":     alltime_pct,
-        })
+        }
 
+        if is_unvested:
+            unvested_positions.append(pos)
+        else:
+            positions.append(pos)
+
+    # Server-side merge of vested positions sharing the same yf_symbol
+    positions = _merge_vested_positions(positions)
     positions.sort(key=lambda x: x["value"], reverse=True)
 
     # Portfolio-level gain summaries
@@ -229,8 +303,13 @@ def portfolio():
 
     liquid_total = sum(
         r["_value"] for r in rows
-        if r.get("asset_class") != "private_equity"
+        if r.get("asset_class") not in ("private_equity", "unvested_rsu")
         and r.get("ticker") != "DBRX_UNVESTED"
+    )
+
+    total_portfolio = sum(
+        r["_value"] for r in rows
+        if r.get("asset_class") != "unvested_rsu"
     )
 
     last_updated = prices.get("fetched_at_human") or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -238,7 +317,7 @@ def portfolio():
     return jsonify({
         "last_updated": last_updated,
         "summary": {
-            "total_portfolio": round(sum(r["_value"] for r in rows)),
+            "total_portfolio": round(total_portfolio),
             "liquid_total":    round(liquid_total),
             "day_gain":        round(day_cur_total - day_start_total, 2) if day_start_total else None,
             "day_pct":         _pct(day_cur_total, day_start_total),
@@ -249,7 +328,47 @@ def portfolio():
             "alltime_gain":    round(at_cur_total - at_cost_total, 2) if at_cost_total else None,
             "alltime_pct":     _pct(at_cur_total, at_cost_total),
         },
-        "positions": positions,
+        "positions":          positions,
+        "unvested_positions": unvested_positions,
+    })
+
+
+@app.route("/api/baseline")
+def baseline():
+    try:
+        rows       = load_baseline_rows()
+        prices     = fetch_all_prices(rows)
+        ytd_prices = get_ytd_prices(rows)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+    total     = 0.0
+    ytd_total = 0.0
+
+    for r in rows:
+        val, _ = get_row_value(r, prices)
+        total += val
+
+        shares_str = (r.get("shares") or "").strip()
+        shares     = float(shares_str) if shares_str else None
+        yf_sym     = (r.get("yf_symbol") or "").strip()
+        cg_id      = (r.get("cg_id") or "").strip()
+        price_key  = yf_sym or cg_id
+
+        ytd_price = ytd_prices.get(price_key) if price_key else None
+        if ytd_price and shares:
+            ytd_total += shares * ytd_price
+
+    ytd_gain = round(total - ytd_total) if ytd_total else None
+    ytd_pct  = round((total - ytd_total) / ytd_total * 100, 2) if ytd_total else None
+
+    return jsonify({
+        "snapshot_date": "2026-03-11",
+        "label":         "Pre-reallocation baseline",
+        "total":         round(total),
+        "ytd_total":     round(ytd_total),
+        "ytd_gain":      ytd_gain,
+        "ytd_pct":       ytd_pct,
     })
 
 

@@ -162,6 +162,41 @@
     .source-live   { color: var(--green); }
     .source-manual { color: var(--text-muted); }
 
+    /* ── Unvested RSU section ── */
+    #unvested-section { margin-top: 16px; }
+    .unvested-header {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px; cursor: pointer; user-select: none;
+      background: var(--bg-tab); border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .unvested-chevron { font-size: 11px; color: var(--text-muted); flex-shrink: 0; transition: transform .2s; }
+    #unvested-section.collapsed .unvested-chevron { transform: rotate(-90deg); }
+    .unvested-title { font-size: 14px; font-weight: 700; flex: 1; }
+    .unvested-meta { font-size: 12px; color: var(--text-muted); }
+    .unvested-rows { display: flex; flex-direction: column; gap: 5px; margin-top: 5px; }
+    #unvested-section.collapsed .unvested-rows { display: none; }
+    .unvested-row {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 11px 14px;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .unvested-note { font-size: 11px; color: var(--text-muted); margin-top: 3px; font-style: italic; }
+
+    /* ── Baseline card ── */
+    #baseline-card {
+      margin-top: 16px;
+      background: var(--bg-tab); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px 18px;
+    }
+    .baseline-label {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .8px; color: var(--text-muted); margin-bottom: 6px;
+    }
+    .baseline-row { display: flex; justify-content: space-between; align-items: baseline; margin-top: 4px; }
+    .baseline-key { font-size: 13px; color: var(--text-sub); }
+    .baseline-val { font-size: 15px; font-weight: 700; }
+
     /* ── Loading / error ── */
     #status-msg { text-align: center; padding: 48px 16px; color: var(--text-muted); }
     .spinner {
@@ -230,6 +265,29 @@
 
   <div id="status-msg"><div class="spinner"></div><br>Fetching live prices…</div>
   <div id="groups-container"></div>
+
+  <!-- Unvested RSUs -->
+  <div id="unvested-section" style="display:none">
+    <div class="unvested-header" id="unvested-header">
+      <span class="unvested-chevron">▼</span>
+      <span class="unvested-title">Unvested RSUs</span>
+      <span class="unvested-meta" id="unvested-meta"></span>
+    </div>
+    <div class="unvested-rows" id="unvested-rows"></div>
+  </div>
+
+  <!-- Baseline comparison -->
+  <div id="baseline-card" style="display:none">
+    <div class="baseline-label">Original Holdings — Pre-reallocation baseline (Mar 11)</div>
+    <div class="baseline-row">
+      <span class="baseline-key">Real-time value</span>
+      <span class="baseline-val" id="baseline-total">—</span>
+    </div>
+    <div class="baseline-row">
+      <span class="baseline-key">YTD change</span>
+      <span class="baseline-val" id="baseline-ytd">—</span>
+    </div>
+  </div>
 </main>
 
 <script>
@@ -239,6 +297,8 @@
     us_equity: 'Stocks', crypto: 'Crypto', retirement: 'Retirement',
     private_equity: 'Private Equity', cash: 'Cash',
   };
+
+  let unvestedCollapsed = false;
 
   // ── State ────────────────────────────────────────────────
   let allPositions    = [];
@@ -365,6 +425,59 @@
     return Array.from(map.values());
   }
 
+  // ── Render unvested RSUs ─────────────────────────────────
+  function renderUnvested(unvested) {
+    const section = document.getElementById('unvested-section');
+    if (!unvested || unvested.length === 0) { section.style.display = 'none'; return; }
+
+    const totalGross = unvested.reduce((s, p) => s + p.value, 0);
+    document.getElementById('unvested-meta').textContent =
+      fmtFull(totalGross) + ' gross · ~' + fmtFull(totalGross * 0.7) + ' net est.';
+
+    const rowsEl = document.getElementById('unvested-rows');
+    rowsEl.innerHTML = unvested.map(p => {
+      const vestLabel = p.description.replace('Amazon RSU Vest ', '');
+      return `
+        <div class="unvested-row">
+          <div class="pos-left">
+            <div class="pos-ticker">${vestLabel}</div>
+            <div class="pos-desc">${p.shares != null ? p.shares + ' gross units' : ''}</div>
+            <div class="unvested-note">~${fmtFull(p.value * 0.7)} net after ~30% tax</div>
+          </div>
+          <div class="pos-right">
+            <div class="pos-value">${fmt(p.value)}</div>
+            <div class="pos-source source-live">gross</div>
+          </div>
+        </div>`;
+    }).join('');
+
+    section.style.display = '';
+    if (unvestedCollapsed) section.classList.add('collapsed');
+  }
+
+  // ── Render baseline card ─────────────────────────────────
+  async function fetchBaseline() {
+    try {
+      const res  = await fetch('/api/baseline');
+      const data = await res.json();
+      if (!res.ok || data.error) return;
+
+      document.getElementById('baseline-total').textContent = fmtFull(data.total);
+
+      const ytdEl = document.getElementById('baseline-ytd');
+      if (data.ytd_gain != null) {
+        const sign = data.ytd_gain >= 0 ? '+' : '';
+        const cls  = data.ytd_gain >= 0 ? 'pos' : 'neg';
+        const pctStr = data.ytd_pct != null ? ` (${sign}${data.ytd_pct.toFixed(1)}%)` : '';
+        ytdEl.innerHTML = `<span class="${cls}">${sign}${fmtFull(data.ytd_gain)}${pctStr}</span>`;
+      } else {
+        ytdEl.textContent = '—';
+      }
+
+      document.getElementById('baseline-card').style.display = '';
+    } catch (_) {}
+  }
+
   // ── Fetch data ───────────────────────────────────────────
   async function fetchPortfolio() {
     const btn = document.getElementById('refresh-btn');
@@ -377,6 +490,7 @@
       if (!res.ok || data.error) throw new Error(data.error || `HTTP ${res.status}`);
 
       allPositions = data.positions;
+      renderUnvested(data.unvested_positions || []);
       const s = data.summary;
 
       document.getElementById('val-total').textContent  = fmtFull(s.total_portfolio);
@@ -552,8 +666,15 @@
     renderGroups();
   });
 
+  // ── Unvested toggle ──────────────────────────────────────
+  document.getElementById('unvested-header').addEventListener('click', () => {
+    unvestedCollapsed = !unvestedCollapsed;
+    document.getElementById('unvested-section').classList.toggle('collapsed', unvestedCollapsed);
+  });
+
   // ── Boot ─────────────────────────────────────────────────
   fetchPortfolio();
+  fetchBaseline();
 </script>
 </body>
 </html>
