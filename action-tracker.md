@@ -1,6 +1,6 @@
 # Financial Planning Action Tracker
 **Household:** Galen & Jaclyn
-**Last Updated:** 2026-03-10
+**Last Updated:** 2026-03-12
 **Next Review:** April 2026 (post-tender settlement, check refi rates)
 
 ---
@@ -22,6 +22,11 @@
 | ✅ DONE | Future contributions updated | Databricks 401(k) contribution allocation updated |
 | ✅ DONE | $30k HELOC payment | Balance reduced to $150,000 |
 | ✅ DONE | Recreational property sold | $146,000 applied to HELOC → balance now ~$4,000 |
+| ✅ DONE | HELOC zeroed out | Paid remaining ~$4,000 from cash. Full $250k credit line open. (3/12/26) |
+| ✅ DONE | Harvest KSCP loss | Sold Knightscope — ~$505 loss captured. (3/12/26) |
+| ✅ DONE | Crypto tax-loss harvesting | Sold NEAR, AIOZ, Algorand, Compound, Kishu Inu — ~$1,900 losses harvested. (3/12/26) |
+| ✅ DONE | AMZN RSU reallocation | Sold 22 shares (Nov 2025 lot) → bought VHT 10.78 sh @ $278.43 + GOOGL 5.357 sh @ $303.89 in Fidelity account (3/12/26) |
+| ✅ DONE | Portfolio + cost basis updated | balances.csv and Google Sheet updated with all current holdings and per-share cost basis. App deployed. |
 
 ---
 
@@ -29,9 +34,9 @@
 
 | Status | Action | Details | Deadline |
 |--------|--------|---------|----------|
-| 🔴 URGENT | **Zero out HELOC** | Pay remaining ~$4,000 from cash. Opens full $250k credit line. | Immediately |
-| 🔴 URGENT | **Crypto tax-loss harvesting** | Sell NEAR ($161), AIOZ ($61), Algorand ($5), Compound ($0.35), Kishu Inu ($4) — ~$1,900 losses. Must do BEFORE tender settles. | Before Mar 15 |
-| 🔴 URGENT | **Harvest KSCP loss** | Sell Knightscope: ~$6 current, $505 loss (-95.39%) | Before Mar 15 |
+| ✅ DONE | **Zero out HELOC** | Paid ~$4,000 from cash. Full $250k credit line open. | Mar 2026 |
+| ✅ DONE | **Crypto tax-loss harvesting** | Sold NEAR, AIOZ, Algorand, Compound, Kishu Inu — ~$1,900 losses harvested. | Mar 2026 |
+| ✅ DONE | **Harvest KSCP loss** | Sold Knightscope — ~$505 loss captured. | Mar 2026 |
 
 ### Crypto Loss Harvesting Detail
 | Token | Current Value | Est. Loss | Action |
@@ -110,9 +115,39 @@
 ### Monthly
 | Status | Action | Details |
 |--------|--------|---------|
-| 🔁 ONGOING | Sell 75% of each Amazon RSU vest | Immediately upon vesting. Deploy to underweight sectors. Do NOT sell existing AMZN position. |
+| 🔁 ONGOING | Sell 75% of each Amazon RSU vest | Immediately upon vesting. Deploy to underweight sectors per RSU Vest Deployment Plan below. Do NOT sell existing AMZN position. |
 | 🔁 ONGOING | Monitor RSU vesting (Jaclyn) | Post-IPO: sell 50–75% upon lockup expiration |
 | 🔁 ONGOING | Update account balances | Log to `data/balances-YYYY-MM.csv` |
+
+### Amazon RSU Vest Deployment Plan — 2026
+
+**Rule:** Sell 75%, keep 25% as ongoing AMZN exposure. Deploy proceeds to most underweight positions.
+
+#### May Vests — Deploy ~$15,593
+| Date | Units | Est. Total | Deploy (75%) |
+|------|-------|-----------|--------------|
+| May 15 | 16 | ~$3,429 | ~$2,572 |
+| May 21 | 81 | ~$17,361 | ~$13,021 |
+
+Allocation: TSLA $8k (complete position) → RKLB $3k (complete position) → VHT $2.6k → GOOGL $2k
+
+#### August Vests — Deploy ~$15,593
+| Date | Units | Est. Total | Deploy (75%) |
+|------|-------|-----------|--------------|
+| Aug 15 | 16 | ~$3,429 | ~$2,572 |
+| Aug 21 | 81 | ~$17,361 | ~$13,021 |
+
+Allocation: ANET up to $10k (**only if corrected to ~$120–125**) → GOOGL $5k → VFH $5k → most underweight ETF $3.6k
+
+#### November Vests — Deploy ~$15,432
+| Date | Units | Est. Total | Deploy (75%) |
+|------|-------|-----------|--------------|
+| Nov 15 | 16 | ~$3,429 | ~$2,572 |
+| Nov 21 | 80 | ~$17,146 | ~$12,860 |
+
+Allocation: ANET up to $10k (if not yet deployed) → GOOGL $3k → most underweight (VHT / VFH / VWO) ~$2.4k
+
+**2026 RSU total deploying: ~$46,618 across three tranches**
 
 ### Quarterly (Mar / Jun / Sep / Dec)
 | Status | Action | Details |

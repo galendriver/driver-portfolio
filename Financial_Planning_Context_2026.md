@@ -1,5 +1,5 @@
 # Financial Planning Context - Galen & Jaclyn
-**Last Updated:** March 10, 2026
+**Last Updated:** March 12, 2026
 **Next Review:** April 2026 (post-tender settlement, Tranche 2 deployment, refi rate monitoring)
 
 ---
@@ -67,28 +67,32 @@
 
 ### **Galen's Portfolio ($1,019,000)**
 
-**Public Brokerage (~$595,000):**
-- NVDA: $140,717 (372% gain)
-- Amazon: Position exists but declining (down 12.6% recently)
-- GOOGL: $3,513 (214% gain)
-- AAPL: $5,717 (76% gain)
-- AMD: $10,082 (102% gain)
-- MSFT: $616 (9% gain)
-- PLTR: $13,213 (129% gain)
-- OKLO: $21,531 (205% gain)
-- WMT: $6,306 (130% gain)
-- TSLA: $336 (24% gain)
-- COIN: -$324 (-18% loss)
-- KSCP: -$505 (-95% loss) - **HARVEST THIS LOSS**
-- Other small positions (NNDM, GOOG, APLD, RGTI)
+**Jaclyn's Individual Brokerage -8348 (~$595,000) — NOTE: This account is in Jaclyn's name:**
+- NVDA: 944 shares @ $40.04 cost basis
+- GOOGL (Class A): 16 shares @ $102.40 cost basis
+- GOOG (Class C): 43 shares @ $184.62 cost basis
+- AAPL: 51 shares @ $148.23 cost basis
+- AMD: 95 shares @ $103.89 cost basis
+- MSFT: 16 shares @ $444.98 cost basis
+- PLTR: 129 shares @ $79.25 cost basis
+- OKLO: 328 shares @ $31.96 cost basis
+- COIN: 6 shares @ $300.00 cost basis
+- WMT: 99 shares @ $88.23 cost basis
+- TSLA: 4 shares @ $347.54 cost basis
+- RGTI: 2 shares @ $22.57 cost basis
+- APLD: 1 share @ $26.31 cost basis
+- NNDM: 200 shares @ $1.54 cost basis
+- KSCP: SOLD 3/12/26 — ~$505 loss harvested
 
 **401(k) - Amazon/Fidelity ($135,000):**
 - Vanguard Target Retirement 2045: 60%
 - Vanguard Institutional 500 Index: 30%
 - SSGA Small/Mid Cap Index: 10%
 
-**Amazon RSUs ($130,000 → ~$114,000 after 12.6% decline):**
-- Vesting schedule: Ongoing
+**Amazon RSUs (two accounts):**
+- Fidelity RSU account: 251.619 shares @ $228.43 cost basis (273.619 total - 22 sold Feb 2026)
+  - Also holds: VHT 10.78 shares @ $278.43, GOOGL 5.357 shares @ $303.89 (purchased with RSU sale proceeds)
+- Keybank account: 1,347 shares @ $228.43 cost basis
 - **Strategy: Sell 75% of each vest immediately upon vesting**
 
 **Cryptocurrency ($135,000 total, but significant losses in alts):**
@@ -109,9 +113,10 @@
   - Kishu Inu: $4 (-~98%, high loss)
   - **Total harvestable losses: ~$1,900**
 
-**Cash ($70,000 → $40,000 after $30k HELOC payment):**
+**Cash ($32,889 as of 3/12/26):**
 - High-yield savings earning ~3%
 - Emergency liquidity
+- Reduced from $70k: $30k HELOC payment (2/19) + $146k property proceeds to HELOC + ~$4k HELOC zero-out (3/12)
 
 ---
 
@@ -560,6 +565,10 @@ Sell these positions to realize losses:
 - ✅ Future contributions updated in Databricks 401(k)
 - ✅ $30,000 paid toward HELOC (2/19/26)
 - ✅ Recreational property sold — $146,000 applied to HELOC (HELOC now ~$4k)
+- ✅ HELOC zeroed out — remaining ~$4k paid from cash (3/12/26). Full $250k credit line available.
+- ✅ Crypto tax-loss harvesting complete — NEAR, AIOZ, Algorand, Compound, Kishu Inu sold (~$1,900 losses)
+- ✅ KSCP sold — ~$505 loss harvested
+- ✅ AMZN RSU reallocation — sold 22 shares (Nov 2025 lot); proceeds used to buy VHT 10.78 shares @ $278.43 and GOOGL 5.357 shares @ $303.89 in Fidelity RSU account (3/12/26)
 
 ---
 
