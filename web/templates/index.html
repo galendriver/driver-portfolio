@@ -183,6 +183,16 @@
     }
     .unvested-note { font-size: 11px; color: var(--text-muted); margin-top: 3px; font-style: italic; }
 
+    /* ── Unvested total row ── */
+    .unvested-total-row {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-top: 1px solid var(--text-muted);
+      border-radius: var(--radius); padding: 11px 14px;
+      display: flex; align-items: flex-start; gap: 10px;
+      margin-top: 2px;
+    }
+    .unvested-total-row .pos-ticker { font-weight: 700; }
+
     /* ── Baseline card ── */
     #baseline-card {
       margin-top: 16px;
@@ -450,6 +460,21 @@
           </div>
         </div>`;
     }).join('');
+
+    const totalGross = unvested.reduce((s, p) => s + p.value, 0);
+    const totalNet   = totalGross * 0.7;
+    const totalRow   = document.createElement('div');
+    totalRow.className = 'unvested-total-row';
+    totalRow.innerHTML = `
+      <div class="pos-left">
+        <div class="pos-ticker">Total</div>
+        <div class="pos-desc">~70% net after tax</div>
+      </div>
+      <div class="pos-right">
+        <div class="pos-value">${fmtFull(totalGross)}</div>
+        <div class="pos-source muted">~${fmtFull(totalNet)} net</div>
+      </div>`;
+    rowsEl.appendChild(totalRow);
 
     section.style.display = '';
     if (unvestedCollapsed) section.classList.add('collapsed');
