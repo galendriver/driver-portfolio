@@ -251,11 +251,13 @@ def portfolio():
                 ytd_cur_total   += row["_value"]
 
         # ── All-time ────────────────────────────────────────────
+        # cost_basis in CSV is per-share; multiply by shares for total.
+        # For manual_value rows (no shares), skip — no meaningful basis.
         alltime_gain = alltime_pct = cost_basis = None
         cb_str = (row.get("cost_basis") or "").strip()
-        if cb_str:
+        if cb_str and shares is not None:
             try:
-                cost_basis   = float(cb_str)
+                cost_basis   = round(shares * float(cb_str), 2)
                 alltime_gain = round(row["_value"] - cost_basis, 2)
                 alltime_pct  = round(alltime_gain / cost_basis * 100, 2) if cost_basis else None
                 if not is_unvested:
