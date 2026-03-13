@@ -10,9 +10,9 @@ jaclyn_brokerage,jaclyn,OKLO,Oklo,328,OKLO,,,tech,us_equity,,31.96
 jaclyn_brokerage,jaclyn,COIN,Coinbase,6,COIN,,,tech,us_equity,,300.0
 jaclyn_brokerage,jaclyn,WMT,Walmart,99,WMT,,,consumer,us_equity,,88.23
 jaclyn_brokerage,jaclyn,TSLA,Tesla,4,TSLA,,,consumer,us_equity,,49.02
-jaclyn_brokerage,jaclyn,RGTI,Rigetti Computing,2,RGTI,,,tech,us_equity,,347.54
-jaclyn_brokerage,jaclyn,APLD,Applied Digital,1,APLD,,,tech,us_equity,,
-jaclyn_brokerage,jaclyn,NNDM,Nano Dimension,200,NNDM,,,tech,us_equity,,
+jaclyn_brokerage,jaclyn,RGTI,Rigetti Computing,2,RGTI,,,tech,us_equity,,22.57
+jaclyn_brokerage,jaclyn,APLD,Applied Digital,1,APLD,,,tech,us_equity,,26.31
+jaclyn_brokerage,jaclyn,NNDM,Nano Dimension,200,NNDM,,,tech,us_equity,,1.54
 galen_401k,galen,GALEN_401K,Amazon 401k Fidelity (TDF + index mix),,,,135000,diversified,retirement,Manual: update quarterly from Fidelity,
 galen_brokerage,galen,AMZN,Amazon - Fidelity,251.619,AMZN,,,tech,us_equity,,228.43
 galen_brokerage,galen,AMZN,Amazon - Key,1347,AMZN,,,tech,us_equity,,228.43
