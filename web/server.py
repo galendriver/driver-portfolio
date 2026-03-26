@@ -16,7 +16,7 @@ import requests
 from pathlib import Path
 from datetime import datetime, date
 
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, make_response
 
 _SCRIPTS_DIR = Path(__file__).parent.parent / "scripts"
 sys.path.insert(0, str(_SCRIPTS_DIR))
@@ -316,7 +316,7 @@ def portfolio():
 
     last_updated = prices.get("fetched_at_human") or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    return jsonify({
+    resp = make_response(jsonify({
         "last_updated": last_updated,
         "summary": {
             "total_portfolio": round(total_portfolio),
@@ -332,7 +332,9 @@ def portfolio():
         },
         "positions":          positions,
         "unvested_positions": unvested_positions,
-    })
+    }))
+    resp.headers["Cache-Control"] = "no-store"
+    return resp
 
 
 @app.route("/api/baseline")
@@ -364,16 +366,18 @@ def baseline():
     ytd_gain = round(total - ytd_total) if ytd_total else None
     ytd_pct  = round((total - ytd_total) / ytd_total * 100, 2) if ytd_total else None
 
-    return jsonify({
+    resp = make_response(jsonify({
         "snapshot_date": "2026-03-11",
         "label":         "Pre-reallocation baseline",
         "total":         round(total),
         "ytd_total":     round(ytd_total),
         "ytd_gain":      ytd_gain,
         "ytd_pct":       ytd_pct,
-    })
+    }))
+    resp.headers["Cache-Control"] = "no-store"
+    return resp
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT", 5001))
     app.run(host="0.0.0.0", port=port, debug=True)
