@@ -80,12 +80,12 @@
 - [ ] Log April balances → `data/balances-2026-04.csv`
 - [ ] Confirm $22k HYSA label ("2026 taxes" reserve — retain intact)
 
-### 🔴 Galen Owes — Data Needed to Update Sheet
-- [ ] **Jaclyn's Databricks vested units post-tender** — exact unit count remaining (was ~2,416; confirm from Carta/NetBenefits)
-- [ ] **Jaclyn's Databricks unvested grant total** — confirm current unvested units post any new grants
-- [ ] **Jaclyn's latest bonus amount** — update income/cash tracking
-- [ ] **Jaclyn's Fidelity 401k balance** — current April value (was $85,732)
-- [ ] **Jaclyn's Databricks 401k balance** — current April value (was $84,048)
+### ✅ Jaclyn Data — April 2026 Update Complete
+- [x] Jaclyn DBRX vested: 1,422 units @ $190 = **$270,180** ✅
+- [x] Jaclyn DBRX unvested: 2,334 units @ $190 = **$443,460** ✅
+- [x] Jaclyn Fidelity 401k: **$86,458** ✅
+- [x] Jaclyn Databricks 401k: **$84,204** ✅
+- [ ] **Jaclyn's bonus** — 18% of base; expected to land end of April → **update balances in early June**
 
 ---
 
