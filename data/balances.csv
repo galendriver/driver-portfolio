@@ -19,8 +19,8 @@ galen_brokerage,galen,AMZN,Amazon - Key,1347,AMZN,,,tech,us_equity,,228.43
 galen_brokerage,galen,VHT,Vanguard Health Care ETF,10.78,VHT,,,healthcare,us_equity,Purchased Feb 2026 with AMZN RSU proceeds,278.43
 galen_brokerage,galen,GOOGL,Alphabet Class A (RSU acct),5.357,GOOGL,,,tech,us_equity,Purchased Feb 2026 with AMZN RSU proceeds,303.89
 galen_crypto,galen,BTC,Bitcoin,0.665421,BTC-USD,bitcoin,,crypto,crypto,,
-galen_crypto,galen,stETH,Lido Staked ETH,7.76244,,staked-ether,,crypto,crypto,,
-galen_crypto,galen,RNDR,Render Token,7140.92,,render-token,,crypto,crypto,,
+galen_crypto,galen,stETH,Lido Staked ETH,7.76244,,ethereum,,crypto,crypto,,
+galen_crypto,galen,RENDER,Render Token,7140.92,RENDER-USD,,,crypto,crypto,,
 galen_crypto,galen,ETH,Ethereum,2.43054,ETH-USD,ethereum,,crypto,crypto,,
 galen_crypto,galen,WLD,Worldcoin,92,WLD-USD,worldcoin-org,,crypto,crypto,UPDATE: confirm WLD balance,
 galen_cash,galen,CASH,High-yield savings,,,,23000,cash,cash,Manual: update monthly,
