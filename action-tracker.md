@@ -42,7 +42,7 @@
 | Databricks tender (gross) | $200,000 |
 | Less: 2025 federal tax owed | -$51,000 |
 | Less: Electrical work | -$24,000 |
-| Less: Repairs / painting | -$15,000 |
+| Less: Repairs / painting | -$15,000 *(due May — not yet paid)* |
 | **Net investable** | **$110,000** (~$100k deployed + ~$10k buffer) |
 | Existing HYSA | $22,000 (untouched) |
 | HELOC available (emergency) | $250,000 |
@@ -56,9 +56,9 @@
 ### Pay First (Cash Out: $90k)
 | Status | Action | Amount |
 |--------|--------|--------|
-| 🔴 URGENT | Pay 2025 federal taxes | $51,000 |
-| 🔴 URGENT | Pay electrical contractor | $24,000 |
-| 🔴 URGENT | Pay painting / repairs contractor | $15,000 |
+| ✅ DONE | Pay 2025 federal taxes | $51,000 |
+| ✅ DONE | Pay electrical contractor | $24,000 |
+| 🟡 PENDING | Pay painting / repairs contractor — **due May** | $15,000 |
 
 ### Deploy in This Order (Priority = Conviction × Event Timing)
 
