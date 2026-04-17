@@ -9,6 +9,7 @@
   <meta name="apple-mobile-web-app-title" content="Portfolio" />
   <link rel="manifest" href="/static/manifest.json" />
   <meta name="theme-color" content="#0d1117" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,43 +30,62 @@
       --safe-bot:  env(safe-area-inset-bottom, 0px);
       --safe-l:    env(safe-area-inset-left,  0px);
       --safe-r:    env(safe-area-inset-right, 0px);
+      --nav-h:     56px;
     }
 
     html, body {
-      height: 100%;
-      background: var(--bg);
-      color: var(--text);
+      height: 100%; background: var(--bg); color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      font-size: 15px;
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
+      font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased;
+      overflow: hidden;
     }
 
     /* ── Header ── */
     #header {
-      position: sticky; top: 0; z-index: 100;
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--bg); border-bottom: 1px solid var(--border);
       padding: calc(var(--safe-top) + 12px) calc(var(--safe-r) + 16px) 12px calc(var(--safe-l) + 16px);
       display: flex; align-items: center; gap: 10px;
     }
     #header h1 { font-size: 17px; font-weight: 700; white-space: nowrap; }
-    #updated-label {
-      flex: 1; font-size: 12px; color: var(--text-muted);
-      text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
+    #header-center { flex: 1; text-align: center; }
+    #updated-label { font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    #page-title { font-size: 15px; font-weight: 600; display: none; }
     #refresh-btn {
       background: none; border: 1px solid var(--border); color: var(--text-sub);
-      border-radius: 8px; padding: 6px 10px; font-size: 16px; cursor: pointer; line-height: 1;
-      flex-shrink: 0;
+      border-radius: 8px; padding: 6px 10px; font-size: 16px; cursor: pointer; line-height: 1; flex-shrink: 0;
     }
     #refresh-btn:active { color: var(--blue); border-color: var(--blue); }
     #refresh-btn.spinning { animation: spin .8s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ── Main ── */
-    #main {
-      padding: 16px calc(var(--safe-r) + 16px) calc(var(--safe-bot) + 32px) calc(var(--safe-l) + 16px);
+    /* ── Bottom Nav ── */
+    #nav-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+      background: var(--bg-card); border-top: 1px solid var(--border);
+      display: flex; padding-bottom: var(--safe-bot);
+    }
+    .nav-btn {
+      flex: 1; padding: 8px 0 6px; text-align: center;
+      background: none; border: none; cursor: pointer; color: var(--text-muted);
+      font-size: 10px; font-weight: 600; display: flex; flex-direction: column;
+      align-items: center; gap: 3px; letter-spacing: .3px; text-transform: uppercase;
+    }
+    .nav-icon { font-size: 22px; line-height: 1.2; }
+    .nav-btn.active { color: var(--blue); }
+
+    /* ── Pages ── */
+    .page {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      overflow-y: auto; -webkit-overflow-scrolling: touch;
+      padding-top: calc(var(--safe-top) + 56px);
+      padding-bottom: calc(var(--nav-h) + var(--safe-bot) + 16px);
+    }
+    .page.hidden { display: none; }
+
+    /* ── Portfolio page inner ── */
+    #page-portfolio .inner {
+      padding: 16px calc(var(--safe-r) + 16px) 0 calc(var(--safe-l) + 16px);
       max-width: 600px; margin: 0 auto;
     }
 
@@ -81,22 +101,17 @@
     }
     .card-value { font-size: 36px; font-weight: 700; letter-spacing: -.5px; line-height: 1.1; }
     .card-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
-
-    /* Performance row: 1d · 1w · YTD */
     .perf-row {
       display: flex; gap: 0; margin-top: 14px;
       border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
     }
-    .perf-cell {
-      flex: 1; padding: 10px 12px; text-align: center;
-      border-right: 1px solid var(--border);
-    }
+    .perf-cell { flex: 1; padding: 10px 12px; text-align: center; border-right: 1px solid var(--border); }
     .perf-cell:last-child { border-right: none; }
     .perf-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .6px; color: var(--text-muted); margin-bottom: 3px; }
     .perf-val   { font-size: 15px; font-weight: 700; }
     .perf-pct   { font-size: 12px; font-weight: 500; margin-top: 1px; }
 
-    /* ── Controls bar ── */
+    /* ── Controls ── */
     #controls {
       display: flex; align-items: center; gap: 8px;
       margin-bottom: 12px; flex-wrap: wrap;
@@ -117,7 +132,7 @@
     }
     .ctrl-toggle.active { border-color: var(--blue); color: var(--blue); }
 
-    /* ── Group sections ── */
+    /* ── Groups ── */
     .group { margin-bottom: 10px; }
     .group-header {
       display: flex; align-items: center; gap: 8px;
@@ -148,19 +163,15 @@
     .pos-gains { display: flex; gap: 6px; margin-top: 5px; flex-wrap: wrap; }
     .pos-gain-chip {
       font-size: 11px; font-weight: 600; padding: 2px 7px;
-      border-radius: 20px; background: var(--bg-tab); border: 1px solid var(--border);
-      white-space: nowrap;
+      border-radius: 20px; background: var(--bg-tab); border: 1px solid var(--border); white-space: nowrap;
     }
     .pos-right { text-align: right; flex-shrink: 0; }
     .pos-value { font-size: 16px; font-weight: 700; }
     .pos-source { font-size: 11px; font-weight: 500; margin-top: 2px; }
 
     /* ── Color helpers ── */
-    .pos { color: var(--green); }
-    .neg { color: var(--red); }
-    .muted { color: var(--text-muted); }
-    .source-live   { color: var(--green); }
-    .source-manual { color: var(--text-muted); }
+    .pos { color: var(--green); } .neg { color: var(--red); } .muted { color: var(--text-muted); }
+    .source-live { color: var(--green); } .source-manual { color: var(--text-muted); }
 
     /* ── Unvested RSU section ── */
     #unvested-section { margin-top: 16px; }
@@ -173,7 +184,9 @@
     .unvested-chevron { font-size: 11px; color: var(--text-muted); flex-shrink: 0; transition: transform .2s; }
     #unvested-section.collapsed .unvested-chevron { transform: rotate(-90deg); }
     .unvested-title { font-size: 14px; font-weight: 700; flex: 1; }
-    .unvested-meta { font-size: 12px; color: var(--text-muted); }
+    .unvested-meta { text-align: right; }
+    .unvested-meta-total { font-size: 14px; font-weight: 700; }
+    .unvested-meta-perf { font-size: 12px; font-weight: 500; margin-top: 1px; }
     .unvested-rows { display: flex; flex-direction: column; gap: 5px; margin-top: 5px; }
     #unvested-section.collapsed .unvested-rows { display: none; }
     .unvested-row {
@@ -182,16 +195,12 @@
       display: flex; align-items: flex-start; gap: 10px;
     }
     .unvested-note { font-size: 11px; color: var(--text-muted); margin-top: 3px; font-style: italic; }
-
-    /* ── Unvested total row ── */
     .unvested-total-row {
       background: var(--bg-card); border: 1px solid var(--border);
       border-top: 1px solid var(--text-muted);
       border-radius: var(--radius); padding: 11px 14px;
-      display: flex; align-items: flex-start; gap: 10px;
-      margin-top: 2px;
+      display: flex; align-items: flex-start; gap: 10px; margin-top: 2px;
     }
-    .unvested-total-row .pos-ticker { font-weight: 700; }
 
     /* ── Baseline card ── */
     #baseline-card {
@@ -219,105 +228,258 @@
       border-radius: var(--radius); padding: 14px 16px; color: var(--red);
       font-size: 13px; margin-bottom: 14px; display: none;
     }
+
+    /* ── Actions page ── */
+    #page-actions .inner {
+      padding: 16px calc(var(--safe-r) + 16px) 0 calc(var(--safe-l) + 16px);
+      max-width: 680px; margin: 0 auto;
+    }
+    #actions-content { font-size: 14px; }
+    #actions-content h2 {
+      font-size: 15px; font-weight: 700; color: var(--text);
+      margin: 20px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border);
+    }
+    #actions-content h2:first-child { margin-top: 0; }
+    #actions-content h3 { font-size: 13px; font-weight: 600; color: var(--text-sub); margin: 14px 0 6px; }
+    #actions-content table {
+      width: 100%; border-collapse: collapse; font-size: 13px; margin: 8px 0;
+    }
+    #actions-content th {
+      background: var(--bg-tab); color: var(--text-sub); font-size: 11px;
+      font-weight: 600; text-transform: uppercase; letter-spacing: .5px;
+      padding: 7px 10px; text-align: left; border: 1px solid var(--border);
+    }
+    #actions-content td {
+      padding: 7px 10px; border: 1px solid var(--border);
+      color: var(--text); vertical-align: top; line-height: 1.4;
+    }
+    #actions-content tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+    #actions-content p { color: var(--text-sub); margin: 6px 0; }
+    #actions-content ul, #actions-content ol { padding-left: 18px; margin: 6px 0; }
+    #actions-content li { color: var(--text-sub); margin: 3px 0; }
+    #actions-content strong { color: var(--text); }
+    #actions-content code {
+      background: var(--bg-tab); border: 1px solid var(--border);
+      border-radius: 4px; padding: 1px 5px; font-size: 12px; font-family: monospace;
+    }
+    #actions-loading { text-align: center; padding: 48px 16px; color: var(--text-muted); }
+
+    /* ── Chat page ── */
+    #page-chat {
+      display: flex; flex-direction: column;
+      padding-bottom: 0 !important;
+    }
+    #chat-messages {
+      flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
+      padding: 12px calc(var(--safe-r) + 16px) 12px calc(var(--safe-l) + 16px);
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .chat-bubble {
+      max-width: 88%; padding: 10px 14px; border-radius: 16px;
+      font-size: 14px; line-height: 1.5;
+    }
+    .chat-bubble.user {
+      background: var(--blue); color: #fff; align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+    .chat-bubble.assistant {
+      background: var(--bg-card); border: 1px solid var(--border);
+      color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px;
+    }
+    .chat-bubble.assistant p { margin: 0 0 8px; }
+    .chat-bubble.assistant p:last-child { margin-bottom: 0; }
+    .chat-bubble.assistant ul, .chat-bubble.assistant ol { padding-left: 18px; margin: 4px 0; }
+    .chat-bubble.assistant li { margin: 2px 0; }
+    .chat-bubble.assistant strong { color: var(--text); }
+    .chat-bubble.assistant code {
+      background: var(--bg-tab); border: 1px solid var(--border);
+      border-radius: 4px; padding: 1px 5px; font-size: 12px; font-family: monospace;
+    }
+    .chat-bubble.typing { color: var(--text-muted); font-style: italic; }
+    .chat-suggestions {
+      display: flex; flex-direction: column; gap: 6px;
+      padding: 0 calc(var(--safe-r) + 16px) 8px calc(var(--safe-l) + 16px);
+    }
+    .chat-suggestion {
+      background: var(--bg-tab); border: 1px solid var(--border);
+      border-radius: 10px; padding: 9px 13px; font-size: 13px;
+      color: var(--text-sub); cursor: pointer; text-align: left;
+    }
+    .chat-suggestion:active { border-color: var(--blue); color: var(--text); }
+    #chat-input-area {
+      background: var(--bg); border-top: 1px solid var(--border);
+      padding: 10px calc(var(--safe-r) + 16px) calc(var(--nav-h) + var(--safe-bot) + 10px) calc(var(--safe-l) + 16px);
+      display: flex; gap: 8px; align-items: flex-end;
+    }
+    #chat-input {
+      flex: 1; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 10px 14px; color: var(--text);
+      font-size: 14px; font-family: inherit; resize: none; line-height: 1.4;
+      max-height: 120px; overflow-y: auto;
+    }
+    #chat-input:focus { outline: none; border-color: var(--blue); }
+    #chat-input::placeholder { color: var(--text-muted); }
+    #chat-send {
+      background: var(--blue); border: none; border-radius: 10px;
+      padding: 10px 14px; color: #fff; font-size: 15px; cursor: pointer;
+      flex-shrink: 0; line-height: 1;
+    }
+    #chat-send:disabled { background: var(--bg-tab); color: var(--text-muted); cursor: default; }
+    #chat-clear {
+      background: none; border: 1px solid var(--border); border-radius: 10px;
+      padding: 10px 12px; color: var(--text-muted); font-size: 12px;
+      cursor: pointer; flex-shrink: 0; white-space: nowrap;
+    }
   </style>
 </head>
 <body>
 
 <header id="header">
   <h1>Driver Portfolio</h1>
-  <span id="updated-label">Loading…</span>
+  <div id="header-center">
+    <span id="updated-label">Loading…</span>
+    <span id="page-title"></span>
+  </div>
   <button id="refresh-btn" title="Refresh">↻</button>
 </header>
 
-<main id="main">
-  <div id="error-msg"></div>
+<!-- Portfolio Page -->
+<div id="page-portfolio" class="page">
+  <div class="inner">
+    <div id="error-msg"></div>
 
-  <!-- Summary card -->
-  <section id="summary">
-    <div class="card">
-      <div class="card-label">Total Portfolio</div>
-      <div class="card-value" id="val-total">—</div>
-      <div class="card-sub" id="val-liquid"></div>
-      <div class="perf-row">
-        <div class="perf-cell">
-          <div class="perf-label">1D</div>
-          <div class="perf-val" id="perf-day-val">—</div>
-          <div class="perf-pct" id="perf-day-pct"></div>
-        </div>
-        <div class="perf-cell">
-          <div class="perf-label">1W</div>
-          <div class="perf-val" id="perf-week-val">—</div>
-          <div class="perf-pct" id="perf-week-pct"></div>
-        </div>
-        <div class="perf-cell">
-          <div class="perf-label">YTD</div>
-          <div class="perf-val" id="perf-ytd-val">—</div>
-          <div class="perf-pct" id="perf-ytd-pct"></div>
+    <section id="summary">
+      <div class="card">
+        <div class="card-label">Total Portfolio</div>
+        <div class="card-value" id="val-total">—</div>
+        <div class="card-sub" id="val-liquid"></div>
+        <div class="perf-row">
+          <div class="perf-cell">
+            <div class="perf-label">1D</div>
+            <div class="perf-val" id="perf-day-val">—</div>
+            <div class="perf-pct" id="perf-day-pct"></div>
+          </div>
+          <div class="perf-cell">
+            <div class="perf-label">1W</div>
+            <div class="perf-val" id="perf-week-val">—</div>
+            <div class="perf-pct" id="perf-week-pct"></div>
+          </div>
+          <div class="perf-cell">
+            <div class="perf-label">YTD</div>
+            <div class="perf-val" id="perf-ytd-val">—</div>
+            <div class="perf-pct" id="perf-ytd-pct"></div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Sort + view controls -->
-  <div id="controls">
-    <span class="ctrl-label">Sort:</span>
-    <div class="ctrl-group">
-      <button class="ctrl-btn active" data-sort="value-desc">Value ▼</button>
-      <button class="ctrl-btn" data-sort="value-asc">Value ▲</button>
-      <button class="ctrl-btn" data-sort="alpha">A→Z</button>
-      <button class="ctrl-btn" data-sort="day">1D%</button>
-      <button class="ctrl-btn" data-sort="week">1W%</button>
-      <button class="ctrl-btn" data-sort="ytd">YTD%</button>
+    <div id="controls">
+      <span class="ctrl-label">Sort:</span>
+      <div class="ctrl-group">
+        <button class="ctrl-btn active" data-sort="value-desc">Value ▼</button>
+        <button class="ctrl-btn" data-sort="value-asc">Value ▲</button>
+        <button class="ctrl-btn" data-sort="alpha">A→Z</button>
+        <button class="ctrl-btn" data-sort="day">1D%</button>
+        <button class="ctrl-btn" data-sort="week">1W%</button>
+        <button class="ctrl-btn" data-sort="ytd">YTD%</button>
+      </div>
+      <div class="ctrl-spacer"></div>
+      <button class="ctrl-toggle" id="combine-btn">Combine</button>
     </div>
-    <div class="ctrl-spacer"></div>
-    <button class="ctrl-toggle" id="combine-btn">Combine</button>
+
+    <div id="status-msg"><div class="spinner"></div><br>Fetching live prices…</div>
+    <div id="groups-container"></div>
+
+    <div id="unvested-section" style="display:none">
+      <div class="unvested-header" id="unvested-header">
+        <span class="unvested-chevron">▼</span>
+        <span class="unvested-title">Unvested RSUs</span>
+        <div class="unvested-meta">
+          <div class="unvested-meta-total" id="unvested-total">—</div>
+          <div class="unvested-meta-perf" id="unvested-perf"></div>
+        </div>
+      </div>
+      <div class="unvested-rows" id="unvested-rows"></div>
+    </div>
+
+    <div id="baseline-card" style="display:none">
+      <div class="baseline-label">Original Holdings — Pre-reallocation baseline (Mar 11)</div>
+      <div class="baseline-row">
+        <span class="baseline-key">Real-time value</span>
+        <span class="baseline-val" id="baseline-total">—</span>
+      </div>
+      <div class="baseline-row">
+        <span class="baseline-key">YTD change</span>
+        <span class="baseline-val" id="baseline-ytd">—</span>
+      </div>
+    </div>
   </div>
+</div>
 
-  <div id="status-msg"><div class="spinner"></div><br>Fetching live prices…</div>
-  <div id="groups-container"></div>
-
-  <!-- Unvested RSUs -->
-  <div id="unvested-section" style="display:none">
-    <div class="unvested-header" id="unvested-header">
-      <span class="unvested-chevron">▼</span>
-      <span class="unvested-title">Unvested RSUs</span>
-      <span class="unvested-meta" id="unvested-meta"></span>
-    </div>
-    <div class="unvested-rows" id="unvested-rows"></div>
+<!-- Actions Page -->
+<div id="page-actions" class="page hidden">
+  <div class="inner">
+    <div id="actions-loading"><div class="spinner"></div><br>Loading action items…</div>
+    <div id="actions-content"></div>
   </div>
+</div>
 
-  <!-- Baseline comparison -->
-  <div id="baseline-card" style="display:none">
-    <div class="baseline-label">Original Holdings — Pre-reallocation baseline (Mar 11)</div>
-    <div class="baseline-row">
-      <span class="baseline-key">Real-time value</span>
-      <span class="baseline-val" id="baseline-total">—</span>
-    </div>
-    <div class="baseline-row">
-      <span class="baseline-key">YTD change</span>
-      <span class="baseline-val" id="baseline-ytd">—</span>
+<!-- Chat Page -->
+<div id="page-chat" class="page hidden">
+  <div id="chat-messages">
+    <div class="chat-bubble assistant">
+      Ask me anything about your financial plan — why we chose specific stocks, upcoming action items, tax implications, RSU strategy, or anything else in the plan.
     </div>
   </div>
-</main>
+  <div class="chat-suggestions" id="chat-suggestions">
+    <button class="chat-suggestion">Why did we choose MSFT for Tranche 1?</button>
+    <button class="chat-suggestion">What's the Tranche 2 deployment plan?</button>
+    <button class="chat-suggestion">When is the next AMZN RSU vest and what's the plan?</button>
+    <button class="chat-suggestion">What are the ANET and dry powder triggers?</button>
+  </div>
+  <div id="chat-input-area">
+    <button id="chat-clear">Clear</button>
+    <textarea id="chat-input" rows="1" placeholder="Ask about your financial plan…"></textarea>
+    <button id="chat-send">↑</button>
+  </div>
+</div>
+
+<!-- Bottom Nav -->
+<nav id="nav-bar">
+  <button class="nav-btn active" data-page="portfolio">
+    <span class="nav-icon">📊</span>
+    <span>Portfolio</span>
+  </button>
+  <button class="nav-btn" data-page="actions">
+    <span class="nav-icon">✅</span>
+    <span>Actions</span>
+  </button>
+  <button class="nav-btn" data-page="chat">
+    <span class="nav-icon">💬</span>
+    <span>Chat</span>
+  </button>
+</nav>
 
 <script>
-  // ── Config ───────────────────────────────────────────────
+  // ── Config ──────────────────────────────────────────────────
   const GROUP_ORDER  = ['us_equity','crypto','retirement','private_equity','cash'];
   const GROUP_LABELS = {
     us_equity: 'Stocks', crypto: 'Crypto', retirement: 'Retirement',
     private_equity: 'Private Equity', cash: 'Cash',
   };
 
-  let unvestedCollapsed = false;
-
-  // ── State ────────────────────────────────────────────────
+  // ── State ────────────────────────────────────────────────────
   let allPositions    = [];
   let currentSort     = 'value-desc';
   let combinedView    = false;
   let collapsedGroups = new Set();
+  let unvestedCollapsed = false;
   let refreshTimer    = null;
+  let activePage      = 'portfolio';
+  let actionsLoaded   = false;
+  let chatHistory     = [];   // [{role, content}]
 
-  // ── Formatters ───────────────────────────────────────────
+  // ── Formatters ───────────────────────────────────────────────
   function fmt(n) {
     if (n == null) return '—';
     const abs = Math.abs(n);
@@ -347,8 +509,6 @@
     const ps   = pct != null ? ` (${sign}${pct.toFixed(1)}%)` : '';
     return `<span class="pos-gain-chip ${cls}">${label}: ${sign}${fmt(gain)}${ps}</span>`;
   }
-
-  // Fills a perf-cell trio: val element, pct element
   function fillPerfCell(valEl, pctEl, gain, pct) {
     if (gain == null) { valEl.textContent = '—'; pctEl.textContent = ''; return; }
     const sign = gain >= 0 ? '+' : '';
@@ -360,7 +520,6 @@
       pctEl.className   = 'perf-pct ' + cls;
     }
   }
-
   function srcLabel(s) {
     if (!s || s === 'missing') return 'no price';
     if (s === 'manual-fallback') return 'est.';
@@ -374,20 +533,20 @@
     return 'source-live';
   }
 
-  // ── Sort helper ──────────────────────────────────────────
+  // ── Sort ─────────────────────────────────────────────────────
   function sortRows(rows) {
     return [...rows].sort((a, b) => {
       if (currentSort === 'value-desc') return b.value - a.value;
       if (currentSort === 'value-asc')  return a.value - b.value;
       if (currentSort === 'alpha')      return a.ticker.localeCompare(b.ticker);
-      if (currentSort === 'day')  { const ap = a.day_pct  ?? -Infinity; const bp = b.day_pct  ?? -Infinity; return bp - ap; }
-      if (currentSort === 'week') { const ap = a.week_pct ?? -Infinity; const bp = b.week_pct ?? -Infinity; return bp - ap; }
-      if (currentSort === 'ytd')  { const ap = a.ytd_pct  ?? -Infinity; const bp = b.ytd_pct  ?? -Infinity; return bp - ap; }
+      if (currentSort === 'day')  { const ap = a.day_pct  ?? -Infinity, bp = b.day_pct  ?? -Infinity; return bp - ap; }
+      if (currentSort === 'week') { const ap = a.week_pct ?? -Infinity, bp = b.week_pct ?? -Infinity; return bp - ap; }
+      if (currentSort === 'ytd')  { const ap = a.ytd_pct  ?? -Infinity, bp = b.ytd_pct  ?? -Infinity; return bp - ap; }
       return 0;
     });
   }
 
-  // ── Combine positions by underlying symbol ────────────────
+  // ── Combine ───────────────────────────────────────────────────
   function combinePositions(rows) {
     const map = new Map();
     rows.forEach(p => {
@@ -398,8 +557,6 @@
         const m = map.get(key);
         m.value += p.value;
         if (p.shares != null) m.shares = (m.shares || 0) + p.shares;
-
-        // Merge day/week/ytd
         for (const [gainKey, startKey, pctKey] of [
           ['day_gain',  null,             'day_pct'],
           ['week_gain', null,             'week_pct'],
@@ -416,7 +573,6 @@
             m[pctKey]  = p[pctKey];
           }
         }
-
         if (p.alltime_gain != null && m.alltime_gain != null) {
           m.alltime_gain += p.alltime_gain;
           if (p.cost_basis != null && m.cost_basis != null) {
@@ -427,7 +583,6 @@
           m.alltime_gain = p.alltime_gain;
           m.alltime_pct  = p.alltime_pct;
         }
-
         m._accounts.push(p.account);
         m._count++;
       }
@@ -435,24 +590,64 @@
     return Array.from(map.values());
   }
 
-  // ── Render unvested RSUs ─────────────────────────────────
+  // ── Render unvested RSUs ─────────────────────────────────────
   function renderUnvested(unvested) {
     const section = document.getElementById('unvested-section');
     if (!unvested || unvested.length === 0) { section.style.display = 'none'; return; }
 
     const totalGross = unvested.reduce((s, p) => s + p.value, 0);
-    document.getElementById('unvested-meta').textContent =
-      fmtFull(totalGross) + ' gross · ~' + fmtFull(totalGross * 0.7) + ' net est.';
+
+    // Aggregate gains for live perf display
+    let dayGain = null, dayStart = 0;
+    let weekGain = null, weekStart = 0;
+    let ytdGain = null, ytdStart = 0;
+    unvested.forEach(p => {
+      if (p.day_gain != null) {
+        dayGain = (dayGain ?? 0) + p.day_gain;
+        dayStart += p.value - p.day_gain;
+      }
+      if (p.week_gain != null) {
+        weekGain = (weekGain ?? 0) + p.week_gain;
+        weekStart += p.value - p.week_gain;
+      }
+      if (p.ytd_gain != null && p.ytd_start_value != null) {
+        ytdGain = (ytdGain ?? 0) + p.ytd_gain;
+        ytdStart += p.ytd_start_value;
+      }
+    });
+    const perfKey = currentSort === 'week' ? 'week' : currentSort === 'ytd' ? 'ytd' : 'day';
+    const [perfGain, perfStart] = perfKey === 'week' ? [weekGain, weekStart]
+                                : perfKey === 'ytd'  ? [ytdGain,  ytdStart]
+                                :                      [dayGain,  dayStart];
+    const perfPct = (perfGain != null && perfStart) ? perfGain / perfStart * 100 : null;
+    const perfLabel = perfKey === 'ytd' ? 'YTD' : perfKey === 'week' ? '1W' : '1D';
+
+    document.getElementById('unvested-total').textContent = fmtFull(totalGross) + ' gross';
+    const perfEl = document.getElementById('unvested-perf');
+    if (perfGain != null) {
+      const sign = perfGain >= 0 ? '+' : '';
+      const cls  = perfGain >= 0 ? 'pos' : 'neg';
+      const pctStr = perfPct != null ? ` (${sign}${perfPct.toFixed(1)}%)` : '';
+      perfEl.innerHTML = `<span class="${cls}">${perfLabel} ${sign}${fmt(perfGain)}${pctStr}</span>`;
+    } else {
+      perfEl.innerHTML = `<span class="muted">~${fmtFull(totalGross * 0.7)} net est.</span>`;
+    }
 
     const rowsEl = document.getElementById('unvested-rows');
     rowsEl.innerHTML = unvested.map(p => {
       const vestLabel = p.description.replace('Amazon RSU Vest ', '');
+      const chips = [
+        fmtGainChip(p.day_gain,  p.day_pct,  '1D'),
+        fmtGainChip(p.week_gain, p.week_pct, '1W'),
+        fmtGainChip(p.ytd_gain,  p.ytd_pct,  'YTD'),
+      ].filter(Boolean).join('');
       return `
         <div class="unvested-row">
           <div class="pos-left">
             <div class="pos-ticker">${vestLabel}</div>
             <div class="pos-desc">${p.shares != null ? p.shares + ' gross units' : ''}</div>
             <div class="unvested-note">~${fmtFull(p.value * 0.7)} net after ~30% tax</div>
+            ${chips ? `<div class="pos-gains">${chips}</div>` : ''}
           </div>
           <div class="pos-right">
             <div class="pos-value">${fmt(p.value)}</div>
@@ -461,8 +656,8 @@
         </div>`;
     }).join('');
 
-    const totalNet   = totalGross * 0.7;
-    const totalRow   = document.createElement('div');
+    const totalNet = totalGross * 0.7;
+    const totalRow = document.createElement('div');
     totalRow.className = 'unvested-total-row';
     totalRow.innerHTML = `
       <div class="pos-left">
@@ -479,15 +674,13 @@
     if (unvestedCollapsed) section.classList.add('collapsed');
   }
 
-  // ── Render baseline card ─────────────────────────────────
+  // ── Render baseline ───────────────────────────────────────────
   async function fetchBaseline() {
     try {
       const res  = await fetch('/api/baseline');
       const data = await res.json();
       if (!res.ok || data.error) return;
-
       document.getElementById('baseline-total').textContent = fmtFull(data.total);
-
       const ytdEl = document.getElementById('baseline-ytd');
       if (data.ytd_gain != null) {
         const sign = data.ytd_gain >= 0 ? '+' : '';
@@ -497,51 +690,31 @@
       } else {
         ytdEl.textContent = '—';
       }
-
       document.getElementById('baseline-card').style.display = '';
     } catch (_) {}
   }
 
-  // ── Fetch data ───────────────────────────────────────────
+  // ── Fetch portfolio ───────────────────────────────────────────
   async function fetchPortfolio() {
     const btn = document.getElementById('refresh-btn');
     btn.classList.add('spinning');
     document.getElementById('error-msg').style.display = 'none';
-
     try {
       const res  = await fetch('/api/portfolio');
       const data = await res.json();
       if (!res.ok || data.error) throw new Error(data.error || `HTTP ${res.status}`);
-
       allPositions = data.positions;
       renderUnvested(data.unvested_positions || []);
       const s = data.summary;
-
       document.getElementById('val-total').textContent  = fmtFull(s.total_portfolio);
       document.getElementById('val-liquid').textContent = 'Liquid: ' + fmtFull(s.liquid_total);
-
-      fillPerfCell(
-        document.getElementById('perf-day-val'),
-        document.getElementById('perf-day-pct'),
-        s.day_gain, s.day_pct
-      );
-      fillPerfCell(
-        document.getElementById('perf-week-val'),
-        document.getElementById('perf-week-pct'),
-        s.week_gain, s.week_pct
-      );
-      fillPerfCell(
-        document.getElementById('perf-ytd-val'),
-        document.getElementById('perf-ytd-pct'),
-        s.ytd_gain, s.ytd_pct
-      );
-
+      fillPerfCell(document.getElementById('perf-day-val'),  document.getElementById('perf-day-pct'),  s.day_gain,  s.day_pct);
+      fillPerfCell(document.getElementById('perf-week-val'), document.getElementById('perf-week-pct'), s.week_gain, s.week_pct);
+      fillPerfCell(document.getElementById('perf-ytd-val'),  document.getElementById('perf-ytd-pct'),  s.ytd_gain,  s.ytd_pct);
       const timePart = (data.last_updated || '').split(' ')[1] || data.last_updated;
       document.getElementById('updated-label').textContent = 'Updated ' + timePart;
-
       document.getElementById('status-msg').style.display = 'none';
       renderGroups();
-
     } catch (err) {
       const el = document.getElementById('error-msg');
       el.textContent = 'Failed to load: ' + err.message;
@@ -554,11 +727,9 @@
     }
   }
 
-  // ── Render groups ────────────────────────────────────────
+  // ── Render groups ─────────────────────────────────────────────
   function renderGroups() {
     let positions = combinedView ? combinePositions(allPositions) : allPositions;
-
-    // Group by asset class
     const groups = {};
     positions.forEach(p => {
       const key = p.asset_class || 'other';
@@ -569,18 +740,16 @@
     const container = document.getElementById('groups-container');
     container.innerHTML = '';
 
-    const order = [...GROUP_ORDER, ...Object.keys(groups).filter(k => !GROUP_ORDER.includes(k))];
-
-    order.forEach(key => {
+    // Only render known groups — no "other" bucket
+    GROUP_ORDER.forEach(key => {
       const rows = groups[key];
       if (!rows || rows.length === 0) return;
 
       const sorted     = sortRows(rows);
-      const label      = GROUP_LABELS[key] || key;
+      const label      = GROUP_LABELS[key];
       const groupTotal = rows.reduce((s, p) => s + p.value, 0);
       const isCollapsed = collapsedGroups.has(key);
 
-      // Group perf — show whichever of day/week/ytd matches current sort, else day
       const perfKey = currentSort === 'week' ? 'week' : currentSort === 'ytd' ? 'ytd' : 'day';
       let gStart = 0, gCur = 0, hasPerf = false;
       rows.forEach(p => {
@@ -599,28 +768,21 @@
         perfHtml = `<div class="group-perf ${cls}">${lbl} ${sign}${pct.toFixed(1)}%</div>`;
       }
 
-      // Position rows HTML
       const rowsHtml = sorted.map(p => {
         let detail = '';
-        if (p.shares != null && p.price != null) {
-          detail = `${fmtShares(p.shares)} sh @ ${fmtPrice(p.price)}`;
-        } else if (p.shares != null) {
-          detail = `${fmtShares(p.shares)} sh`;
-        }
-
+        if (p.shares != null && p.price != null) detail = `${fmtShares(p.shares)} sh @ ${fmtPrice(p.price)}`;
+        else if (p.shares != null)               detail = `${fmtShares(p.shares)} sh`;
         let accountsHtml = '';
         if (combinedView && p._count > 1) {
           const accts = p._accounts.map(a => a.replace(/_/g, ' ')).join(' · ');
           accountsHtml = `<div class="pos-accounts">${accts}</div>`;
         }
-
         const chips = [
           fmtGainChip(p.day_gain,     p.day_pct,     '1D'),
           fmtGainChip(p.week_gain,    p.week_pct,    '1W'),
           fmtGainChip(p.ytd_gain,     p.ytd_pct,     'YTD'),
           fmtGainChip(p.alltime_gain, p.alltime_pct, 'All-time'),
         ].filter(Boolean).join('');
-
         return `
           <div class="position-row">
             <div class="pos-left">
@@ -649,26 +811,111 @@
             ${perfHtml}
           </div>
         </div>
-        <div class="group-rows">${rowsHtml}</div>
-      `;
-
+        <div class="group-rows">${rowsHtml}</div>`;
       groupEl.querySelector('.group-header').addEventListener('click', () => {
         const k = groupEl.dataset.key;
         collapsedGroups.has(k) ? collapsedGroups.delete(k) : collapsedGroups.add(k);
         groupEl.classList.toggle('collapsed');
       });
-
       container.appendChild(groupEl);
     });
   }
 
-  // ── Auto-refresh ─────────────────────────────────────────
+  // ── Actions page ──────────────────────────────────────────────
+  async function loadActions() {
+    if (actionsLoaded) return;
+    try {
+      const res  = await fetch('/api/actions');
+      const data = await res.json();
+      if (!res.ok || data.error) throw new Error(data.error || 'Failed');
+      document.getElementById('actions-loading').style.display = 'none';
+      document.getElementById('actions-content').innerHTML = marked.parse(data.markdown);
+      actionsLoaded = true;
+    } catch (err) {
+      document.getElementById('actions-loading').innerHTML =
+        `<span style="color:var(--red)">Failed to load: ${err.message}</span>`;
+    }
+  }
+
+  // ── Chat page ─────────────────────────────────────────────────
+  function appendBubble(role, html, isHtml = false) {
+    const msgs = document.getElementById('chat-messages');
+    const el   = document.createElement('div');
+    el.className = 'chat-bubble ' + role;
+    if (isHtml) el.innerHTML = html;
+    else        el.textContent = html;
+    msgs.appendChild(el);
+    msgs.scrollTop = msgs.scrollHeight;
+    return el;
+  }
+
+  async function sendChat(text) {
+    if (!text.trim()) return;
+
+    // Hide suggestions after first send
+    document.getElementById('chat-suggestions').style.display = 'none';
+
+    chatHistory.push({ role: 'user', content: text });
+    appendBubble('user', text);
+
+    const input  = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('chat-send');
+    input.value  = '';
+    input.style.height = '';
+    sendBtn.disabled = true;
+
+    const typingEl = appendBubble('assistant', 'Thinking…', false);
+    typingEl.classList.add('typing');
+
+    try {
+      const res  = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: chatHistory }),
+      });
+      const data = await res.json();
+      if (!res.ok || data.error) throw new Error(data.error || `HTTP ${res.status}`);
+
+      typingEl.classList.remove('typing');
+      typingEl.innerHTML = marked.parse(data.reply);
+      chatHistory.push({ role: 'assistant', content: data.reply });
+    } catch (err) {
+      typingEl.classList.remove('typing');
+      typingEl.textContent = 'Error: ' + err.message;
+      typingEl.style.color = 'var(--red)';
+      chatHistory.pop(); // remove failed user message so it can be retried
+    } finally {
+      sendBtn.disabled = false;
+      document.getElementById('chat-messages').scrollTop = 9999;
+    }
+  }
+
+  // ── Auto-refresh ──────────────────────────────────────────────
   function scheduleRefresh() {
     clearTimeout(refreshTimer);
     refreshTimer = setTimeout(fetchPortfolio, 5 * 60 * 1000);
   }
 
-  // ── Events ───────────────────────────────────────────────
+  // ── Nav page switching ────────────────────────────────────────
+  function switchPage(name) {
+    if (activePage === name) return;
+    activePage = name;
+
+    document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+    document.getElementById('page-' + name).classList.remove('hidden');
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.page === name));
+
+    const isPortfolio = name === 'portfolio';
+    document.getElementById('refresh-btn').style.display = isPortfolio ? '' : 'none';
+    document.getElementById('updated-label').style.display = isPortfolio ? '' : 'none';
+    document.getElementById('page-title').style.display = isPortfolio ? 'none' : '';
+    document.getElementById('page-title').textContent =
+      name === 'actions' ? 'Action Items' : 'Ask Your Plan';
+
+    if (name === 'actions') loadActions();
+  }
+
+  // ── Events ────────────────────────────────────────────────────
   document.getElementById('refresh-btn').addEventListener('click', () => {
     clearTimeout(refreshTimer);
     fetchPortfolio();
@@ -690,13 +937,45 @@
     renderGroups();
   });
 
-  // ── Unvested toggle ──────────────────────────────────────
   document.getElementById('unvested-header').addEventListener('click', () => {
     unvestedCollapsed = !unvestedCollapsed;
     document.getElementById('unvested-section').classList.toggle('collapsed', unvestedCollapsed);
   });
 
-  // ── Boot ─────────────────────────────────────────────────
+  document.getElementById('nav-bar').addEventListener('click', e => {
+    const btn = e.target.closest('.nav-btn');
+    if (btn) switchPage(btn.dataset.page);
+  });
+
+  document.getElementById('chat-send').addEventListener('click', () => {
+    sendChat(document.getElementById('chat-input').value);
+  });
+
+  document.getElementById('chat-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendChat(e.target.value);
+    }
+  });
+
+  document.getElementById('chat-input').addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+  });
+
+  document.getElementById('chat-clear').addEventListener('click', () => {
+    chatHistory = [];
+    const msgs = document.getElementById('chat-messages');
+    msgs.innerHTML = `<div class="chat-bubble assistant">Ask me anything about your financial plan — why we chose specific stocks, upcoming action items, tax implications, RSU strategy, or anything else in the plan.</div>`;
+    document.getElementById('chat-suggestions').style.display = '';
+  });
+
+  document.getElementById('chat-suggestions').addEventListener('click', e => {
+    const btn = e.target.closest('.chat-suggestion');
+    if (btn) sendChat(btn.textContent);
+  });
+
+  // ── Boot ──────────────────────────────────────────────────────
   fetchPortfolio();
   fetchBaseline();
 </script>

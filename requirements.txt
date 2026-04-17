@@ -1,4 +1,6 @@
 flask
-yfinance
+yfinance>=1.2.2
+curl_cffi>=0.15.0
 requests
 gunicorn
+anthropic

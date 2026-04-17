@@ -16,7 +16,7 @@ import requests
 from pathlib import Path
 from datetime import datetime, date
 
-from flask import Flask, jsonify, render_template, make_response
+from flask import Flask, jsonify, render_template, make_response, request
 
 _SCRIPTS_DIR = Path(__file__).parent.parent / "scripts"
 sys.path.insert(0, str(_SCRIPTS_DIR))
@@ -376,6 +376,78 @@ def baseline():
     }))
     resp.headers["Cache-Control"] = "no-store"
     return resp
+
+
+_CONTEXT_DIR = Path(__file__).parent.parent
+
+
+@app.route("/api/actions")
+def actions():
+    tracker = _CONTEXT_DIR / "action-tracker.md"
+    if not tracker.exists():
+        return jsonify({"error": "action-tracker.md not found"}), 404
+    content = tracker.read_text()
+    # Drop the COMPLETED section — only show forward-looking items
+    completed_marker = "\n## COMPLETED"
+    next_section_after = "\n## APRIL 2026"
+    start = content.find(next_section_after)
+    if start == -1:
+        # Fallback: find first non-completed ## section after COMPLETED block
+        completed_start = content.find(completed_marker)
+        if completed_start != -1:
+            nxt = content.find("\n## ", completed_start + 1)
+            start = nxt if nxt != -1 else 0
+    if start > 0:
+        content = content[start:].lstrip("\n")
+    return jsonify({"markdown": content})
+
+
+@app.route("/api/chat", methods=["POST"])
+def chat():
+    try:
+        import anthropic as _anthropic
+    except ImportError:
+        return jsonify({"error": "anthropic package not installed"}), 500
+
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        return jsonify({"error": "ANTHROPIC_API_KEY not configured on server"}), 500
+
+    data = request.get_json(silent=True) or {}
+    messages = data.get("messages", [])
+    if not messages:
+        return jsonify({"error": "No messages provided"}), 400
+
+    ctx_parts = []
+    for fname in [
+        "Financial_Planning_Context_2026.md",
+        "action-tracker.md",
+        "reports/April_2026_Deployment_Brief.md",
+    ]:
+        fpath = _CONTEXT_DIR / fname
+        if fpath.exists():
+            ctx_parts.append(f"### {Path(fname).name}\n\n{fpath.read_text()}")
+    context = "\n\n---\n\n".join(ctx_parts)
+
+    client = _anthropic.Anthropic(api_key=api_key)
+    response = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=1024,
+        system=[{
+            "type": "text",
+            "text": (
+                f"You are a financial advisor assistant for Galen and Jaclyn Driver. "
+                f"Today is {date.today().isoformat()}. "
+                "Answer questions concisely and specifically using the financial plan context below. "
+                "When asked about investment decisions, cite the specific reasoning from the plan.\n\n"
+                + context
+            ),
+            "cache_control": {"type": "ephemeral"},
+        }],
+        messages=messages,
+        extra_headers={"anthropic-beta": "prompt-caching-2024-07-31"},
+    )
+    return jsonify({"reply": response.content[0].text})
 
 
 if __name__ == "__main__":
