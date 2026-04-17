@@ -18,7 +18,7 @@ galen_401k,galen,GALEN_401K,Amazon 401k Fidelity (TDF + index mix),,,,135000,div
 galen_rsu,galen,AMZN_RSU,Amazon RSUs (vested — Fidelity),273.619,AMZN,,,tech,us_equity,Pre-March-2026 baseline snapshot
 galen_crypto,galen,BTC,Bitcoin,0.665421,BTC-USD,bitcoin,,crypto,crypto,
 galen_crypto,galen,stETH,Lido Staked ETH,7.76244,,staked-ether,,crypto,crypto,
-galen_crypto,galen,RNDR,Render Token,7140.92,,render-token,,crypto,crypto,
+galen_crypto,galen,RENDER,Render Token,7140.92,,render,,crypto,crypto,
 galen_crypto,galen,ETH,Ethereum,2.43054,ETH-USD,ethereum,,crypto,crypto,
 galen_crypto,galen,WLD,Worldcoin,92,WLD-USD,worldcoin-org,,crypto,crypto,
 galen_crypto,galen,NEAR,NEAR Protocol,,,near,46,crypto,crypto,Baseline approx value
