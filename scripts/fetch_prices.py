@@ -278,6 +278,11 @@ def fetch_all_prices(rows: list[dict], force_refresh: bool = False) -> dict:
     return prices
 
 
+def _parse_number(s: str) -> float:
+    """Parse a number string that may include currency symbols and commas (e.g. '$140,419.00')."""
+    return float(s.replace("$", "").replace(",", "").strip())
+
+
 def get_row_value(row: dict, prices: dict) -> tuple[float, str]:
     """
     Compute dollar value for a single CSV row.
@@ -290,12 +295,12 @@ def get_row_value(row: dict, prices: dict) -> tuple[float, str]:
 
     # Manual value (no shares) — private equity, 401k funds
     if manual_str and not shares_str:
-        return float(manual_str), "manual"
+        return _parse_number(manual_str), "manual"
 
     if not shares_str:
         return 0.0, "missing"
 
-    shares = float(shares_str)
+    shares = _parse_number(shares_str)
     if shares == 0:
         return 0.0, "zero"
 
@@ -311,7 +316,7 @@ def get_row_value(row: dict, prices: dict) -> tuple[float, str]:
 
     # Fallback to manual_value if live price unavailable
     if manual_str:
-        return float(manual_str), "manual-fallback"
+        return _parse_number(manual_str), "manual-fallback"
 
     return 0.0, "missing"
 
