@@ -60,12 +60,12 @@ def load_rows(use_sheet: bool = True) -> list[dict]:
 # Cache helpers
 # ---------------------------------------------------------------------------
 
-def load_cache() -> dict:
+def load_cache(stale_ok: bool = False) -> dict:
     if CACHE_FILE.exists():
         try:
             data = json.loads(CACHE_FILE.read_text())
             age = time.time() - data.get("fetched_at", 0)
-            if age < CACHE_TTL_SECONDS:
+            if age < CACHE_TTL_SECONDS or stale_ok:
                 return data
         except Exception:
             pass
@@ -238,6 +238,9 @@ def fetch_all_prices(rows: list[dict], force_refresh: bool = False) -> dict:
     yf_symbols = list(set(yf_symbols))
     cg_ids     = list(set(cg_ids))
 
+    # Load stale cache as fallback — used to fill in any symbols that fail to fetch
+    stale = load_cache(stale_ok=True)
+
     prices = {}
 
     # Current + prev_close prices
@@ -247,7 +250,11 @@ def fetch_all_prices(rows: list[dict], force_refresh: bool = False) -> dict:
         prices.update(yf_prices)
         for sym in yf_symbols:
             if sym not in yf_prices:
-                print(f"  [warn] No price returned for {sym}")
+                if sym in stale:
+                    prices[sym] = stale[sym]
+                    print(f"  [stale-fallback] {sym} using cached price")
+                else:
+                    print(f"  [warn] No price returned for {sym}")
 
     if cg_ids:
         print(f"  Fetching {len(cg_ids)} crypto prices from CoinGecko...")
@@ -255,7 +262,11 @@ def fetch_all_prices(rows: list[dict], force_refresh: bool = False) -> dict:
         prices.update(cg_prices)
         for cg_id in cg_ids:
             if cg_id not in cg_prices:
-                print(f"  [warn] No price returned for {cg_id}")
+                if cg_id in stale:
+                    prices[cg_id] = stale[cg_id]
+                    print(f"  [stale-fallback] {cg_id} using cached price")
+                else:
+                    print(f"  [warn] No price returned for {cg_id}")
 
     save_cache(prices)
 
