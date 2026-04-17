@@ -1,7 +1,7 @@
 # Financial Planning Action Tracker
 **Household:** Galen & Jaclyn
-**Last Updated:** 2026-03-12
-**Next Review:** April 2026 (post-tender settlement, check refi rates)
+**Last Updated:** 2026-04-16
+**Next Review:** May 2026 (post-MSFT earnings 4/29, May RSU vests)
 
 ---
 
@@ -27,72 +27,124 @@
 | ✅ DONE | Crypto tax-loss harvesting | Sold NEAR, AIOZ, Algorand, Compound, Kishu Inu — ~$1,900 losses harvested. (3/12/26) |
 | ✅ DONE | AMZN RSU reallocation | Sold 22 shares (Nov 2025 lot) → bought VHT 10.78 sh @ $278.43 + GOOGL 5.357 sh @ $303.89 in Fidelity account (3/12/26) |
 | ✅ DONE | Portfolio + cost basis updated | balances.csv and Google Sheet updated with all current holdings and per-share cost basis. App deployed. |
+| ✅ DONE | Databricks tender executed | ~$200k gross received |
+| ✅ DONE | Tranche 1 deployed (4/16/26) | 8 positions executed: MSFT 29sh@$419.97, LLY 11sh@$905.90, VHT 36sh@$275.61, C 60sh@$131.50, TSLA 16sh@$394.06, RTX 25sh@$198.41, UNH 16sh@$315.05, RKLB 55sh@$76.92 |
+| ✅ DONE | Google Sheet + CSV updated | All fills, DBRX post-tender value, Galen 401k ($140,661) updated |
 
 ---
 
-## URGENT — Do Before Tender Settles
+## APRIL 2026 CAPITAL PLAN (Post-Tender, Updated 4/15)
 
-| Status | Action | Details | Deadline |
-|--------|--------|---------|----------|
-| ✅ DONE | **Zero out HELOC** | Paid ~$4,000 from cash. Full $250k credit line open. | Mar 2026 |
-| ✅ DONE | **Crypto tax-loss harvesting** | Sold NEAR, AIOZ, Algorand, Compound, Kishu Inu — ~$1,900 losses harvested. | Mar 2026 |
-| ✅ DONE | **Harvest KSCP loss** | Sold Knightscope — ~$505 loss captured. | Mar 2026 |
+### Actual Capital Math
 
-### Crypto Loss Harvesting Detail
-| Token | Current Value | Est. Loss | Action |
-|-------|--------------|-----------|--------|
-| NEAR Protocol | $161 | ~$648 | Sell all |
-| AIOZ Network | $61 | ~$695 | Sell all |
-| Algorand | $5 | ~$10 | Sell all |
-| Compound | $0.35 | ~$9 | Sell all |
-| Kishu Inu | $4 | ~high | Sell all |
-| KSCP (brokerage) | $6 | ~$505 | Sell all |
-| **Total** | | **~$1,900** | |
-
----
-
-## WEEK OF MARCH 15–20 — Tender Settles, Deploy Capital
-
-### Capital Available
 | Source | Amount |
 |--------|--------|
 | Databricks tender (gross) | $200,000 |
-| Less: 2026 tax reserve (move to separate HYSA, do not invest) | -$20,000 |
-| **Investable from tender** | **$180,000** |
-| Existing cash (keep untouched as emergency fund) | $40,000 |
+| Less: 2025 federal tax owed | -$51,000 |
+| Less: Electrical work | -$24,000 |
+| Less: Repairs / painting | -$15,000 |
+| **Net investable** | **$110,000** (~$100k deployed + ~$10k buffer) |
+| Existing HYSA | $22,000 (untouched) |
+| HELOC available (emergency) | $250,000 |
 
-### Step 1 — Tax Reserve
-| Status | Action | Details |
-|--------|--------|---------|
-| 🟡 PENDING | Move $20,000 to HYSA labeled "2026 taxes" | Do not invest. Hold until April 2027 tax filing. |
-
-### Step 2 — Deploy $180,000
-
-| Status | Priority | Buy | Ticker | Amount | Thesis |
-|--------|----------|-----|--------|--------|--------|
-| 🟡 PENDING | 1 | Healthcare ETF | VHT | $40,000 | 0% → target 3–5%. Defensive, low correlation. |
-| 🟡 PENDING | 2 | Financials ETF | VFH | $30,000 | 0% → target 3–5%. AI financing + rate environment. |
-| 🟡 PENDING | 3 | Google | GOOGL | $22,000 | Highest conviction. 3-lab AI exposure, Gemini 18% share, YouTube, Search moat. |
-| 🟡 PENDING | 4 | RTX Corporation | RTX | $14,000 | 7-year Pentagon missile contracts. Tomahawk/PAC-3/SM-6 quadrupling. |
-| 🟡 PENDING | 5 | Constellation Energy | CEG | $12,000 | Nuclear repriced as energy security. Calpine deal ($60GW). Meta 20-yr contract. |
-| 🟡 PENDING | 6 | Tesla | TSLA | $12,000 | $X consolidation thesis. SpaceX IPO June 2026 catalyst. Tranche 1 of $20k total. |
-| 🟡 PENDING | 7 | Japan ETF | EWJ | $10,000 | Geographic diversification. Fiscal reform thesis. |
-| 🟡 PENDING | 8 | AeroVironment | AVAV | $8,000 | Drone warfare. 93% firm orders, $3.5B contract awards, $330 analyst target. |
-| 🟡 PENDING | 9 | Emerging Markets ETF | VWO | $8,000 | Geographic diversification. |
-| 🟡 PENDING | 10 | Rocket Lab | RKLB | $5,000 | Space ecosystem. SpaceX IPO halo. Picks-and-shovels. Tranche 1 of $8k total. |
-| 🟡 PENDING | 11 | Hold in HYSA (Tranche 2) | — | $19,000 | Dry powder for pullback opportunity. |
-| | | | **TOTAL** | **$180,000** | |
+**Rationale for change from March $180k plan:** 2025 tax bill came in higher than forecast ($51k vs. ~$17k estimate). Two unforeseen home repairs required immediate action. Deploying $100k instead of $180k; concentration thesis still holds given 76% household AI/tech exposure.
 
 ---
 
-## TRANCHE 2 — Deploy Q2 2026 (~$19k dry powder)
+## THIS WEEK — April 14–18 (Tranche 1 Deploy: $60,000)
 
-| Status | Action | Amount | Trigger |
-|--------|--------|--------|---------|
-| ⏸ WATCH | Complete TSLA position | $8,000 | 4–6 weeks pre-SpaceX IPO announcement |
-| ⏸ WATCH | Complete RKLB position | $3,000 | Post SpaceX IPO announcement clarity |
-| ⏸ WATCH | **Arista Networks (ANET)** | $10,000 | **Only on ~10% market correction (~$120-125 entry).** 29% upside, 0 sell ratings, AI Ethernet moat. |
-| ⏸ WATCH | Additional GOOGL | From remainder | If market pulls back 10%+, add more GOOGL first |
+### Pay First (Cash Out: $90k)
+| Status | Action | Amount |
+|--------|--------|--------|
+| 🔴 URGENT | Pay 2025 federal taxes | $51,000 |
+| 🔴 URGENT | Pay electrical contractor | $24,000 |
+| 🔴 URGENT | Pay painting / repairs contractor | $15,000 |
+
+### Deploy in This Order (Priority = Conviction × Event Timing)
+
+| # | Status | Ticker | Amount | Conviction | Thesis |
+|---|--------|--------|--------|------------|--------|
+| 1 | 🔴 URGENT | **MSFT** | $12,000 | MEDIUM (asymmetric) | −33% drawdown, 94% Buy, Q3 earnings 4/29. Full allocation — no adds planned. |
+| 2 | 🔴 URGENT | **LLY** | $10,000 | **HIGH** | FDA-approved oral GLP-1 (Foundayo) 4/1, $1,209 target, 44% upside. Quality growth. |
+| 3 | 🔴 URGENT | **VHT** | $10,000 | **HIGH** | Healthcare ETF. Closes largest sector gap (0% → ~2%). |
+| 4 | 🔴 URGENT | **Citi (C)** | $8,000 | **HIGH** | Lowest-valuation large bank. Restructuring catalyst. |
+| 5 | 🔴 URGENT | **TSLA** | $6,000 | MEDIUM | SpaceX IPO roadshow June. Energy/auto, not AI-pure. |
+| 6 | 🔴 URGENT | **RTX** | $5,000 | MEDIUM | $268B backlog, Iran war premium. Already rallied — reduced sizing. |
+| 7 | 🔴 URGENT | **UNH** | $5,000 | MEDIUM | Contrarian (−35% YTD). Sized small for ongoing fraud investigation risk. |
+| 8 | 🔴 URGENT | **RKLB** | $4,000 | HIGH (speculative) | SpaceX IPO halo. |
+
+**Tranche 1 total: $60,000**
+
+### Also This Week
+- [x] Log Tranche 1 fills → Google Sheet + balances.csv ✅ done 4/16
+- [ ] Log April balances → `data/balances-2026-04.csv`
+- [ ] Confirm $22k HYSA label ("2026 taxes" reserve — retain intact)
+
+### 🔴 Galen Owes — Data Needed to Update Sheet
+- [ ] **Jaclyn's Databricks vested units post-tender** — exact unit count remaining (was ~2,416; confirm from Carta/NetBenefits)
+- [ ] **Jaclyn's Databricks unvested grant total** — confirm current unvested units post any new grants
+- [ ] **Jaclyn's latest bonus amount** — update income/cash tracking
+- [ ] **Jaclyn's Fidelity 401k balance** — current April value (was $85,732)
+- [ ] **Jaclyn's Databricks 401k balance** — current April value (was $84,048)
+
+---
+
+## LATE APRIL – EARLY MAY — Tranche 2 ($26,000)
+
+Top-off sizing after Tranche 1 execution:
+
+| Status | Ticker | Amount | Notes |
+|--------|--------|--------|-------|
+| 🟡 PENDING | LLY | $5,000 | Complete position |
+| 🟡 PENDING | VHT | $5,000 | Complete position |
+| 🟡 PENDING | Citi (C) | $4,000 | Complete position |
+| 🟡 PENDING | TSLA | $4,000 | Complete position |
+| 🟡 PENDING | RTX | $3,000 | Complete position |
+| 🟡 PENDING | UNH | $3,000 | Complete position |
+| 🟡 PENDING | RKLB | $2,000 | Complete position |
+| | **TOTAL** | **$26,000** | |
+
+---
+
+## DRY POWDER — $14,000 (held in HYSA)
+
+Trigger-based deployment only:
+
+| Trigger | Action |
+|---------|--------|
+| ANET drops to $120–125 | Deploy $10k (per original plan) |
+| MSFT drops >15% post-earnings 4/29 | Add $4k to MSFT |
+| GOOGL drops 10%+ during 2026 | Front-load next RSU proceeds into GOOGL |
+| Black-swan VIX >30 sustained | Hold dry |
+
+---
+
+## MSFT BOUNCE + BUILD STRATEGY (New — April 2026)
+
+**Structure:** Buy MSFT at drawdown → hold to long-term cap gains → rotate proceeds to GOOGL (your high-conviction structural thesis: 3-lab AI exposure via Gemini + Anthropic + xAI/SpaceX).
+
+### MSFT Exit Rules (All Require Post-4/15/2027 for Long-Term Treatment)
+
+| Trigger | Action | Tax Impact |
+|---------|--------|-----------|
+| MSFT hits $500 (+40%) AND past 4/15/2027 | Trim 50% → rotate to GOOGL | 15% LTCG |
+| MSFT hits $580 (+62%) AND past 4/15/2027 | Trim remaining 50% → rotate to GOOGL | 15% LTCG |
+| MSFT $500+ BEFORE 4/15/2027 | **Wait.** Tax drag (38.8% ST vs 15% LT) = ~24% of gain | — |
+| MSFT flat for 18 months | Hold. Reassess only if thesis breaks | — |
+
+### GOOGL Structural Build (via AMZN RSU Proceeds)
+
+**Rationale:** Instead of lump-sum GOOGL in April (adds to AI concentration), accumulate GOOGL over 2026 using Amazon RSU vest proceeds at new 85% sell rate. Tax-neutral (RSUs taxed at vest regardless).
+
+| Vest Window | Gross | Sell 85% | GOOGL Deploy | Running GOOGL Build |
+|-------------|-------|----------|--------------|---------------------|
+| May 2026 | ~$20,790 | $17,672 | **$10,000** | $10k |
+| Aug 2026 | ~$20,790 | $17,672 | **$8,000** | $18k |
+| Nov 2026 | ~$20,575 | $17,489 | **$6,000** | $24k |
+| **Total 2026 GOOGL build** | | | **$24,000** | |
+
+**Year-end 2026 GOOGL position:** ~$43k (existing $19k + $24k build).
+**2027+:** MSFT trim proceeds (if triggers hit) layer on top. Target: $55–70k GOOGL by mid-2027.
 
 ---
 
@@ -106,7 +158,7 @@
 | Refi target | 4.0–4.5% 30-year fixed |
 | Current 30-yr fixed market rate | ~6.0–6.3% — refinancing now would INCREASE your rate |
 | Decision | **Do not pay down. Do not refi yet.** Revisit when 30-yr fixed hits ~5.0%. |
-| Rate alert to set | Get notified when 30-yr fixed reaches 5.0% → call mortgage broker |
+| Rate alert | Set notification at 5.0% → call mortgage broker |
 
 ---
 
@@ -115,39 +167,44 @@
 ### Monthly
 | Status | Action | Details |
 |--------|--------|---------|
-| 🔁 ONGOING | Sell 75% of each Amazon RSU vest | Immediately upon vesting. Deploy to underweight sectors per RSU Vest Deployment Plan below. Do NOT sell existing AMZN position. |
+| 🔁 ONGOING | **Sell 85% of each Amazon RSU vest** (updated from 75%) | Higher concentration reduction rate reflects 76% household AI/tech exposure. Do NOT sell existing AMZN core position. |
 | 🔁 ONGOING | Monitor RSU vesting (Jaclyn) | Post-IPO: sell 50–75% upon lockup expiration |
 | 🔁 ONGOING | Update account balances | Log to `data/balances-YYYY-MM.csv` |
 
-### Amazon RSU Vest Deployment Plan — 2026
+### Amazon RSU Vest Deployment Plan — 2026 (UPDATED 4/15)
 
-**Rule:** Sell 75%, keep 25% as ongoing AMZN exposure. Deploy proceeds to most underweight positions.
+**Rule:** Sell 85% of each vest (was 75%). Keep 15% for residual AMZN exposure. Deploy 100% of proceeds to **non-AI diversifiers + GOOGL structural build**.
 
-#### May Vests — Deploy ~$15,593
-| Date | Units | Est. Total | Deploy (75%) |
-|------|-------|-----------|--------------|
-| May 15 | 16 | ~$3,429 | ~$2,572 |
-| May 21 | 81 | ~$17,361 | ~$13,021 |
+**Standing rule:** No RSU proceeds go to MSFT, META, NVDA, AMZN, or any pure AI-infrastructure name. Proceeds are the non-AI rebalancing tool.
 
-Allocation: TSLA $8k (complete position) → RKLB $3k (complete position) → VHT $2.6k → GOOGL $2k
+#### May Vests — Deploy ~$17,672
 
-#### August Vests — Deploy ~$15,593
-| Date | Units | Est. Total | Deploy (75%) |
-|------|-------|-----------|--------------|
-| Aug 15 | 16 | ~$3,429 | ~$2,572 |
-| Aug 21 | 81 | ~$17,361 | ~$13,021 |
+| Date | Units | Est. Total (at $214) | Deploy (85%) |
+|------|-------|----------------------|--------------|
+| May 15 | 16 | ~$3,424 | ~$2,910 |
+| May 21 | 81 | ~$17,334 | ~$14,734 |
 
-Allocation: ANET up to $10k (**only if corrected to ~$120–125**) → GOOGL $5k → VFH $5k → most underweight ETF $3.6k
+**Allocation priority:**
+1. GOOGL $10,000 (structural build — start)
+2. VHT $3,000 (complete April position)
+3. LLY $2,500 (complete April position)
+4. Citi $2,000 (complete April position)
 
-#### November Vests — Deploy ~$15,432
-| Date | Units | Est. Total | Deploy (75%) |
-|------|-------|-----------|--------------|
-| Nov 15 | 16 | ~$3,429 | ~$2,572 |
-| Nov 21 | 80 | ~$17,146 | ~$12,860 |
+#### August Vests — Deploy ~$17,672
 
-Allocation: ANET up to $10k (if not yet deployed) → GOOGL $3k → most underweight (VHT / VFH / VWO) ~$2.4k
+**Allocation priority:**
+1. ANET $10,000 **ONLY if corrected to ~$120–125** — else GOOGL $8,000
+2. GOOGL $6,000 if ANET trigger hits (else $8,000)
+3. Non-AI underweight (healthcare/financials/defense) ~$3,500
 
-**2026 RSU total deploying: ~$46,618 across three tranches**
+#### November Vests — Deploy ~$17,489
+
+**Allocation priority:**
+1. ANET $10,000 (if not yet deployed)
+2. GOOGL $6,000
+3. Most underweight sector at YE review ~$1,500
+
+**2026 total RSU proceeds deploying: ~$52,833**
 
 ### Quarterly (Mar / Jun / Sep / Dec)
 | Status | Action | Details |
@@ -156,12 +213,13 @@ Allocation: ANET up to $10k (if not yet deployed) → GOOGL $3k → most underwe
 | 🔁 ONGOING | Check taxable portfolio sector weights | Run `check_allocations.py` |
 | 🔁 ONGOING | Trim if any single position >25% liquid | Target: trim to 20% |
 | 🔁 ONGOING | Databricks concentration check | Flag if >45% household or >70% Jaclyn's NW |
+| 🔁 ONGOING | Household AI/tech concentration check | Target: reduce 76% → <65% by YE 2026 |
 
 ### Annual (January)
 | Status | Action | Details |
 |--------|--------|---------|
 | 🔁 ONGOING | Comprehensive portfolio review | Update retirement projections |
-| 🔁 ONGOING | Assess mortgage refi opportunity | Target: 4.0–4.5% fixed (from 5.85% ARM). Don't refi above 5.0%. |
+| 🔁 ONGOING | Assess mortgage refi opportunity | Target: 4.0–4.5% fixed. Don't refi above 5.0%. |
 | 🔁 ONGOING | Tax-loss harvesting sweep | Check all positions for unrealized losses |
 | 🔁 ONGOING | Max 401(k) contributions | $23k each = $46k/yr household |
 | 🔁 ONGOING | Evaluate backdoor Roth / mega backdoor Roth | $7k/person Roth + up to $50k+ mega backdoor |
@@ -172,13 +230,17 @@ Allocation: ANET up to $10k (if not yet deployed) → GOOGL $3k → most underwe
 
 | Decision | Rationale |
 |----------|-----------|
-| ❌ Do NOT sell NVDA | 40% analyst upside. Tax friction too high (372% gain). AI capex intact. |
-| ❌ Do NOT sell existing AMZN position | 36% consensus upside, 0 sell ratings from 63 analysts. AWS growing 30%+. |
-| ❌ Do NOT buy XLE or broad energy ETFs | RSI 75.98 (all-time high). War premium temporary. Structural oil oversupply. |
-| ❌ Do NOT buy VRT (Vertiv) now | Only 8% analyst upside. BlackRock trimmed 11.2% in Q4. Watch for pullback. |
-| ❌ Do NOT buy BMNR (BitMine) | Wrong risk profile. Already have BTC/ETH. BlackRock move was passive rebalancing. |
-| ❌ Do NOT pay down mortgage | 3.80% effective after-tax rate. ARM locked to Oct 2032. Invest the capital instead. |
-| ❌ Do NOT refinance yet | Current 30-yr fixed (6.0–6.3%) is HIGHER than ARM (5.85%). Wait for rates to drop. |
+| ❌ Do NOT sell NVDA | 38% analyst upside. Tax friction too high. AI capex intact. |
+| ❌ Do NOT add to NVDA | Already 9% household at overweight. |
+| ❌ Do NOT sell existing AMZN position | 36% consensus upside, 0 sell ratings. AWS growing 30%+. |
+| ❌ Do NOT add META | Correlated with MSFT. Picking one hyperscaler only. |
+| ❌ Do NOT lump-sum GOOGL | Use RSU proceeds for structural build instead (tax-efficient, dampens AI concentration per deployment cycle). |
+| ❌ Do NOT add to AMZN from any source | RSU vests add enough; sell 85% of each. |
+| ❌ Do NOT deploy RSU proceeds to AI names | Proceeds are the non-AI rebalancing tool. |
+| ❌ Do NOT buy XLE or broad energy ETFs | Oil at war-premium highs. Structural oversupply thesis. |
+| ❌ Do NOT buy EWJ / VWO right now | Lower expected 12-mo return than selected names. 401(k) international allocation sufficient. |
+| ❌ Do NOT pay down mortgage | 3.80% effective after-tax rate. ARM locked to Oct 2032. |
+| ❌ Do NOT refinance yet | Current 30-yr fixed (6.0–6.3%) higher than ARM (5.85%). |
 
 ---
 
@@ -186,30 +248,32 @@ Allocation: ANET up to $10k (if not yet deployed) → GOOGL $3k → most underwe
 
 | Metric | Current | Target / Limit | Alert If |
 |--------|---------|----------------|----------|
-| Databricks % of household | 46% | Keep <40% post-tender | >45% |
-| Databricks % of Jaclyn's NW | 86% | Keep <60% post-tender | >70% |
+| Databricks % of household | ~38% post-tender | Keep <40% | >45% |
+| Databricks % of Jaclyn's NW | ~63% post-tender | Keep <60% | >70% |
+| Household AI/tech concentration | ~76% | Target <65% YE 2026 | >80% |
 | Any single liquid position | NVDA | Keep <25% | >25% |
-| Amazon % of household | ~13% | Keep <20% | >20% |
-| Healthcare allocation | 0% | Target 3–5% | <2% after deployment |
-| Financials allocation | 0% | Target 3–5% | <2% after deployment |
-| International (total) | ~5% | Target 8–10% | <5% |
-| HELOC balance | ~$4,000 | $0 immediately | >$0 |
-| Cash + HYSA liquidity | ~$40k | Keep >$40k | <$30k |
+| Amazon % of household | ~14% | Keep <20% | >20% |
+| Healthcare allocation | ~0.2% | Target 5–7% post-April deploy | <4% |
+| Financials allocation | 0% | Target 3–5% post-April deploy | <2% |
+| International (total) | ~5% (in 401k) | Target 8–10% | <5% |
+| HELOC balance | $0 | $0 | >$0 |
+| Cash + HYSA liquidity | ~$22k + $14k dry powder | Keep >$30k | <$20k |
 | 30-yr fixed mortgage rate | 6.0–6.3% | Alert at 5.0% to call broker | <5.0% |
 
 ---
 
-## 2026 Tax Snapshot
+## 2026 Tax Snapshot (Updated 4/15)
 
-| Event | Capital Gain | Tax Rate | Est. Tax |
-|-------|-------------|----------|----------|
-| Databricks tender | ~$133,000 | 15% federal LTCG | ~$19,950 |
-| Property sale | ~$50,000 | 15% federal LTCG | ~$7,500 |
-| Crypto loss offset | ~($1,900) | — | ~($285) |
-| **Net 2026 capital gains tax** | | | **~$27,165** |
-| **Set aside from tender proceeds** | | | **$20,000 in separate HYSA** |
+| Event | Capital Gain / Event | Tax Rate | Est. Tax |
+|-------|---------------------|----------|----------|
+| 2025 federal taxes (paid 4/15/26) | — | Prior year reconciliation | **$51,000 paid** |
+| Databricks tender ST portion | ~$9,880 | 38.8% (ST + NIIT) | ~$3,834 |
+| Databricks tender LT portion | ~$32,175 | 15% LTCG | ~$4,826 |
+| Property sale (recreational) | ~$50,000 | 15% LTCG | ~$7,500 |
+| Crypto + KSCP loss harvesting | ~($2,405) | Offset | ~($360) |
+| **Net 2026 capital gains tax (est.)** | | | **~$15,800** |
 
-*Washington state: 7% capital gains applies above $250k threshold — not triggered by these transactions.*
+*Washington state: 7% capital gains applies above $250k threshold — not triggered.*
 
 ---
 
@@ -219,8 +283,20 @@ Allocation: ANET up to $10k (if not yet deployed) → GOOGL $3k → most underwe
 |------|-----------|-----------------|
 | Feb 2026 | Baseline | $1,780,780 |
 | Mar 2026 | Post-tender + HELOC eliminated | ~$1,930,780 |
+| Apr 2026 | Post-tax + house expenses + Tranche 1 deploy | ~$1,840,000 |
+| Apr 29, 2026 | **MSFT Q3 earnings** (checkpoint) | — |
+| May 2026 | First AMZN vest under new 85% rule → GOOGL build starts | — |
 | Jun 2026 | SpaceX IPO — reassess TSLA/RKLB | — |
-| Aug 2026 | 6-month portfolio check | ~$2,050,000 |
+| Aug 2026 | 6-month portfolio check | ~$2,000,000 |
 | Feb 2027 | 1-year target | ~$2,100,000–$2,300,000 |
+| Apr 15, 2027 | MSFT long-term cap gains threshold — rotation window opens | — |
 | Oct 2032 | ARM adjustment date — must refi before this | — |
 | 2035–2036 | Retirement (age 47–48) | $6,000,000–$7,000,000 |
+
+---
+
+## Reference Documents
+
+- [April 2026 Deployment Brief](./reports/April_2026_Deployment_Brief.md) — Full conviction framework + scenario modeling
+- [Financial_Planning_Context_2026.md](./Financial_Planning_Context_2026.md) — Household baseline, asset inventory, 3-lab GOOGL thesis
+- [data/balances.csv](./data/balances.csv) — Live position tracking
