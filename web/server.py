@@ -430,23 +430,25 @@ def chat():
     context = "\n\n---\n\n".join(ctx_parts)
 
     client = _anthropic.Anthropic(api_key=api_key)
-    response = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=1024,
-        system=[{
-            "type": "text",
-            "text": (
-                f"You are a financial advisor assistant for Galen and Jaclyn Driver. "
-                f"Today is {date.today().isoformat()}. "
-                "Answer questions concisely and specifically using the financial plan context below. "
-                "When asked about investment decisions, cite the specific reasoning from the plan.\n\n"
-                + context
-            ),
-            "cache_control": {"type": "ephemeral"},
-        }],
-        messages=messages,
-        extra_headers={"anthropic-beta": "prompt-caching-2024-07-31"},
-    )
+    try:
+        response = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=1024,
+            system=[{
+                "type": "text",
+                "text": (
+                    f"You are a financial advisor assistant for Galen and Jaclyn Driver. "
+                    f"Today is {date.today().isoformat()}. "
+                    "Answer questions concisely and specifically using the financial plan context below. "
+                    "When asked about investment decisions, cite the specific reasoning from the plan.\n\n"
+                    + context
+                ),
+                "cache_control": {"type": "ephemeral"},
+            }],
+            messages=messages,
+        )
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
     return jsonify({"reply": response.content[0].text})
 
 
