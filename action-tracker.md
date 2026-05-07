@@ -185,11 +185,10 @@ Trigger-based deployment only:
 | May 21 | 81 | ~$22,275 | ~$18,934 |
 
 **Confirmed allocation (5/6):**
-1. GOOGL $10,000 (structural build — start)
+1. GOOGL ~$15,174 (structural build — $10k plan + ~$5,174 surplus from AMZN price increase)
 2. VHT $3,000 (complete April position)
 3. LLY $2,500 (complete April position)
 4. Citi $2,000 (complete April position)
-5. **Surplus ~$5,174 → VHT $3,000 + LLY $2,174** (both still underweight; do not add to GOOGL per lump-sum rule)
 
 **Timing:** Wait until after May 21 vest clears, then execute full allocation in one pass.
 
