@@ -264,72 +264,6 @@
     }
     #actions-loading { text-align: center; padding: 48px 16px; color: var(--text-muted); }
 
-    /* ── Chat page ── */
-    #page-chat {
-      display: flex; flex-direction: column;
-      padding-bottom: 0 !important;
-    }
-    #chat-messages {
-      flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
-      padding: 12px calc(var(--safe-r) + 16px) 12px calc(var(--safe-l) + 16px);
-      display: flex; flex-direction: column; gap: 10px;
-    }
-    .chat-bubble {
-      max-width: 88%; padding: 10px 14px; border-radius: 16px;
-      font-size: 14px; line-height: 1.5;
-    }
-    .chat-bubble.user {
-      background: var(--blue); color: #fff; align-self: flex-end;
-      border-bottom-right-radius: 4px;
-    }
-    .chat-bubble.assistant {
-      background: var(--bg-card); border: 1px solid var(--border);
-      color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px;
-    }
-    .chat-bubble.assistant p { margin: 0 0 8px; }
-    .chat-bubble.assistant p:last-child { margin-bottom: 0; }
-    .chat-bubble.assistant ul, .chat-bubble.assistant ol { padding-left: 18px; margin: 4px 0; }
-    .chat-bubble.assistant li { margin: 2px 0; }
-    .chat-bubble.assistant strong { color: var(--text); }
-    .chat-bubble.assistant code {
-      background: var(--bg-tab); border: 1px solid var(--border);
-      border-radius: 4px; padding: 1px 5px; font-size: 12px; font-family: monospace;
-    }
-    .chat-bubble.typing { color: var(--text-muted); font-style: italic; }
-    .chat-suggestions {
-      display: flex; flex-direction: column; gap: 6px;
-      padding: 0 calc(var(--safe-r) + 16px) 8px calc(var(--safe-l) + 16px);
-    }
-    .chat-suggestion {
-      background: var(--bg-tab); border: 1px solid var(--border);
-      border-radius: 10px; padding: 9px 13px; font-size: 13px;
-      color: var(--text-sub); cursor: pointer; text-align: left;
-    }
-    .chat-suggestion:active { border-color: var(--blue); color: var(--text); }
-    #chat-input-area {
-      background: var(--bg); border-top: 1px solid var(--border);
-      padding: 10px calc(var(--safe-r) + 16px) calc(var(--nav-h) + var(--safe-bot) + 10px) calc(var(--safe-l) + 16px);
-      display: flex; gap: 8px; align-items: flex-end;
-    }
-    #chat-input {
-      flex: 1; background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 12px; padding: 10px 14px; color: var(--text);
-      font-size: 14px; font-family: inherit; resize: none; line-height: 1.4;
-      max-height: 120px; overflow-y: auto;
-    }
-    #chat-input:focus { outline: none; border-color: var(--blue); }
-    #chat-input::placeholder { color: var(--text-muted); }
-    #chat-send {
-      background: var(--blue); border: none; border-radius: 10px;
-      padding: 10px 14px; color: #fff; font-size: 15px; cursor: pointer;
-      flex-shrink: 0; line-height: 1;
-    }
-    #chat-send:disabled { background: var(--bg-tab); color: var(--text-muted); cursor: default; }
-    #chat-clear {
-      background: none; border: 1px solid var(--border); border-radius: 10px;
-      padding: 10px 12px; color: var(--text-muted); font-size: 12px;
-      cursor: pointer; flex-shrink: 0; white-space: nowrap;
-    }
   </style>
 </head>
 <body>
@@ -424,26 +358,6 @@
   </div>
 </div>
 
-<!-- Chat Page -->
-<div id="page-chat" class="page hidden">
-  <div id="chat-messages">
-    <div class="chat-bubble assistant">
-      Ask me anything about your financial plan — why we chose specific stocks, upcoming action items, tax implications, RSU strategy, or anything else in the plan.
-    </div>
-  </div>
-  <div class="chat-suggestions" id="chat-suggestions">
-    <button class="chat-suggestion">Why did we choose MSFT for Tranche 1?</button>
-    <button class="chat-suggestion">What's the Tranche 2 deployment plan?</button>
-    <button class="chat-suggestion">When is the next AMZN RSU vest and what's the plan?</button>
-    <button class="chat-suggestion">What are the ANET and dry powder triggers?</button>
-  </div>
-  <div id="chat-input-area">
-    <button id="chat-clear">Clear</button>
-    <textarea id="chat-input" rows="1" placeholder="Ask about your financial plan…"></textarea>
-    <button id="chat-send">↑</button>
-  </div>
-</div>
-
 <!-- Bottom Nav -->
 <nav id="nav-bar">
   <button class="nav-btn active" data-page="portfolio">
@@ -453,10 +367,6 @@
   <button class="nav-btn" data-page="actions">
     <span class="nav-icon">✅</span>
     <span>Actions</span>
-  </button>
-  <button class="nav-btn" data-page="chat">
-    <span class="nav-icon">💬</span>
-    <span>Chat</span>
   </button>
 </nav>
 
@@ -477,7 +387,6 @@
   let refreshTimer    = null;
   let activePage      = 'portfolio';
   let actionsLoaded   = false;
-  let chatHistory     = [];   // [{role, content}]
 
   // ── Formatters ───────────────────────────────────────────────
   function fmt(n) {
@@ -837,59 +746,6 @@
     }
   }
 
-  // ── Chat page ─────────────────────────────────────────────────
-  function appendBubble(role, html, isHtml = false) {
-    const msgs = document.getElementById('chat-messages');
-    const el   = document.createElement('div');
-    el.className = 'chat-bubble ' + role;
-    if (isHtml) el.innerHTML = html;
-    else        el.textContent = html;
-    msgs.appendChild(el);
-    msgs.scrollTop = msgs.scrollHeight;
-    return el;
-  }
-
-  async function sendChat(text) {
-    if (!text.trim()) return;
-
-    // Hide suggestions after first send
-    document.getElementById('chat-suggestions').style.display = 'none';
-
-    chatHistory.push({ role: 'user', content: text });
-    appendBubble('user', text);
-
-    const input  = document.getElementById('chat-input');
-    const sendBtn = document.getElementById('chat-send');
-    input.value  = '';
-    input.style.height = '';
-    sendBtn.disabled = true;
-
-    const typingEl = appendBubble('assistant', 'Thinking…', false);
-    typingEl.classList.add('typing');
-
-    try {
-      const res  = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: chatHistory }),
-      });
-      const data = await res.json();
-      if (!res.ok || data.error) throw new Error(data.error || `HTTP ${res.status}`);
-
-      typingEl.classList.remove('typing');
-      typingEl.innerHTML = marked.parse(data.reply);
-      chatHistory.push({ role: 'assistant', content: data.reply });
-    } catch (err) {
-      typingEl.classList.remove('typing');
-      typingEl.textContent = 'Error: ' + err.message;
-      typingEl.style.color = 'var(--red)';
-      chatHistory.pop(); // remove failed user message so it can be retried
-    } finally {
-      sendBtn.disabled = false;
-      document.getElementById('chat-messages').scrollTop = 9999;
-    }
-  }
-
   // ── Auto-refresh ──────────────────────────────────────────────
   function scheduleRefresh() {
     clearTimeout(refreshTimer);
@@ -909,8 +765,7 @@
     document.getElementById('refresh-btn').style.display = isPortfolio ? '' : 'none';
     document.getElementById('updated-label').style.display = isPortfolio ? '' : 'none';
     document.getElementById('page-title').style.display = isPortfolio ? 'none' : '';
-    document.getElementById('page-title').textContent =
-      name === 'actions' ? 'Action Items' : 'Ask Your Plan';
+    document.getElementById('page-title').textContent = 'Action Items';
 
     if (name === 'actions') loadActions();
   }
@@ -945,34 +800,6 @@
   document.getElementById('nav-bar').addEventListener('click', e => {
     const btn = e.target.closest('.nav-btn');
     if (btn) switchPage(btn.dataset.page);
-  });
-
-  document.getElementById('chat-send').addEventListener('click', () => {
-    sendChat(document.getElementById('chat-input').value);
-  });
-
-  document.getElementById('chat-input').addEventListener('keydown', e => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      sendChat(e.target.value);
-    }
-  });
-
-  document.getElementById('chat-input').addEventListener('input', function() {
-    this.style.height = 'auto';
-    this.style.height = Math.min(this.scrollHeight, 120) + 'px';
-  });
-
-  document.getElementById('chat-clear').addEventListener('click', () => {
-    chatHistory = [];
-    const msgs = document.getElementById('chat-messages');
-    msgs.innerHTML = `<div class="chat-bubble assistant">Ask me anything about your financial plan — why we chose specific stocks, upcoming action items, tax implications, RSU strategy, or anything else in the plan.</div>`;
-    document.getElementById('chat-suggestions').style.display = '';
-  });
-
-  document.getElementById('chat-suggestions').addEventListener('click', e => {
-    const btn = e.target.closest('.chat-suggestion');
-    if (btn) sendChat(btn.textContent);
   });
 
   // ── Boot ──────────────────────────────────────────────────────

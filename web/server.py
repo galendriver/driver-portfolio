@@ -402,56 +402,6 @@ def actions():
     return jsonify({"markdown": content})
 
 
-@app.route("/api/chat", methods=["POST"])
-def chat():
-    try:
-        import anthropic as _anthropic
-    except ImportError:
-        return jsonify({"error": "anthropic package not installed"}), 500
-
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
-    if not api_key:
-        return jsonify({"error": "ANTHROPIC_API_KEY not configured on server"}), 500
-
-    data = request.get_json(silent=True) or {}
-    messages = data.get("messages", [])
-    if not messages:
-        return jsonify({"error": "No messages provided"}), 400
-
-    ctx_parts = []
-    for fname in [
-        "Financial_Planning_Context_2026.md",
-        "action-tracker.md",
-        "reports/April_2026_Deployment_Brief.md",
-    ]:
-        fpath = _CONTEXT_DIR / fname
-        if fpath.exists():
-            ctx_parts.append(f"### {Path(fname).name}\n\n{fpath.read_text()}")
-    context = "\n\n---\n\n".join(ctx_parts)
-
-    client = _anthropic.Anthropic(api_key=api_key)
-    try:
-        response = client.messages.create(
-            model="claude-sonnet-4-6",
-            max_tokens=1024,
-            system=[{
-                "type": "text",
-                "text": (
-                    f"You are a financial advisor assistant for Galen and Jaclyn Driver. "
-                    f"Today is {date.today().isoformat()}. "
-                    "Answer questions concisely and specifically using the financial plan context below. "
-                    "When asked about investment decisions, cite the specific reasoning from the plan.\n\n"
-                    + context
-                ),
-                "cache_control": {"type": "ephemeral"},
-            }],
-            messages=messages,
-        )
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-    return jsonify({"reply": response.content[0].text})
-
-
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5001))
     app.run(host="0.0.0.0", port=port, debug=True)
