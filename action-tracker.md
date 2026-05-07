@@ -177,18 +177,21 @@ Trigger-based deployment only:
 
 **Standing rule:** No RSU proceeds go to MSFT, META, NVDA, AMZN, or any pure AI-infrastructure name. Proceeds are the non-AI rebalancing tool.
 
-#### May Vests — Deploy ~$17,672
+#### May Vests — Deploy ~$22,674 (UPDATED 5/6 — AMZN at $275)
 
-| Date | Units | Est. Total (at $214) | Deploy (85%) |
+| Date | Units | Est. Total (at $275) | Deploy (85%) |
 |------|-------|----------------------|--------------|
-| May 15 | 16 | ~$3,424 | ~$2,910 |
-| May 21 | 81 | ~$17,334 | ~$14,734 |
+| May 15 | 16 | ~$4,400 | ~$3,740 |
+| May 21 | 81 | ~$22,275 | ~$18,934 |
 
-**Allocation priority:**
+**Confirmed allocation (5/6):**
 1. GOOGL $10,000 (structural build — start)
 2. VHT $3,000 (complete April position)
 3. LLY $2,500 (complete April position)
 4. Citi $2,000 (complete April position)
+5. **Surplus ~$5,174 → VHT $3,000 + LLY $2,174** (both still underweight; do not add to GOOGL per lump-sum rule)
+
+**Timing:** Wait until after May 21 vest clears, then execute full allocation in one pass.
 
 #### August Vests — Deploy ~$17,672
 
@@ -209,7 +212,7 @@ Trigger-based deployment only:
 ### Quarterly (Mar / Jun / Sep / Dec)
 | Status | Action | Details |
 |--------|--------|---------|
-| 🔁 ONGOING | Review 401(k) allocations for drift | Rebalance if >10% off target |
+| 🔁 ONGOING | Review 401(k) allocations for drift | Rebalance if >10% off target. **Next check: June 2026.** Accounts to check manually (no auto-rebalance): (1) **Galen — Amazon/Fidelity (~$140k):** targets 60% VG 2045 / 30% Inst 500 Index / 10% Small-Mid Cap. (2) **Jaclyn — Databricks/Fidelity (~$84k):** targets 30% Intl / 15% EM / 25% TRP All-Cap / 15% Mid-Cap / 10% Value / 5% Bonds. Jaclyn's Fidelity TRP 2055 (~$86k) auto-rebalances — no action needed. |
 | 🔁 ONGOING | Check taxable portfolio sector weights | Run `check_allocations.py` |
 | 🔁 ONGOING | Trim if any single position >25% liquid | Target: trim to 20% |
 | 🔁 ONGOING | Databricks concentration check | Flag if >45% household or >70% Jaclyn's NW |
