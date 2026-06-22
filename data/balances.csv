@@ -29,13 +29,15 @@ jaclyn_databricks_equity,jaclyn,DBRX_UNVESTED,Databricks unvested equity (pre-IP
 jaclyn_401k_fidelity,jaclyn,JACLYN_401K_FID,Jaclyn 401k Fidelity (TRP 2055),,,,86458,diversified,retirement,Manual: update quarterly from Fidelity,
 jaclyn_401k_databricks,jaclyn,JACLYN_401K_DBRX,Jaclyn 401k Databricks (tactical),,,,84204,diversified,retirement,Manual: update quarterly from NetBenefits,
 galen_brokerage,galen,MSFT,Microsoft (Tranche 1 buy 4/16/26),29,MSFT,,,tech,us_equity,Tranche 1 deploy — MEDIUM conviction asymmetric drawdown play pre-4/29 earnings; hold to 4/15/27 for LTCG,419.97
-galen_brokerage,galen,LLY,Eli Lilly (Tranche 1 buy 4/16/26),11,LLY,,,healthcare,us_equity,Tranche 1 deploy — HIGH conviction; FDA oral GLP-1 Foundayo; $1209 analyst target,905.90
-galen_brokerage,galen,VHT,Vanguard Health Care ETF (Tranche 1 add 4/16/26),36,VHT,,,healthcare,us_equity,Tranche 1 deploy — adds to existing position; closes healthcare gap,275.61
-galen_brokerage,galen,C,Citigroup (Tranche 1 buy 4/16/26),60,C,,,financials,us_equity,Tranche 1 deploy — HIGH conviction; lowest-val large bank; restructuring catalyst,131.50
-galen_brokerage,galen,TSLA,Tesla (Tranche 1 buy 4/16/26 — new lot),16,TSLA,,,consumer,us_equity,Tranche 1 deploy — MEDIUM conviction; SpaceX IPO June 2026 halo; DO NOT confuse with Jaclyn existing 4sh lot,394.06
-galen_brokerage,galen,RTX,RTX Corp (Tranche 1 buy 4/16/26),25,RTX,,,industrials,us_equity,Tranche 1 deploy — MEDIUM conviction; $268B backlog; Iran war premium,198.41
+galen_brokerage,galen,LLY,Eli Lilly (Tranche 1 buy 4/16/26),16,LLY,,,healthcare,us_equity,Tranche 1 deploy — HIGH conviction; FDA oral GLP-1 Foundayo; $1209 analyst target,927.50
+galen_brokerage,galen,VHT,Vanguard Health Care ETF (Tranche 1 add 4/16/26),44.22,VHT,,,healthcare,us_equity,Tranche 1 deploy — adds to existing position; closes healthcare gap,272.00
+galen_brokerage,galen,C,Citigroup (Tranche 1 buy 4/16/26),91,C,,,financials,us_equity,Tranche 1 deploy — HIGH conviction; lowest-val large bank; restructuring catalyst,129.30
+galen_brokerage,galen,TSLA,Tesla (Tranche 1 buy 4/16/26 — new lot),25,TSLA,,,consumer,us_equity,Tranche 1 deploy — MEDIUM conviction; SpaceX IPO June 2026 halo; DO NOT confuse with Jaclyn existing 4sh lot,411.22
+galen_brokerage,galen,RTX,RTX Corp (Tranche 1 buy 4/16/26),41,RTX,,,industrials,us_equity,Tranche 1 deploy — MEDIUM conviction; $268B backlog; Iran war premium,190.61
 galen_brokerage,galen,UNH,UnitedHealth Group (Tranche 1 buy 4/16/26),16,UNH,,,healthcare,us_equity,Tranche 1 deploy — MEDIUM conviction contrarian; -45% YTD; sized small due to fraud investigation risk,315.05
-galen_brokerage,galen,RKLB,Rocket Lab (Tranche 1 buy 4/16/26),55,RKLB,,,tech,us_equity,Tranche 1 deploy — HIGH speculative; SpaceX IPO halo play,76.92
+galen_brokerage,galen,RKLB,Rocket Lab (Tranche 1 buy 4/16/26),72,RKLB,,,tech,us_equity,Tranche 1 deploy — HIGH speculative; SpaceX IPO halo play,85.37
+galen_brokerage,galen,LUNR,Intuitive Machines,30,LUNR,,,tech,us_equity,June 2026 purchase,36.42
+galen_brokerage,galen,NOK,Nokia,122,NOK,,,tech,us_equity,June 2026 purchase,16.55
 galen_rsu_unvested,galen,AMZN_VEST_MAY15,Amazon RSU Vest May 15,16,AMZN,,,tech,unvested_rsu,FY2026 | 2024+2025 grants | Sell 85% at vest,
 galen_rsu_unvested,galen,AMZN_VEST_MAY21,Amazon RSU Vest May 21,81,AMZN,,,tech,unvested_rsu,FY2026 | 2024+2025 grants | Sell 85% at vest,
 galen_rsu_unvested,galen,AMZN_VEST_AUG15,Amazon RSU Vest Aug 15,16,AMZN,,,tech,unvested_rsu,FY2026 | 2024+2025 grants | Sell 85% at vest,
