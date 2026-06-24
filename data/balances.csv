@@ -14,7 +14,7 @@ jaclyn_brokerage,jaclyn,RGTI,Rigetti Computing,2,RGTI,,,tech,us_equity,,22.57
 jaclyn_brokerage,jaclyn,APLD,Applied Digital,1,APLD,,,tech,us_equity,,26.31
 jaclyn_brokerage,jaclyn,NNDM,Nano Dimension,200,NNDM,,,tech,us_equity,,1.54
 galen_401k,galen,GALEN_401K,Amazon 401k Fidelity (TDF + index mix),,,,140661,diversified,retirement,Manual: update quarterly from Fidelity,
-galen_brokerage,galen,AMZN,Amazon - Fidelity,251.619,AMZN,,,tech,us_equity,,228.43
+galen_brokerage,galen,AMZN,Amazon - Fidelity,319.074,AMZN,,,tech,us_equity,Includes May 2026 vest (11.126 + 56.329 net shares after tax withholding) — previously missing from this line since April,228.43
 galen_brokerage,galen,AMZN,Amazon - Key,1347,AMZN,,,tech,us_equity,,228.43
 galen_brokerage,galen,VHT,Vanguard Health Care ETF,10.78,VHT,,,healthcare,us_equity,Purchased Feb 2026 with AMZN RSU proceeds,278.43
 galen_brokerage,galen,GOOGL,Alphabet Class A (RSU acct),5.357,GOOGL,,,tech,us_equity,Purchased Feb 2026 with AMZN RSU proceeds,303.89
@@ -38,8 +38,6 @@ galen_brokerage,galen,UNH,UnitedHealth Group (Tranche 1 buy 4/16/26),16,UNH,,,he
 galen_brokerage,galen,RKLB,Rocket Lab (Tranche 1 buy 4/16/26),72,RKLB,,,tech,us_equity,Tranche 1 deploy — HIGH speculative; SpaceX IPO halo play,85.37
 galen_brokerage,galen,LUNR,Intuitive Machines,30,LUNR,,,tech,us_equity,No thesis ever documented; 6/21/26 reassessment flagged for cutting (no catalyst; -29%); missing from Google Sheet,36.42
 galen_brokerage,galen,NOK,Nokia,122,NOK,,,tech,us_equity,No thesis ever documented; 6/21/26 reassessment flagged for cutting (not in original plan); missing from Google Sheet,16.55
-galen_rsu_unvested,galen,AMZN_VEST_MAY15,Amazon RSU Vest May 15,16,AMZN,,,tech,unvested_rsu,FY2026 | 2024+2025 grants | Sell 75% at vest,
-galen_rsu_unvested,galen,AMZN_VEST_MAY21,Amazon RSU Vest May 21,81,AMZN,,,tech,unvested_rsu,FY2026 | 2024+2025 grants | Sell 75% at vest,
 galen_rsu_unvested,galen,AMZN_VEST_AUG15,Amazon RSU Vest Aug 15,16,AMZN,,,tech,unvested_rsu,FY2026 | 2024+2025 grants | Sell 75% at vest,
 galen_rsu_unvested,galen,AMZN_VEST_AUG21,Amazon RSU Vest Aug 21,81,AMZN,,,tech,unvested_rsu,FY2026 | 2024+2025 grants | Sell 75% at vest,
 galen_rsu_unvested,galen,AMZN_VEST_NOV15,Amazon RSU Vest Nov 15,16,AMZN,,,tech,unvested_rsu,FY2026 | 2024+2025 grants | Sell 75% at vest,
@@ -54,5 +52,7 @@ galen_rsu_unvested,galen,AMZN_VEST_NOV27_15,Amazon RSU Vest Nov 15 2027,29,AMZN,
 galen_rsu_unvested,galen,AMZN_VEST_NOV27_21,Amazon RSU Vest Nov 21 2027,54,AMZN,,,tech,unvested_rsu,FY2027 | 2026 grant (215 units / 4 vests = 54) | Sell 75%,
 galen_rsu_unvested,galen,AMZN_VEST_FEB28_15,Amazon RSU Vest Feb 15 2028,29,AMZN,,,tech,unvested_rsu,FY2027 | 2025 grant (RS3740394) 29 units | Sell 75%,
 galen_rsu_unvested,galen,AMZN_VEST_FEB28_21,Amazon RSU Vest Feb 21 2028,53,AMZN,,,tech,unvested_rsu,FY2027 | 2026 grant (215 units / 4 vests; last tranche = 53) | Sell 75%,
-galen_rsu_unvested,galen,AMZN_VEST_MAY28_15,Amazon RSU Vest May 15 2028,29,AMZN,,,tech,unvested_rsu,FY2028 | 2025 grant tail | Sell 75%,
-galen_rsu_unvested,galen,AMZN_VEST_MAY28_21,Amazon RSU Vest May 21 2028,36,AMZN,,,tech,unvested_rsu,FY2028 | 2026 grant tail (65 total Apr28-Mar29 across 15th+21st) | Sell 75%,
+galen_rsu_unvested,galen,AMZN_VEST_MAY28_21,Amazon RSU Vest May 21 2028,17,AMZN,,,tech,unvested_rsu,Per 6/23/26 vest schedule screenshot (RS3909470) | Sell 75%,
+galen_rsu_unvested,galen,AMZN_VEST_AUG28_21,Amazon RSU Vest Aug 21 2028,16,AMZN,,,tech,unvested_rsu,Per 6/23/26 vest schedule screenshot (RS3909470) | Sell 75%,
+galen_rsu_unvested,galen,AMZN_VEST_NOV28_21,Amazon RSU Vest Nov 21 2028,16,AMZN,,,tech,unvested_rsu,Per 6/23/26 vest schedule screenshot (RS3909470) | Sell 75%,
+galen_rsu_unvested,galen,AMZN_VEST_FEB29_21,Amazon RSU Vest Feb 21 2029,16,AMZN,,,tech,unvested_rsu,Per 6/23/26 vest schedule screenshot (RS3909470) | Sell 75%,
