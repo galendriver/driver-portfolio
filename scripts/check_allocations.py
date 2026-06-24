@@ -191,7 +191,7 @@ def print_net_worth(views, by_owner):
     # Real estate equity (not in CSV — hardcoded from context)
     re_equity = 470_000 + 750_000  # primary + rental
     total_with_re = total + re_equity
-    liabilities = 1_330_000 + 300_000 + 150_000  # primary + rental mortgage + HELOC
+    liabilities = 1_330_000 + 300_000  # primary + rental mortgage (recreational property sold, HELOC paid off 2026)
     net_worth = total_with_re - liabilities
 
     print(f"  Financial portfolio (incl. private equity): {fmt_usd(total)}")
@@ -329,7 +329,6 @@ def print_action_summary(views, by_ticker):
 
     harvest_count = sum(1 for r in [] if "HARVEST" in r.get("notes", "").upper())
     print(f"  🔴 Crypto + KSCP tax-loss harvesting: execute before tender settles")
-    print(f"  🟡 Property sale close: ~2–3 weeks → pay off HELOC immediately")
     print(f"  🟡 Post-tender deploy: $135k to healthcare/financials/industrials/international")
     print()
 
