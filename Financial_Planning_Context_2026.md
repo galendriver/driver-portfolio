@@ -1,5 +1,5 @@
 # Financial Planning Context - Galen & Jaclyn
-**Last Updated:** March 12, 2026
+**Last Updated:** March 15, 2026
 **Next Review:** April 2026 (post-tender settlement, Tranche 2 deployment, refi rate monitoring)
 
 ---
@@ -39,9 +39,9 @@
 ## Household Income Breakdown
 
 ### **Galen (Husband) - Amazon Employee**
-- Base salary: $155,000/year
-- Amazon RSU vests: ~$40-50k/year (estimated)
-- **Total annual compensation: ~$200,000**
+- Base salary: $171,100/year (effective Apr 1, 2026 — updated from $155,000)
+- Amazon RSU vests: ~$82,245/year FY2026 | ~$81,105/year FY2027 | ~$18,316 FY2028 (Option 1 chosen — all RSUs)
+- **Total annual compensation: ~$253,345 (FY2026)**
 
 ### **Jaclyn (Wife) - Databricks Employee**
 - Base salary: $210,000/year
@@ -122,12 +122,16 @@
 
 ### **Jaclyn's Portfolio ($1,171,780)**
 
-**Databricks Pre-IPO Equity ($1,002,000):**
-- Vested: $593,000 (3,119 units @ ~$190/unit)
+**Databricks Pre-IPO Equity ($1,002,000 pre-tender):**
+- Vested: $658,010 (3,463 units @ $190/unit — 3,119 from prior vests + 228 vested 3/15/26 [131+47+50])
 - Unvested: $410,000 (2,156 units, continues vesting)
-- Cost basis (estimated): ~$100,000
-- **Tender offer decision: Sell $200,000 (33.7% of vested)**
-- **Post-tender position: $393k vested + $410k unvested = $803k total**
+- **Weighted avg cost basis: ~$109.83/unit** (NOT ~$32 as previously estimated)
+  - Jan/Mar/Jun 2025 vests: 1,752 units @ $92.50
+  - Sep 2025 vests: 247 units @ $150.00
+  - Dec 2025 vests: 248 units @ $190.00
+  - Mar 15, 2026 vest: 228 units @ $190.00 (131+47+50, vested 3/15/26)
+- **Tender offer decision: Sell ~1,053 units = $200,000**
+- **Post-tender position: ~2,416 units × $190 = ~$459k vested + $410k unvested = $869k total**
 
 **401(k) - Fidelity ($85,732):**
 - Fund: T. Rowe Price Target Retirement 2055 F
@@ -276,21 +280,33 @@
 - **Just right ($200k):** Provides $190k net proceeds to diversify while maintaining substantial upside
 - **Too much ($300k+):** Wife may have emotional resistance; still gets diversification from other actions
 
-**Tax implications:**
-- Sale amount: $200,000
-- Estimated cost basis: ~$67,000
-- Capital gain: ~$133,000
-- Federal long-term capital gains tax (15%): ~$19,950
-- Less crypto loss harvesting offset (~$1,900): -$285
-- **Net tax: ~$19,665**
-- **Net proceeds: ~$180,335**
+**Optimal sell priority (minimize tax per share):**
+
+| Priority | Vest Date | Units | Basis | Gain/Unit | Tax Rate | Tax/Share |
+|----------|-----------|-------|-------|-----------|----------|-----------|
+| 1st | Mar 15, 2026 | 350 | $190 | $0 | n/a | $0 |
+| 2nd | Dec 15, 2025 | 248 | $190 | $0 | n/a | $0 |
+| 3rd | Sep 15, 2025 | 247 | $150 | $40 ST | 38.8%* | $15.52 |
+| 4th | Jan 16, 2025 | use as needed | $92.50 | $97.50 LT | 18.8% | $18.33 |
+| Last | Jun 15, 2025 | avoid | $92.50 | $97.50 ST | 38.8%* | $36.08 |
+
+*ST gains taxed at 35% ordinary income + 3.8% NIIT (MAGI ~$750k far exceeds $250k MFJ threshold)
+
+**To sell $200k — exact lot selection:**
+- Step 1: Mar 2026 (228 units: 131+47+50) = $43,320, tax = $0
+- Step 2: Dec 2025 (248 units: 52+54+142) = $47,120, tax = $0
+- Step 3: Sep 2025 (247 units: 141+52+54) = $46,930, gain = $9,880 ST, tax = ~$3,834
+- Step 4: Jan 2025 (330 units only, out of 1,358 available) = $62,700, gain = $32,175 LT, tax = ~$6,046
+- **Total: 1,053 units = ~$200,070**
+- **Total tax: ~$9,880**
+- **Net proceeds: ~$190,120**
 
 **Post-sale position:**
-- Vested retained: $393,000 (66.3% of current vested)
+- Vested retained: ~2,416 units × $190 = ~$459,040
 - Unvested continuing: $410,000 (100% still building)
-- **Total Databricks exposure: $803,000**
-- **Concentration: 86% → 60% of Jaclyn's net worth**
-- **Concentration: 46% → 37% of household portfolio**
+- **Total Databricks exposure: ~$869,000**
+- **Concentration: 86% → ~63% of Jaclyn's net worth**
+- **Concentration: 46% → ~38% of household portfolio**
 
 **Maintains upside while reducing risk:**
 - If Databricks 2x: Still make $806k profit
@@ -325,8 +341,8 @@
 
 **Actual sources (revised from original plan):**
 - Databricks tender gross: $200,000
-- Less: 2026 tax reserve (separate HYSA, do not invest): -$20,000
-- **Investable from tender: $180,000**
+- Less: 2026 tax reserve (separate HYSA, do not invest): -$10,000 (revised down from $20k — actual tax ~$9,880)
+- **Investable from tender: $190,000** (revised up from $180k — prior basis estimate was wrong)
 - Property sale: $146,000 → applied to HELOC (not investable)
 - Existing cash: $40,000 → kept as emergency fund (do not touch)
 
@@ -812,10 +828,10 @@ Sell these positions to realize losses:
 - Washington: 7% capital gains tax on gains >$250k (doesn't apply to 2026 sales)
 
 **2026 specific events:**
-- Databricks tender: $133,000 capital gain → $19,950 federal tax (minus $285 crypto offset)
+- Databricks tender: ~$42,055 capital gain ($9,880 ST + $32,175 LT) → ~$9,880 federal tax
 - Property sale: ~$50,000 capital gain → $7,500 federal tax
-- Crypto loss harvesting: ~$1,900 losses → offsets $285 in other gains
-- **Total capital gains tax 2026: ~$27,165**
+- Crypto loss harvesting: ~$1,900 losses → offsets some gains
+- **Total capital gains tax 2026: ~$17,380** (down from prior ~$27k estimate — prior basis estimate of ~$32/unit was wrong; actual weighted basis is ~$110/unit)
 
 **Deductions to maximize:**
 - Mortgage interest (primary): $77,805 (SALT cap limits to $10k)
