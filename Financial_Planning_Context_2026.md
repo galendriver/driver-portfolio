@@ -1102,7 +1102,13 @@ Sell these positions to realize losses:
 - Captures current state, recommendations, and implementation plan
 - Ready for Claude Code project handover
 
-**Next update scheduled:** March 2026 (post-property sale and tender settlement)
+**Version 1.2 - June 23, 2026**
+- **RSU sell rate confirmed at 75%** (not 85% as proposed in the April 14, 2026 deployment brief) — Galen is bullish on AMZN long-term; 85% bump was never adopted
+- **GOOGL "highest conviction" thesis reaffirmed** post-Q1 2026 earnings: cloud revenue +63% YoY (>$20B), backlog ~doubled QoQ to $460B+, Gemini 3 driving enterprise demand (+40% QoQ paid MAU), search queries at all-time high despite AI-disruption fears. Risks to monitor: DOJ antitrust appeal (filed Feb 2026), 2026 capex raised to $180–190B. Standing $22,000 GOOGL position target unchanged; April 14 brief's "exclude GOOGL from RSU proceeds" rule is superseded.
+- Recreational property sold ~$150K (spring 2026); ~$146K net proceeds paid off the $150K HELOC in full — HELOC target of $0 now met
+- `check_allocations.py` liabilities corrected to drop the paid-off HELOC (was overstating liabilities by $150k)
+
+**Next update scheduled:** When Databricks tender settlement and Tranche 2/3 deployment status are confirmed current (last documented update was March 15, 2026 tender tax-lot plan)
 
 ---
 
