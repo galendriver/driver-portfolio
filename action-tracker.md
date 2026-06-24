@@ -1,7 +1,20 @@
 # Financial Planning Action Tracker
 **Household:** Galen & Jaclyn
-**Last Updated:** 2026-04-16
-**Next Review:** May 2026 (post-MSFT earnings 4/29, May RSU vests)
+**Last Updated:** 2026-06-23
+**Next Review:** See [June 2026 Portfolio Reassessment](./reports/June_2026_Portfolio_Reassessment.md) for the most recent full pass
+
+---
+
+## STATUS AS OF 2026-06-23 — Reconciliation
+
+- **RSU sell rate is 75%, not 85%.** The 85% bump below (and throughout this file) was decided 4/15 but reconfirmed back to 75% on 6/23 — Galen is bullish on AMZN long-term. All "Sell 85%" references in this file and `balances.csv` are stale; treat 75% as current.
+- **May RSU → GOOGL ($15,174 @ 85%, see "GOOGL Structural Build" below) was never executed.** Confirmed via brokerage screenshot 6/23 — both May lots (56.329 + 11.126 sh) still fully unsold. Superseded: 6/23 plan sells 75% (~$11,844) split AVUV $7,000 / VWO $4,844, not a GOOGL lump sum. GOOGL gets $5,000 from the separate ANET dry-powder pool instead.
+- **ANET trigger is dead** — ANET at $169 (6/21), never corrected to the $120–125 entry. The $10k earmarked for it was redirected to GOOGL per 6/23 decision, not SPCX.
+- **Tranche 2 ($26,000 top-off, table below) was never executed.** Share counts in the live brokerage account match Tranche 1 exactly, no top-off occurred. Status: unresolved, not folded into any current plan.
+- **LUNR (30sh) and NOK (122sh)**: real positions, were in `balances.csv` (overlooked in two earlier searches this session) but never made it into the live Google Sheet. No thesis was ever documented for either. The 6/21 reassessment recommended cutting both — not yet acted on.
+- Full detail: [reports/June_2026_Portfolio_Reassessment.md](./reports/June_2026_Portfolio_Reassessment.md)
+
+---
 
 ---
 
