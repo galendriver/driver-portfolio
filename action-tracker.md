@@ -1,7 +1,35 @@
 # Financial Planning Action Tracker
 **Household:** Galen & Jaclyn
-**Last Updated:** 2026-06-23
-**Next Review:** See [June 2026 Portfolio Reassessment](./reports/June_2026_Portfolio_Reassessment.md) for the most recent full pass
+**Last Updated:** 2026-09-05
+**Next Review:** See [September 2026 Portfolio Reassessment](./reports/September_2026_Portfolio_Reassessment.md) — full account reconciliation + two-horizon strategy
+
+---
+
+## STATUS AS OF 2026-09-05 — Full Account Reconciliation
+
+**Net worth: $2,165,905** (excl. $152,004 gross unvested AMZN RSUs). Liquid: $1,469,335.
+Every account was pulled from source tonight. `balances.csv` is now the reconciled truth.
+
+**Previously untracked assets found — ~$385k:**
+- Nordstrom 401(k) (Fidelity 7883P) — **$53,698**, prior-employer plan, allocation never reviewed
+- BECU — **$45,499** across 3 accounts (MMA $36,493 + two checking)
+- AMZN in Fidelity TOD — 335.938 sh, **$86,843**, the CSV had only 251.6 sh
+- GOOGL 14 sh in Jaclyn's -0552 — **$4,738**, in no record anywhere
+- stETH + RNDR — **$30,097**, zeroed out by a price-fetch bug, not actually missing
+- SOFI, QBTS, HSA, brokerage cash balances — smaller, all previously untracked
+
+**Corrections:**
+- **Account ownership was wrong.** The entire April Tranche 1 (~$97k) sits in **Jaclyn's** -0552 account, not Galen's — it was funded by her Databricks tender. The CSV had it under `galen_brokerage`.
+- Databricks: **1,689 vested shares** ($321,510 @ $190) and **1,974 unvested units** ($375,060). Prior figures were unit counts from April and were stale.
+- Galen 401(k): $140,661 → **$156,797**. Jaclyn's: F5 **$93,390** + Databricks **$90,308** (was recorded as a single "TRP 2055" line at $86,458).
+
+**Open, unexecuted:**
+- **May AND August 2026 RSU vests were never sold** — 84.319 AMZN sh (~$21,800) sitting undiversified against a standing 75%-sell rule. Cost basis ≈ market, so selling is tax-neutral.
+- LUNR, NOK still held. Third flag.
+- Tranche 2 ($26k) still never executed.
+- $9,273 cash idle in -0552 since June.
+
+**⚠️ App data source:** `web/server.py` reads the **Google Sheet**, not `balances.csv`. The Sheet is badly stale and has a trailing-tab typo in the stETH `yf_symbol` that zeroes that row (the code prefers `yf_symbol` and never falls back to `cg_id`). Until the Sheet is updated or the app is flipped to CSV-first, the deployed dashboard will keep understating net worth by roughly $385k.
 
 ---
 
@@ -252,8 +280,8 @@ Trigger-based deployment only:
 | ❌ Do NOT lump-sum GOOGL | Use RSU proceeds for structural build instead (tax-efficient, dampens AI concentration per deployment cycle). |
 | ❌ Do NOT add to AMZN from any source | RSU vests add enough; sell 85% of each. |
 | ❌ Do NOT deploy RSU proceeds to AI names | Proceeds are the non-AI rebalancing tool. |
-| ❌ Do NOT buy XLE or broad energy ETFs | Oil at war-premium highs. Structural oversupply thesis. |
-| ❌ Do NOT buy EWJ / VWO right now | Lower expected 12-mo return than selected names. 401(k) international allocation sufficient. |
+| ⚠️ ~~Do NOT buy XLE or broad energy ETFs~~ — **RETIRED 2026-09-05** | **This was never Galen's rule — Claude set it in March 2026 on purely technical grounds (XLE RSI 75.98 at an all-time high, war premium judged temporary), then it was restated in April as a "structural oversupply thesis" that was never actually underwritten.** A timing call got promoted to a standing constraint and steered allocation for six months. Retired. No sector is off-limits on principle; energy, power, and insurance are all evaluated on current conditions like anything else. See [September 2026 Reassessment](./reports/September_2026_Portfolio_Reassessment.md). |
+| ⚠️ ~~Do NOT buy EWJ / VWO right now~~ — **SUPERSEDED 2026-06-24** | VWO was bought 6/24/26 (84.603 sh) as part of the RSU diversification decision. Rule is stale. |
 | ❌ Do NOT pay down mortgage | 3.80% effective after-tax rate. ARM locked to Oct 2032. |
 | ❌ Do NOT refinance yet | Current 30-yr fixed (6.0–6.3%) higher than ARM (5.85%). |
 

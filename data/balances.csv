@@ -1,58 +1,71 @@
 account,owner,ticker,description,shares,yf_symbol,cg_id,manual_value,sector,asset_class,notes,cost_basis
-jaclyn_brokerage,jaclyn,NVDA,NVIDIA,944,NVDA,,,tech,us_equity,,40.04
-jaclyn_brokerage,jaclyn,GOOGL,Alphabet Class A,16,GOOGL,,,tech,us_equity,,102.4
-jaclyn_brokerage,jaclyn,GOOG,Alphabet Class C,43,GOOG,,,tech,us_equity,,184.62
-jaclyn_brokerage,jaclyn,AAPL,Apple,51,AAPL,,,tech,us_equity,,148.23
-jaclyn_brokerage,jaclyn,AMD,AMD,95,AMD,,,tech,us_equity,,103.89
-jaclyn_brokerage,jaclyn,MSFT,Microsoft,16,MSFT,,,tech,us_equity,,444.98
-jaclyn_brokerage,jaclyn,PLTR,Palantir,129,PLTR,,,tech,us_equity,,79.25
-jaclyn_brokerage,jaclyn,OKLO,Oklo,328,OKLO,,,tech,us_equity,,31.96
-jaclyn_brokerage,jaclyn,COIN,Coinbase,6,COIN,,,tech,us_equity,,300.0
-jaclyn_brokerage,jaclyn,WMT,Walmart,99,WMT,,,consumer,us_equity,,88.23
-jaclyn_brokerage,jaclyn,TSLA,Tesla,4,TSLA,,,consumer,us_equity,,49.02
-jaclyn_brokerage,jaclyn,RGTI,Rigetti Computing,2,RGTI,,,tech,us_equity,,22.57
-jaclyn_brokerage,jaclyn,APLD,Applied Digital,1,APLD,,,tech,us_equity,,26.31
-jaclyn_brokerage,jaclyn,NNDM,Nano Dimension,200,NNDM,,,tech,us_equity,,1.54
-galen_401k,galen,GALEN_401K,Amazon 401k Fidelity (TDF + index mix),,,,140661,diversified,retirement,Manual: update quarterly from Fidelity,
-galen_brokerage,galen,AMZN,Amazon - Fidelity,319.074,AMZN,,,tech,us_equity,Includes May 2026 vest (11.126 + 56.329 net shares after tax withholding) — previously missing from this line since April,228.43
-galen_brokerage,galen,AMZN,Amazon - Key,1347,AMZN,,,tech,us_equity,,228.43
-galen_brokerage,galen,VHT,Vanguard Health Care ETF,10.78,VHT,,,healthcare,us_equity,Purchased Feb 2026 with AMZN RSU proceeds,278.43
-galen_brokerage,galen,GOOGL,Alphabet Class A (RSU acct),5.357,GOOGL,,,tech,us_equity,Purchased Feb 2026 with AMZN RSU proceeds,303.89
-galen_crypto,galen,BTC,Bitcoin,0.665421,BTC-USD,bitcoin,,crypto,crypto,,
-galen_crypto,galen,stETH,Lido Staked ETH,7.76244,,ethereum,,crypto,crypto,,
-galen_crypto,galen,RENDER,Render Token,7140.92,RENDER-USD,,,crypto,crypto,,
-galen_crypto,galen,ETH,Ethereum,2.43054,ETH-USD,ethereum,,crypto,crypto,,
-galen_crypto,galen,WLD,Worldcoin,92,WLD-USD,worldcoin-org,,crypto,crypto,UPDATE: confirm WLD balance,
-galen_cash,galen,CASH,High-yield savings,,,,23000,cash,cash,Manual: update monthly,
-jaclyn_databricks_equity,jaclyn,DBRX_VESTED,Databricks vested equity (pre-IPO),,,,270180,tech,private_equity,Manual: 1422 units @ $190 (confirmed post-tender Apr 2026),
-jaclyn_databricks_equity,jaclyn,DBRX_UNVESTED,Databricks unvested equity (pre-IPO),,,,443460,tech,private_equity,Manual: 2334 units unvested (confirmed Apr 2026); illiquid; update quarterly,
-jaclyn_401k_fidelity,jaclyn,JACLYN_401K_FID,Jaclyn 401k Fidelity (TRP 2055),,,,86458,diversified,retirement,Manual: update quarterly from Fidelity,
-jaclyn_401k_databricks,jaclyn,JACLYN_401K_DBRX,Jaclyn 401k Databricks (tactical),,,,84204,diversified,retirement,Manual: update quarterly from NetBenefits,
-galen_brokerage,galen,MSFT,Microsoft (Tranche 1 buy 4/16/26),29,MSFT,,,tech,us_equity,Tranche 1 deploy — MEDIUM conviction asymmetric drawdown play pre-4/29 earnings; hold to 4/15/27 for LTCG,419.97
-galen_brokerage,galen,LLY,Eli Lilly (Tranche 1 buy 4/16/26),16,LLY,,,healthcare,us_equity,Tranche 1 deploy — HIGH conviction; FDA oral GLP-1 Foundayo; $1209 analyst target,927.50
-galen_brokerage,galen,VHT,Vanguard Health Care ETF (Tranche 1 add 4/16/26),44.22,VHT,,,healthcare,us_equity,Tranche 1 deploy — adds to existing position; closes healthcare gap,272.00
-galen_brokerage,galen,C,Citigroup (Tranche 1 buy 4/16/26),91,C,,,financials,us_equity,Tranche 1 deploy — HIGH conviction; lowest-val large bank; restructuring catalyst,129.30
-galen_brokerage,galen,TSLA,Tesla (Tranche 1 buy 4/16/26 — new lot),25,TSLA,,,consumer,us_equity,Tranche 1 deploy — MEDIUM conviction; SpaceX IPO June 2026 halo; DO NOT confuse with Jaclyn existing 4sh lot,411.22
-galen_brokerage,galen,RTX,RTX Corp (Tranche 1 buy 4/16/26),41,RTX,,,industrials,us_equity,Tranche 1 deploy — MEDIUM conviction; $268B backlog; Iran war premium,190.61
-galen_brokerage,galen,UNH,UnitedHealth Group (Tranche 1 buy 4/16/26),16,UNH,,,healthcare,us_equity,Tranche 1 deploy — MEDIUM conviction contrarian; -45% YTD; sized small due to fraud investigation risk,315.05
-galen_brokerage,galen,RKLB,Rocket Lab (Tranche 1 buy 4/16/26),72,RKLB,,,tech,us_equity,Tranche 1 deploy — HIGH speculative; SpaceX IPO halo play,85.37
-galen_brokerage,galen,LUNR,Intuitive Machines,30,LUNR,,,tech,us_equity,No thesis ever documented; 6/21/26 reassessment flagged for cutting (no catalyst; -29%); missing from Google Sheet,36.42
-galen_brokerage,galen,NOK,Nokia,122,NOK,,,tech,us_equity,No thesis ever documented; 6/21/26 reassessment flagged for cutting (not in original plan); missing from Google Sheet,16.55
-galen_rsu_unvested,galen,AMZN_VEST_AUG15,Amazon RSU Vest Aug 15,16,AMZN,,,tech,unvested_rsu,FY2026 | 2024+2025 grants | Sell 75% at vest,
-galen_rsu_unvested,galen,AMZN_VEST_AUG21,Amazon RSU Vest Aug 21,81,AMZN,,,tech,unvested_rsu,FY2026 | 2024+2025 grants | Sell 75% at vest,
-galen_rsu_unvested,galen,AMZN_VEST_NOV15,Amazon RSU Vest Nov 15,16,AMZN,,,tech,unvested_rsu,FY2026 | 2024+2025 grants | Sell 75% at vest,
-galen_rsu_unvested,galen,AMZN_VEST_NOV21,Amazon RSU Vest Nov 21,80,AMZN,,,tech,unvested_rsu,FY2026 | 2024+2025 grants | Sell 75% at vest,
-galen_rsu_unvested,galen,AMZN_VEST_FEB27_15,Amazon RSU Vest Feb 15 2027,16,AMZN,,,tech,unvested_rsu,FY2026 (completes Apr26-Mar27 total of 386) | Confirm exact units from grant details | Sell 75%,
-galen_rsu_unvested,galen,AMZN_VEST_FEB27_21,Amazon RSU Vest Feb 21 2027,80,AMZN,,,tech,unvested_rsu,FY2026 (completes Apr26-Mar27 total of 386) | Confirm exact units from grant details | Sell 75%,
-galen_rsu_unvested,galen,AMZN_VEST_MAY27_15,Amazon RSU Vest May 15 2027,29,AMZN,,,tech,unvested_rsu,FY2027 | 2025 grant (RS3740394) confirmed 29 units | Sell 75%,
-galen_rsu_unvested,galen,AMZN_VEST_MAY27_21,Amazon RSU Vest May 21 2027,54,AMZN,,,tech,unvested_rsu,FY2027 | 2026 grant (215 units / 4 vests = 54) | Sell 75%,
-galen_rsu_unvested,galen,AMZN_VEST_AUG27_15,Amazon RSU Vest Aug 15 2027,29,AMZN,,,tech,unvested_rsu,FY2027 | 2025 grant (RS3740394) 29 units | Sell 75%,
-galen_rsu_unvested,galen,AMZN_VEST_AUG27_21,Amazon RSU Vest Aug 21 2027,54,AMZN,,,tech,unvested_rsu,FY2027 | 2026 grant (215 units / 4 vests = 54) | Sell 75%,
-galen_rsu_unvested,galen,AMZN_VEST_NOV27_15,Amazon RSU Vest Nov 15 2027,29,AMZN,,,tech,unvested_rsu,FY2027 | 2025 grant (RS3740394) 29 units | Sell 75%,
-galen_rsu_unvested,galen,AMZN_VEST_NOV27_21,Amazon RSU Vest Nov 21 2027,54,AMZN,,,tech,unvested_rsu,FY2027 | 2026 grant (215 units / 4 vests = 54) | Sell 75%,
-galen_rsu_unvested,galen,AMZN_VEST_FEB28_15,Amazon RSU Vest Feb 15 2028,29,AMZN,,,tech,unvested_rsu,FY2027 | 2025 grant (RS3740394) 29 units | Sell 75%,
-galen_rsu_unvested,galen,AMZN_VEST_FEB28_21,Amazon RSU Vest Feb 21 2028,53,AMZN,,,tech,unvested_rsu,FY2027 | 2026 grant (215 units / 4 vests; last tranche = 53) | Sell 75%,
-galen_rsu_unvested,galen,AMZN_VEST_MAY28_21,Amazon RSU Vest May 21 2028,17,AMZN,,,tech,unvested_rsu,Per 6/23/26 vest schedule screenshot (RS3909470) | Sell 75%,
-galen_rsu_unvested,galen,AMZN_VEST_AUG28_21,Amazon RSU Vest Aug 21 2028,16,AMZN,,,tech,unvested_rsu,Per 6/23/26 vest schedule screenshot (RS3909470) | Sell 75%,
-galen_rsu_unvested,galen,AMZN_VEST_NOV28_21,Amazon RSU Vest Nov 21 2028,16,AMZN,,,tech,unvested_rsu,Per 6/23/26 vest schedule screenshot (RS3909470) | Sell 75%,
-galen_rsu_unvested,galen,AMZN_VEST_FEB29_21,Amazon RSU Vest Feb 21 2029,16,AMZN,,,tech,unvested_rsu,Per 6/23/26 vest schedule screenshot (RS3909470) | Sell 75%,
+galen_fidelity_tod,galen,AMZN,Amazon (Fidelity Individual-TOD X96693941),335.938,AMZN,,,tech,us_equity,"Reconciled 2026-09-05 from Fidelity. Includes 84.319 sh from May+Aug 2026 RSU vests that were NEVER sold under the 75% rule — basis ~= market, so selling is tax-neutral. Older lots are the deliberate core hold.",234.18
+galen_fidelity_tod,galen,AVUV,Avantis US Small Cap Value ETF,58.725,AVUV,,,small_cap_value,us_equity,Bought 2026-06-24 with May RSU proceeds — executes the 6/23 diversification decision. Underfunded vs intent.,123.45
+galen_fidelity_tod,galen,VWO,Vanguard FTSE Emerging Markets ETF,84.603,VWO,,,international,us_equity,Bought 2026-06-24 with May RSU proceeds — first EM exposure outside 401k. Underfunded vs intent.,59.08
+galen_fidelity_tod,galen,VHT,Vanguard Health Care ETF (Feb 2026 lot),10.78,VHT,,,healthcare,us_equity,Purchased Feb 2026 with AMZN RSU proceeds.,278.43
+galen_fidelity_tod,galen,GOOGL,Alphabet Class A (Fidelity TOD),5.357,GOOGL,,,tech,us_equity,Purchased Feb 2026 with AMZN RSU proceeds.,303.89
+galen_fidelity_tod,galen,SPAXX,Fidelity core cash sweep,,,,11.49,cash,cash,Core position in Fidelity TOD.,
+galen_key,galen,AMZN,Amazon (Key Investment Services HT4217765),1347,AMZN,,,tech,us_equity,Transferred from Fidelity to Key to qualify for a better mortgage rate. Do not sell — relationship pricing depends on the balance.,228.43
+galen_401k_amazon,galen,GALEN_401K_AMZN,Amazon 401k Fidelity (TDF + index mix),,,,156797.28,diversified,retirement,"Confirmed 2026-09-05. Targets 60% VG 2045 / 30% Inst 500 Index / 10% Small-Mid. No auto-rebalance — check quarterly.",
+galen_401k_nordstrom,galen,GALEN_401K_NORD,Nordstrom 401k (Fidelity 7883P),,,,53698.09,diversified,retirement,"DISCOVERED 2026-09-05 — prior-employer 401k, recently consolidated into Fidelity, never previously tracked. Allocation unreviewed.",
+galen_everbank,galen,CASH_HYSA,EverBank Premier Online Savings ****0019,,,,23310.37,cash,cash,"Earmarked ""2026 taxes"" reserve. Also covers the ~$15k painting/repairs bill if still unpaid.",
+galen_crypto,galen,BTC,Bitcoin,0.665421,,bitcoin,,crypto,crypto,,
+galen_crypto,galen,stETH,Lido Staked ETH,7.78224,,staked-ether,,crypto,crypto,"yf_symbol deliberately blank — STETH-USD fails on Yahoo and the code prefers yf over cg, which zeroed this row for months.",
+galen_crypto,galen,RNDR,Render Token,7140.92,,render,,crypto,crypto,"yf_symbol deliberately blank — RENDER-USD fails on Yahoo. Same bug as stETH.",
+galen_crypto,galen,ETH,Ethereum,2.43054,,ethereum,,crypto,crypto,,
+galen_crypto,galen,WLD,Worldcoin,92.4114,,worldcoin-org,,crypto,crypto,,
+galen_crypto,galen,KISHU,Kishu Inu,139128010596,,kishu-inu,,crypto,crypto,"Dust. Was reported sold in the 3/12/26 tax-loss harvest but a residual balance remains — confirm the position is actually closed.",
+galen_crypto,galen,USDC,USD Coin,18,,usd-coin,,crypto,crypto,,
+jaclyn_brokerage_0552,jaclyn,LLY,Eli Lilly (Tranche 1 4/16/26),16,LLY,,,healthcare,us_equity,"Tranche 1. HIGH conviction; oral GLP-1 Foundayo. LTCG date 4/16/2027 — do not sell before.",927.50
+jaclyn_brokerage_0552,jaclyn,VHT,Vanguard Health Care ETF (Tranche 1 4/16/26),55,VHT,,,healthcare,us_equity,Tranche 1. LTCG date 4/16/2027 — do not sell before.,273.2367
+jaclyn_brokerage_0552,jaclyn,MSFT,Microsoft (Tranche 1 4/16/26),29,MSFT,,,tech,us_equity,"Tranche 1 drawdown/bounce play. Trim triggers at $500/$580 but ONLY after 4/16/2027 — currently ~$500, do not take it, ST tax drag is ~24% of the gain.",419.97
+jaclyn_brokerage_0552,jaclyn,C,Citigroup (Tranche 1 4/16/26),91,C,,,financials,us_equity,"Tranche 1. Lowest-valuation large bank; benefits from a hiking Fed. LTCG date 4/16/2027.",129.2993
+jaclyn_brokerage_0552,jaclyn,RTX,RTX Corp (Tranche 1 4/16/26),41,RTX,,,industrials,us_equity,"Tranche 1. $268B backlog. Note: defense stocks have NOT rallied on the Iran war — original war-premium thesis has underdelivered.",190.6051
+jaclyn_brokerage_0552,jaclyn,UNH,UnitedHealth Group (Tranche 1 4/16/26),16,UNH,,,healthcare,us_equity,Tranche 1 contrarian. Working (+26%). LTCG date 4/16/2027.,315.05
+jaclyn_brokerage_0552,jaclyn,TSLA,Tesla (Tranche 1 4/16/26),25,TSLA,,,consumer,us_equity,"Tranche 1. Optimus/robotaxi is a 2027+ story — Musk himself guided expectations down. At a loss; harvest candidate if thesis is abandoned.",411.2248
+jaclyn_brokerage_0552,jaclyn,RKLB,Rocket Lab (Tranche 1 4/16/26),72,RKLB,,,tech,us_equity,"THESIS INVERTED: bought as a SpaceX-IPO halo play; SpaceX is now public (SPCX) and a direct competitor. At a loss — harvest candidate.",85.3728
+jaclyn_brokerage_0552,jaclyn,GOOGL,Alphabet Class A (-0552 lot),14,GOOGL,,,tech,us_equity,"DISCOVERED 2026-09-05 — this lot was never tracked in the CSV or Sheet.",349.6957
+jaclyn_brokerage_0552,jaclyn,LUNR,Intuitive Machines,30,LUNR,,,tech,us_equity,"No thesis ever documented. Flagged for cutting 6/21/26 and again 9/5/26. At a loss — harvest.",36.415
+jaclyn_brokerage_0552,jaclyn,NOK,Nokia,122,NOK,,,tech,us_equity,"No thesis ever documented. Flagged for cutting 6/21/26 and again 9/5/26. At a loss — harvest.",16.55
+jaclyn_brokerage_0552,jaclyn,CASH_0552,Cash — Individual Brokerage -0552,,,,9273.20,cash,cash,"Undeployed dry powder. Originally the ANET trigger money, redirected to GOOGL 6/23 and then never deployed.",
+jaclyn_brokerage_8348,jaclyn,NVDA,NVIDIA,944,NVDA,,,tech,us_equity,"Largest liquid position, +475% all-time. Standing decision: do not sell (tax friction), do not add (concentration).",40.0414
+jaclyn_brokerage_8348,jaclyn,AMD,AMD,95,AMD,,,tech,us_equity,,103.89
+jaclyn_brokerage_8348,jaclyn,PLTR,Palantir,129,PLTR,,,tech,us_equity,,79.25
+jaclyn_brokerage_8348,jaclyn,AAPL,Apple,51,AAPL,,,tech,us_equity,,148.2349
+jaclyn_brokerage_8348,jaclyn,GOOG,Alphabet Class C,43,GOOG,,,tech,us_equity,,184.6165
+jaclyn_brokerage_8348,jaclyn,OKLO,Oklo,328,OKLO,,,energy,us_equity,"THESIS (documented 2026-09-05, previously undocumented): micro-nuclear/SMR levered to AI-driven power demand. Validated by the Meta prepay-for-power deal, NRC accelerated design approval, and achieved self-sustaining fission. First revenue late 2027/early 2028; Ohio 2030; full power 2034 — a RETIREMENT-horizon holding, not a 12-month one. Hold, do not add.",31.9566
+jaclyn_brokerage_8348,jaclyn,WMT,Walmart,99,WMT,,,consumer,us_equity,,49.0233
+jaclyn_brokerage_8348,jaclyn,MSFT,Microsoft (-8348 lot),16,MSFT,,,tech,us_equity,,444.9781
+jaclyn_brokerage_8348,jaclyn,GOOGL,Alphabet Class A (-8348 lot),16,GOOGL,,,tech,us_equity,,102.40
+jaclyn_brokerage_8348,jaclyn,TSLA,Tesla (-8348 lot),4,TSLA,,,consumer,us_equity,Separate small lot from the Tranche 1 position in -0552.,347.54
+jaclyn_brokerage_8348,jaclyn,COIN,Coinbase,6,COIN,,,tech,us_equity,,300.00
+jaclyn_brokerage_8348,jaclyn,NNDM,Nano Dimension,225,NNDM,,,tech,us_equity,Share count corrected from 200 to 225 on 2026-09-05.,1.54489
+jaclyn_brokerage_8348,jaclyn,SOFI,SoFi Technologies,18,SOFI,,,financials,us_equity,DISCOVERED 2026-09-05 — never tracked. No thesis documented.,17.34
+jaclyn_brokerage_8348,jaclyn,QBTS,D-Wave Quantum,3,QBTS,,,tech,us_equity,DISCOVERED 2026-09-05 — never tracked. No thesis documented.,23.18
+jaclyn_brokerage_8348,jaclyn,RGTI,Rigetti Computing,2,RGTI,,,tech,us_equity,,22.57
+jaclyn_brokerage_8348,jaclyn,APLD,Applied Digital,1,APLD,,,tech,us_equity,,26.31
+jaclyn_brokerage_8348,jaclyn,CASH_8348,Cash — Individual Brokerage -8348,,,,22.34,cash,cash,,
+jaclyn_401k_f5,jaclyn,JACLYN_401K_F5,Jaclyn 401k — F5 (Fidelity 48304),,,,93390.05,diversified,retirement,"Confirmed 2026-09-05. Prior-employer plan; previously mislabeled as ""Fidelity TRP 2055"" at $86,458.",
+jaclyn_401k_databricks,jaclyn,JACLYN_401K_DBRX,Jaclyn 401k — Databricks (Fidelity 92148),,,,90308.20,diversified,retirement,"Confirmed 2026-09-05. Tactical allocation, no auto-rebalance — check quarterly.",
+jaclyn_hsa,jaclyn,JACLYN_HSA,Health Savings Account (220968992),,,,0.12,cash,cash,"Effectively unfunded. Triple-tax-advantaged and going unused — revisit at open enrollment if HSA-eligible coverage is available.",
+jaclyn_databricks_equity,jaclyn,DBRX_VESTED,Databricks vested shares (pre-IPO),,,,321510,tech,private_equity,"1,689 Common A shares @ $190 (last formal tender price, Apr 2026). Cost basis $182,265. Confirmed 2026-09-05 from the Securities tab. Next tender expected higher given recent rounds.",
+jaclyn_databricks_equity,jaclyn,DBRX_UNVESTED,Databricks unvested RSUs (pre-IPO),,,,375060,tech,private_equity,"1,974 units outstanding @ $190 across 4 grants (12/01/22, 03/29/24, 04/29/25, 02/27/26). 3,806 distributed to date, 0 forfeited. Illiquid — update each tender.",
+household_becu,joint,BECU_MMA,BECU Money Market Advantage (1515),,,,36493.36,cash,cash,"DISCOVERED 2026-09-05 — never tracked. Earning credit-union MMA rates (~2-3%) vs ~4.5%+ in Treasury MMFs. Moving this is ~$600-900/yr of free yield.",
+household_becu,joint,BECU_CHK_MAIN,BECU Checking MAIN (4875),,,,7561.94,cash,cash,DISCOVERED 2026-09-05 — never tracked.,
+household_becu,joint,BECU_CHK,BECU Checking (8571),,,,1443.77,cash,cash,DISCOVERED 2026-09-05 — never tracked.,
+galen_rsu_unvested,galen,AMZN_VEST_NOV15_26,Amazon RSU Vest Nov 15 2026,16,AMZN,,,tech,unvested_rsu,Grant 04/01/2025. Sell 75% at vest (rule under review — see Sept 2026 reassessment).,
+galen_rsu_unvested,galen,AMZN_VEST_NOV21_26,Amazon RSU Vest Nov 21 2026,80,AMZN,,,tech,unvested_rsu,Grant 04/01/2024. Sell 75% at vest (rule under review).,
+galen_rsu_unvested,galen,AMZN_VEST_FEB15_27,Amazon RSU Vest Feb 15 2027,16,AMZN,,,tech,unvested_rsu,Grant 04/01/2025.,
+galen_rsu_unvested,galen,AMZN_VEST_FEB21_27,Amazon RSU Vest Feb 21 2027,80,AMZN,,,tech,unvested_rsu,Grant 04/01/2024. Final vest of this grant.,
+galen_rsu_unvested,galen,AMZN_VEST_MAY15_27,Amazon RSU Vest May 15 2027,29,AMZN,,,tech,unvested_rsu,Grant 04/01/2025.,
+galen_rsu_unvested,galen,AMZN_VEST_MAY21_27,Amazon RSU Vest May 21 2027,54,AMZN,,,tech,unvested_rsu,Grant 04/03/2026.,
+galen_rsu_unvested,galen,AMZN_VEST_AUG15_27,Amazon RSU Vest Aug 15 2027,29,AMZN,,,tech,unvested_rsu,Grant 04/01/2025.,
+galen_rsu_unvested,galen,AMZN_VEST_AUG21_27,Amazon RSU Vest Aug 21 2027,54,AMZN,,,tech,unvested_rsu,Grant 04/03/2026.,
+galen_rsu_unvested,galen,AMZN_VEST_NOV15_27,Amazon RSU Vest Nov 15 2027,29,AMZN,,,tech,unvested_rsu,Grant 04/01/2025.,
+galen_rsu_unvested,galen,AMZN_VEST_NOV21_27,Amazon RSU Vest Nov 21 2027,54,AMZN,,,tech,unvested_rsu,Grant 04/03/2026.,
+galen_rsu_unvested,galen,AMZN_VEST_FEB15_28,Amazon RSU Vest Feb 15 2028,29,AMZN,,,tech,unvested_rsu,Grant 04/01/2025. Final vest of this grant.,
+galen_rsu_unvested,galen,AMZN_VEST_FEB21_28,Amazon RSU Vest Feb 21 2028,53,AMZN,,,tech,unvested_rsu,Grant 04/03/2026.,
+galen_rsu_unvested,galen,AMZN_VEST_MAY21_28,Amazon RSU Vest May 21 2028,17,AMZN,,,tech,unvested_rsu,Grant 04/03/2026.,
+galen_rsu_unvested,galen,AMZN_VEST_AUG21_28,Amazon RSU Vest Aug 21 2028,16,AMZN,,,tech,unvested_rsu,Grant 04/03/2026.,
+galen_rsu_unvested,galen,AMZN_VEST_NOV21_28,Amazon RSU Vest Nov 21 2028,16,AMZN,,,tech,unvested_rsu,Grant 04/03/2026.,
+galen_rsu_unvested,galen,AMZN_VEST_FEB21_29,Amazon RSU Vest Feb 21 2029,16,AMZN,,,tech,unvested_rsu,Grant 04/03/2026. Final vest.,

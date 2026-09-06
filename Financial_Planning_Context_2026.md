@@ -376,7 +376,7 @@
 **Standing decisions — do NOT do these:**
 - ❌ Do not sell NVDA (40% analyst upside, tax friction prohibitive, AI capex intact)
 - ❌ Do not sell existing AMZN position (36% consensus upside, 0 sell ratings, AWS growing 30%+)
-- ❌ Do not buy XLE or broad energy ETFs (RSI 75.98 all-time high, war premium temporary)
+- ⚠️ ~~Do not buy XLE or broad energy ETFs (RSI 75.98 all-time high, war premium temporary)~~ — **RETIRED 2026-09-05.** This was a Claude-authored *timing* call on an overbought technical setup, not a structural view, and not Galen's. It was later restated in `action-tracker.md` as a "structural oversupply thesis" it never was. No sector is prohibited on principle.
 - ❌ Do not buy VRT/Vertiv (only 8% upside, BlackRock trimmed 11.2% in Q4)
 - ❌ Do not buy BMNR/BitMine (wrong risk profile, BlackRock move was passive rebalancing)
 - ❌ Do not pay down mortgage (3.80% effective after-tax rate, ARM locked to Oct 2032)
