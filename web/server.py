@@ -183,7 +183,11 @@ def index():
 @app.route("/api/portfolio")
 def portfolio():
     try:
-        rows       = load_rows()
+        # Read the committed CSV, not the Google Sheet. The Sheet had drifted five
+        # months stale and silently overrode reconciled data — including a trailing
+        # tab in the stETH yf_symbol that zeroed the row, since price lookup is
+        # `if yf_symbol ... elif cg_id` and never falls back.
+        rows       = load_rows(use_sheet=False)
         prices     = fetch_all_prices(rows)
         ytd_prices = get_ytd_prices(rows)
     except Exception as e:

@@ -11,9 +11,9 @@ galen_401k_nordstrom,galen,GALEN_401K_NORD,Nordstrom 401k (Fidelity 7883P),,,,53
 galen_everbank,galen,CASH_HYSA,EverBank Premier Online Savings ****0019,,,,23310.37,cash,cash,"Earmarked ""2026 taxes"" reserve. Also covers the ~$15k painting/repairs bill if still unpaid.",
 galen_crypto,galen,BTC,Bitcoin,0.665421,,bitcoin,,crypto,crypto,,
 galen_crypto,galen,stETH,Lido Staked ETH,7.78224,,staked-ether,,crypto,crypto,"yf_symbol deliberately blank — STETH-USD fails on Yahoo and the code prefers yf over cg, which zeroed this row for months.",
-galen_crypto,galen,RNDR,Render Token,7140.92,,render,,crypto,crypto,"yf_symbol deliberately blank — RENDER-USD fails on Yahoo. Same bug as stETH.",
+galen_crypto,galen,RNDR,Render Token,7140.92,,render-token,,crypto,crypto,"yf_symbol deliberately blank — RENDER-USD fails on Yahoo. Same bug as stETH.",
 galen_crypto,galen,ETH,Ethereum,2.43054,,ethereum,,crypto,crypto,,
-galen_crypto,galen,WLD,Worldcoin,92.4114,,worldcoin-org,,crypto,crypto,,
+galen_crypto,galen,WLD,Worldcoin,92.4114,,worldcoin-wld,,crypto,crypto,,
 galen_crypto,galen,KISHU,Kishu Inu,139128010596,,kishu-inu,,crypto,crypto,"Dust. Was reported sold in the 3/12/26 tax-loss harvest but a residual balance remains — confirm the position is actually closed.",
 galen_crypto,galen,USDC,USD Coin,18,,usd-coin,,crypto,crypto,,
 jaclyn_brokerage_0552,jaclyn,LLY,Eli Lilly (Tranche 1 4/16/26),16,LLY,,,healthcare,us_equity,"Tranche 1. HIGH conviction; oral GLP-1 Foundayo. LTCG date 4/16/2027 — do not sell before.",927.50
